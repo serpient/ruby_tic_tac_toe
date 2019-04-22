@@ -5,8 +5,8 @@ class GamePresenter
         @presenter = presenter
     end
 
-    def get_input()
-        presenter.get_input()
+    def get_input(input: nil)
+        presenter.get_input(input: input)
     end
 
     def output_message(message:)
@@ -15,7 +15,7 @@ class GamePresenter
 end
 
 class ConsoleIO
-    def get_input()
+    def get_input(input: nil)
         print "Choose a position: "
         return gets.chomp
     end
@@ -26,8 +26,8 @@ class ConsoleIO
 end
 
 class TestIO
-    def get_input()
-        return "4"
+    def get_input(input: nil)
+        return input || "4"
     end
 
     def output_message(message:)

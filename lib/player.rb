@@ -6,19 +6,19 @@ class Player
         @token = token
     end
 
-    def move(board:)
-        player.move(board: board)
+    def move(board:, presenter:)
+        player.move(board: board, presenter: presenter)
     end
 end
 
 class Human 
-    def move(board:)
-        return 0
+    def move(board:, presenter:)
+        presenter.get_input()
     end
 end
 
 class Computer 
-    def move(board:)
+    def move(board:, presenter: )
         board.empty_positions().sample()
     end
 end

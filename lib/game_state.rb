@@ -1,14 +1,16 @@
 class GameState 
-    attr_accessor :player_1, :player_2, :board, :current_player
+    attr_accessor :player_1, :player_2, :board, :current_player, :presenter
     
     def initialize(
         player_1:,
         player_2:,
-        board_size:
+        board_size:,
+        presenter: ConsoleIO.new()
     )
+        @presenter = GamePresenter.new(presenter: presenter)
+        @board = Board.new(size: board_size)
         @player_1 = Player.new(player: player_1, token: :hero)
         @player_2 = Player.new(player: player_2, token: :opponent)
-        @board = Board.new(size: board_size)
         @current_player = @player_1
     end
 
