@@ -56,8 +56,8 @@ describe 'Board Transformer' do
             board.update(position: 2, token: 3)
             board.update(position: 3, token: 4)
             expect(diagonal_rows(board)).to eql [
-                [0, 3],
-                [1, 2],
+                [1, 4],
+                [2, 3],
             ]
         end
 
