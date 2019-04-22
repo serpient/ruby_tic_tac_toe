@@ -19,4 +19,11 @@ class Board
     def position_is_available?(position)
         return state[position] == :empty
     end
+
+    def empty_positions()
+        state.each_with_index.reduce([]) do |empty_positions, (position, idx)| 
+            position == :empty && empty_positions.push(idx)
+            empty_positions
+        end
+    end
 end

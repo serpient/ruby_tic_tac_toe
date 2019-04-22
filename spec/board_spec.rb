@@ -61,4 +61,12 @@ describe 'Board' do
             expect(board.is_full?()).to eq true
         end
     end
+
+    context 'Empty_Positions' do
+        it 'returns a list of empty position indexes' do
+            board = Board.new(size: 2)
+
+            expect(board.empty_positions()).to eq [0,1,2,3]
+        end
+    end
 end
