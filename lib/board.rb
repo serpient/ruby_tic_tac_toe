@@ -26,4 +26,12 @@ class Board
             empty_positions
         end
     end
+
+    def is_valid_range?(int)
+        int >= 1 && int <= max_spaces
+    end
+
+    def is_empty?(int)
+        state[int] == :empty
+    end
 end
