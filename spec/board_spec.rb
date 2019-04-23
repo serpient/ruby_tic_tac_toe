@@ -1,6 +1,8 @@
 require_relative '../lib/board'
+require_relative '../lib/token'
 
 describe 'Board' do
+    include Token
     context 'Initialization' do
         board = Board.new(
             size: 3
@@ -11,7 +13,7 @@ describe 'Board' do
         end
 
         it 'creates new board' do
-            expect(board.positions).to eq [:empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty]
+            expect(board.positions).to eq [empty,empty,empty,empty,empty,empty,empty,empty,empty]
         end
 
         it 'sets max spaces' do
@@ -26,13 +28,13 @@ describe 'Board' do
             )
             expect(board.update(
                 position: 0, 
-                token: :player
-            )).to eq [:player, :empty, :empty, :empty]
+                token: hero
+            )).to eq [hero, empty, empty, empty]
         end
     end
 
     context 'Position_Is_Available' do
-        it 'returns true if position is :empty' do
+        it 'returns true if position is empty' do
             board = Board.new(
                 size: 2
             )
@@ -53,10 +55,10 @@ describe 'Board' do
                 size: 2
             )
 
-            board.update(position: 0, token: :player)
-            board.update(position: 1, token: :player)
-            board.update(position: 2, token: :player)
-            board.update(position: 3, token: :player)
+            board.update(position: 0, token: hero)
+            board.update(position: 1, token: hero)
+            board.update(position: 2, token: hero)
+            board.update(position: 3, token: hero)
 
             expect(board.is_full?()).to eq true
         end

@@ -1,4 +1,7 @@
+require_relative './token'
+
 class GameState 
+    include Token
     attr_accessor :player_1, :player_2, :board, :current_player, :presenter
     
     def initialize(
@@ -9,8 +12,8 @@ class GameState
     )
         @presenter = GamePresenter.new(presenter: presenter)
         @board = Board.new(size: board_size)
-        @player_1 = Player.new(player: player_1, token: :hero)
-        @player_2 = Player.new(player: player_2, token: :opponent)
+        @player_1 = Player.new(player: player_1, token: hero)
+        @player_2 = Player.new(player: player_2, token: opponent)
         @current_player = @player_1
     end
 

@@ -1,10 +1,13 @@
-class Board
-    attr_accessor :size, :positions, :max_positions
+require_relative './token'
 
+class Board
+    include Token
+    attr_accessor :size, :positions, :max_positions
+    
     def initialize(size:)
         @size = size
         @max_positions = size * size
-        @positions = (1..max_positions).map {|num| num = :empty }
+        @positions = (1..max_positions).map {|num| num = empty }
     end
 
     def update(position:, token:)
@@ -14,16 +17,16 @@ class Board
     end
 
     def is_full?()
-        positions.all? {|position| position != :empty }
+        positions.all? {|position| position != empty }
     end
 
     def position_is_available?(position)
-        return positions[position] == :empty
+        return positions[position] == empty
     end
 
     def empty_positions()
         positions.each_with_index.reduce([]) do |empty_positions, (position, idx)| 
-            position == :empty && empty_positions.push(idx)
+            position == empty && empty_positions.push(idx)
             empty_positions
         end
     end
@@ -33,6 +36,6 @@ class Board
     end
 
     def is_position_empty?(position)
-        positions[position] == :empty
+        positions[position] == empty
     end
 end

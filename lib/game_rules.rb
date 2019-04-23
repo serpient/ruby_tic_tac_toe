@@ -1,4 +1,7 @@
+require_relative './token'
+
 module GameRules
+    include Token
     include BoardTransformer
 
     def is_game_a_win?(board:) 
@@ -19,7 +22,7 @@ module GameRules
     def is_any_row_a_win?(rows) 
         rows.any? do |row|
             row.all? do |symbol|
-                symbol != :empty && symbol == row[0]
+                symbol != empty && symbol == row[0]
             end
         end
     end
