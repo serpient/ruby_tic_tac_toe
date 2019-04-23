@@ -24,9 +24,9 @@ describe 'GameState' do
             expect(game_state.board.positions).to eq [:empty, :empty, :empty, :empty]
         end
 
-        it 'sets presenter' do
-            expect(game_state.presenter.presenter.is_a?(ConsoleIO)).to eq true
-        end
+        # it 'sets presenter' do
+        #     expect(game_state.presenter.presenter.is_a?(ConsoleIO)).to eq true
+        # end
     end
 
     context 'switch_players' do

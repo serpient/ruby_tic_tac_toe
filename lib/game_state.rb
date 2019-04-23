@@ -2,15 +2,13 @@ require_relative './token'
 
 class GameState 
     include Token
-    attr_accessor :player_1, :player_2, :board, :current_player, :presenter
+    attr_accessor :player_1, :player_2, :board, :current_player
     
     def initialize(
         player_1:,
         player_2:,
-        board_size:,
-        presenter: ConsoleIO.new()
+        board_size:
     )
-        @presenter = GamePresenter.new(presenter: presenter)
         @board = Board.new(size: board_size)
         @player_1 = Player.new(player: player_1, token: hero)
         @player_2 = Player.new(player: player_2, token: opponent)
