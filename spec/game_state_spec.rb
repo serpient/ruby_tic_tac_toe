@@ -21,7 +21,7 @@ describe 'GameState' do
         end
 
         it 'sets new board' do
-            expect(game_state.board.state).to eq [:empty, :empty, :empty, :empty]
+            expect(game_state.board.positions).to eq [:empty, :empty, :empty, :empty]
         end
 
         it 'sets presenter' do

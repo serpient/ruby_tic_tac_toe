@@ -11,16 +11,16 @@ describe 'Board' do
         end
 
         it 'creates new board' do
-            expect(board.state).to eq [:empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty]
+            expect(board.positions).to eq [:empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty]
         end
 
         it 'sets max spaces' do
-            expect(board.max_spaces).to eq 9
+            expect(board.max_positions).to eq 9
         end
     end  
 
     context 'Update' do
-        it 'updates a position in board state' do
+        it 'updates a position in board positions' do
             board = Board.new(
                 size: 2
             )
