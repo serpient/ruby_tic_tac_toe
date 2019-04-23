@@ -21,4 +21,24 @@ describe 'Validator' do
             expect(position_input_valid?(input: "5", board: board)).to eq false
         end
     end
+
+    context 'board_size_valid?' do
+        it 'returns false if input is not 3 or 4' do
+            expect(board_size_valid?(input: "2")).to eq false
+        end
+
+        it 'returns true if input is 3 or 4' do
+            expect(board_size_valid?(input: "4")).to eq true
+        end
+    end
+
+    context 'opponent_type_valid?' do
+        it 'returns false if input is NOT (H) or (C)' do
+            expect(opponent_type_valid?(input: "A")).to eq false
+        end
+
+        it 'returns true if input is (H) or (C)' do
+            expect(opponent_type_valid?(input: "H")).to eq true
+        end
+    end
 end
