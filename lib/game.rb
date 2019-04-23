@@ -1,0 +1,52 @@
+require_relative '../lib/game_state'
+require_relative '../lib/game_presenter'
+require_relative '../lib/messages'
+require_relative '../lib/board'
+require_relative '../lib/validator'
+require_relative '../lib/player'
+require_relative '../lib/game_settings'
+
+class Game
+    include Validator
+    include Messages
+
+    attr_accessor :game_state, :game_presenter
+
+    def initialize(game_presenter: ConsoleIO.new())
+        @game_presenter = game_presenter
+    end
+
+    def set_game_settings(settings:)
+        settings.each.reduce({}) do |map, setting_type|
+            input = nil
+            while !setting_type.is_valid?(input: input)
+                print_banner()
+                game_presenter.output_message(message: setting_type.message())
+                input = game_presenter.get_input() 
+            end
+            map[setting_type.name] = input
+            map
+        end
+    end
+
+    def print_banner()
+        game_presenter.clear()
+        game_presenter.output_message(message: start_banner())
+    end
+
+    def start()
+        settings = [
+            GameSettings.new(setting: BoardSize.new()),
+            GameSettings.new(setting: OpponentType.new()),
+        ]
+        setting_results = set_game_settings(settings: settings)
+
+        @game_state = GameState.new(
+            player_1: Human.new(),
+            player_2: setting_results["opponent_type"] == "H" ? Human.new() : Computer.new(),
+            board_size: setting_results["board_size"].to_i
+        )
+
+    end
+end
+
