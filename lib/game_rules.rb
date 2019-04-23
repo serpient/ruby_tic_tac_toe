@@ -15,6 +15,7 @@ module GameRules
         return board.is_full?
     end
 
+    private
     def is_any_row_a_win?(rows) 
         rows.any? do |row|
             row.all? do |symbol|

@@ -22,6 +22,7 @@ module BoardTransformer
         ]
     end
 
+    private
     def generate_row_value(range:, num_to_take:, board:)
         row_values = range.select.with_index do |_,position| 
             position % num_to_take == 0
