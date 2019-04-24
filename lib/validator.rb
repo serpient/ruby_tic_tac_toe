@@ -5,7 +5,11 @@ module Validator
 
     def position_valid?(input:, board:) 
         int = input.to_i
-        return board.is_input_valid?(int) && board.is_position_empty?(int)
+        return board_range_valid?(int,board) && board.position_empty?(int)
+    end
+
+    def board_range_valid?(int, board)
+        int >= 1 && int <= board.max_positions
     end
     
     def board_size_valid?(input:)

@@ -16,27 +16,27 @@ describe 'Game Settings' do
         end
     end
 
-    context 'opponent type is_valid' do
+    context 'opponent type valid' do
         game_settings = GameSettings.new(
             setting: OpponentType.new(),
         )
         it 'returns true if valid' do
-            expect(game_settings.is_valid?(input: human)).to eql true
+            expect(game_settings.valid?(input: human)).to eql true
         end
         it 'returns false if invalid' do
-            expect(game_settings.is_valid?(input: "3")).to eql false
+            expect(game_settings.valid?(input: "3")).to eql false
         end
     end
 
-    context 'board size is_valid' do
+    context 'board size valid' do
         game_settings = GameSettings.new(
             setting: BoardSize.new(),
         )
         it 'returns false if invalid' do
-            expect(game_settings.is_valid?(input: human)).to eql false
+            expect(game_settings.valid?(input: human)).to eql false
         end
         it 'returns true if valid' do
-            expect(game_settings.is_valid?(input: "3")).to eql true
+            expect(game_settings.valid?(input: "3")).to eql true
         end
     end
 end

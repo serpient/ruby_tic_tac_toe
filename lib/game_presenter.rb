@@ -13,8 +13,8 @@ class GamePresenter
         presenter.output_message(message)
     end
 
-    def clear()
-        presenter.clear()
+    def clear
+        presenter.clear
     end
 end
 
@@ -27,7 +27,7 @@ class ConsoleIO
         puts message
     end
 
-    def clear()
+    def clear
         print "\e[2J\e[f"
     end
 end

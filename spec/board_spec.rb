@@ -43,12 +43,12 @@ describe 'Board' do
         end
     end
 
-    context 'Is_Full' do
+    context 'full' do
         it 'returns false when board is not full' do
             board = Board.new(
                 size: 2
             )
-            expect(board.is_full?()).to eq false
+            expect(board.full?()).to eq false
         end
 
         it 'returns true when board is full' do
@@ -61,7 +61,7 @@ describe 'Board' do
             board.update(position: 2, token: hero)
             board.update(position: 3, token: hero)
 
-            expect(board.is_full?()).to eq true
+            expect(board.full?()).to eq true
         end
     end
 

@@ -14,7 +14,7 @@ class Board
         @positions[position] = token
     end
 
-    def is_full?()
+    def full?
         positions.all? {|position| position != empty }
     end
 
@@ -22,18 +22,14 @@ class Board
         return positions[position] == empty
     end
 
-    def empty_positions()
+    def empty_positions
         positions.each_with_index.reduce([]) do |empty_positions, (_position, idx)| 
-            empty_positions.push(idx) if is_position_empty?(idx)
+            empty_positions.push(idx) if position_empty?(idx)
             empty_positions
         end
     end
 
-    def is_input_valid?(int)
-        int >= 1 && int <= max_positions
-    end
-
-    def is_position_empty?(position)
+    def position_empty?(position)
         positions[position] == empty
     end
 end

@@ -6,7 +6,7 @@ module BoardTransformer
     def vertical_rows(board)
         max_positions = board.max_positions
         size = board.size 
-        (0..size - 1).map do |starting_row|
+        (0...size).map do |starting_row|
             generate_row_value(range: starting_row..(max_positions), num_to_take: size, board: board)
         end
     end
@@ -17,8 +17,16 @@ module BoardTransformer
         max_positions = board.max_positions
         size = board.size
         [
-            generate_row_value(range: top_left_corner..max_positions, num_to_take: size + 1, board: board),
-            generate_row_value(range: top_right_corner..max_positions, num_to_take: size - 1, board: board)
+            generate_row_value(
+                range: top_left_corner..max_positions, 
+                num_to_take: size + 1, 
+                board: board
+            ),
+            generate_row_value(
+                range: top_right_corner..max_positions, 
+                num_to_take: size - 1, 
+                board: board
+            )
         ]
     end
 

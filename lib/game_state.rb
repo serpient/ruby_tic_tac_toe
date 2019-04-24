@@ -17,7 +17,7 @@ class GameState
         @current_player = @player_1
     end
 
-    def switch_players()
+    def switch_players
         @current_player = current_player == player_1 ? player_2 : player_1
     end
 

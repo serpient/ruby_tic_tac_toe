@@ -13,13 +13,13 @@ end
 
 class Human 
     def move(board:, presenter:)
-        presenter.get_input()
+        presenter.get_input
     end
 end
 
 class Computer 
     def move(board:, presenter: )
-        board.empty_positions().sample()
+        board.empty_positions.sample
     end
 end
 

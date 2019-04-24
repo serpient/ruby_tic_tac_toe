@@ -8,16 +8,16 @@ class GameSettings
         @setting = setting
     end
 
-    def is_valid?(input: nil)
+    def valid?(input: nil)
         @input = input
-        setting.is_valid?(input: input)
+        setting.valid?(input: input)
     end
 
-    def name()
+    def name
         setting.name
     end
 
-    def message()
+    def message
         setting.message
     end
 
@@ -31,12 +31,12 @@ class OpponentType
     include Validator
     attr_accessor :name, :message
     
-    def initialize()
+    def initialize
         @name = "opponent_type"
-        @message = opponent_type_msg()
+        @message = opponent_type_msg
     end
 
-    def is_valid?(input: nil)
+    def valid?(input: nil)
         opponent_type_valid?(input: input)
     end
 
@@ -50,12 +50,12 @@ class BoardSize
     include Validator
     attr_accessor :name, :message
     
-    def initialize()
+    def initialize
         @name = "board_size"
-        @message = board_size_msg()
+        @message = board_size_msg
     end
 
-    def is_valid?(input: nil)
+    def valid?(input: nil)
         board_size_valid?(input: input)
     end
 
