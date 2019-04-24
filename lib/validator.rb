@@ -1,4 +1,8 @@
+require_relative '../lib/player'
+
 module Validator
+    include PlayerType
+
     def position_valid?(input:, board:) 
         int = input.to_i
         return board.is_input_valid?(int) && board.is_position_empty?(int)
@@ -10,6 +14,6 @@ module Validator
     end
 
     def opponent_type_valid?(input:)
-        return input == "C" || input == "H"
+        return input == computer || input == human
     end
 end

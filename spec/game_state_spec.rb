@@ -2,12 +2,18 @@ require_relative '../lib/game_state'
 require_relative '../lib/player'
 
 describe 'GameState' do
+    include PlayerType
+    attr_accessor :game_state
+
     context 'Initialization' do
-        game_state = GameState.new(
-            player_1: "H",
-            player_2: "C",
-            board_size: 2
-        )
+        before(:all) do
+            @game_state = GameState.new(
+                player_1: human,
+                player_2: computer,
+                board_size: 2
+            )
+        end
+
         it 'sets player_1' do
             expect(game_state.player_1.player.is_a?(Human)).to eq true
         end
@@ -27,13 +33,13 @@ describe 'GameState' do
 
     context 'switch_players' do
         it 'switches current player' do
-            game_state = GameState.new(
-                player_1: "H",
-                player_2: "C",
+            new_game_state = GameState.new(
+                player_1: human,
+                player_2: computer,
                 board_size: 3
             )
-            game_state.switch_players()
-            expect(game_state.current_player).to eq game_state.player_2
+            new_game_state.switch_players()
+            expect(new_game_state.current_player).to eq new_game_state.player_2
         end
     end
 end

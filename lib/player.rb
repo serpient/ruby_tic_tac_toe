@@ -22,3 +22,13 @@ class Computer
         board.empty_positions().sample()
     end
 end
+
+module PlayerType
+    def human
+        return "H"
+    end
+
+    def computer
+        return "C"
+    end
+end

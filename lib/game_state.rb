@@ -3,10 +3,11 @@ require_relative '../lib/player'
 
 class GameState 
     include Token
+    include PlayerType
     attr_accessor :player_1, :player_2, :board, :current_player
     
     def initialize(
-        player_1: "H",
+        player_1: human,
         player_2:,
         board_size:
     )
@@ -20,8 +21,7 @@ class GameState
         @current_player = current_player == player_1 ? player_2 : player_1
     end
 
-    private
     def get_player(type)
-        type == "H" ? Human : Computer
+        return type == human ? Human : Computer
     end
 end

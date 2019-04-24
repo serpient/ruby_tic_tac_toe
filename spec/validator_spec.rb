@@ -1,9 +1,11 @@
 require_relative '../lib/validator'
 require_relative '../lib/board'
-
+require_relative '../lib/player'
 
 describe 'Validator' do
     include Validator
+    include PlayerType
+
     context 'position_valid?' do
         board = Board.new(size: 2)
         board.update(position: 0, token: :hero)
@@ -38,7 +40,7 @@ describe 'Validator' do
         end
 
         it 'returns true if input is (H) or (C)' do
-            expect(opponent_type_valid?(input: "H")).to eq true
+            expect(opponent_type_valid?(input: computer)).to eq true
         end
     end
 end

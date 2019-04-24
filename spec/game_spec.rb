@@ -5,6 +5,7 @@ require_relative '../lib/game_presenter'
 require_relative '../lib/game_settings'
 
 describe 'Game' do
+    include PlayerType
     context 'set game settings' do
         game = Game.new(game_presenter: TestIO.new())
         it 'iterates over a series of game settings and compiles a settings list' do
@@ -12,7 +13,7 @@ describe 'Game' do
                 GameSettings.new(setting: BoardSize.new()),
                 GameSettings.new(setting: OpponentType.new()),
             ]
-            resulting = { "opponent_type" => "H", "board_size" => 4}
+            resulting = { "opponent_type" => human, "board_size" => 4}
             expect(game.set_game_settings(settings: settings)).to eql resulting
         end
     end
