@@ -15,7 +15,7 @@ describe 'Game Presenter' do
             presenter: TestIO.new()
         )
         it 'gets input through presenter' do
-            expect(game_presenter.get_input(input: "1")).to eq "1"
+            expect(game_presenter.get_input("1")).to eq "1"
         end
     end
 

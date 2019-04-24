@@ -5,8 +5,8 @@ class GamePresenter
         @presenter = presenter
     end
 
-    def get_input(input: nil)
-        presenter.get_input(input: input)
+    def get_input(input=nil)
+        presenter.get_input(input)
     end
 
     def output_message(message)
@@ -19,7 +19,7 @@ class GamePresenter
 end
 
 class ConsoleIO
-    def get_input(input: nil)
+    def get_input(input=nil)
         return gets.chomp
     end
 
@@ -43,7 +43,7 @@ class TestIO
         @count += 1
     end
 
-    def get_input(input: nil)
+    def get_input(input=nil)
         return input if input != nil
 
         value = case count 
