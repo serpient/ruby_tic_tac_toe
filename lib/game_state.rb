@@ -21,6 +21,7 @@ class GameState
         @current_player = current_player == player_1 ? player_2 : player_1
     end
 
+    private
     def get_player(type)
         return type == human ? Human : Computer
     end

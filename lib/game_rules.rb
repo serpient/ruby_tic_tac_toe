@@ -22,7 +22,7 @@ module GameRules
     def any_row_a_win?(rows) 
         rows.any? do |row|
             row.all? do |symbol|
-                symbol != empty && symbol == row[0]
+                symbol != empty && symbol == row.first
             end
         end
     end
