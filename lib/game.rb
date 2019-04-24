@@ -1,7 +1,7 @@
 require_relative '../lib/game_state'
 require_relative '../lib/game_presenter'
 require_relative '../lib/messages'
-require_relative '../lib/game_settings'
+require_relative '../lib/game_setting'
 
 class Game
     include Validator
@@ -17,24 +17,17 @@ class Game
         settings.reduce({}) do |map, setting_type|
             input = nil
             while !setting_type.valid?(input: input)
-                print_banner
-                game_presenter.output_message(setting_type.message)
-                input = game_presenter.get_input
+                input = game_presenter.game_setting_IO(message: setting_type.message)
             end
             map[setting_type.name] = setting_type.clean(input: input)
             map
         end
     end
 
-    def print_banner
-        game_presenter.clear
-        game_presenter.output_message(start_banner)
-    end
-
     def start()
         settings = [
-            GameSettings.new(setting: BoardSize.new),
-            GameSettings.new(setting: OpponentType.new),
+            GameSetting.new(setting: BoardSize.new),
+            GameSetting.new(setting: OpponentType.new),
         ]
         setting_results = set_game_settings(settings: settings)
 

@@ -1,11 +1,11 @@
-require_relative '../lib/game_settings'
+require_relative '../lib/game_setting'
 require_relative '../lib/player'
 
-describe 'Game Settings' do
+describe 'Game Setting' do
     include PlayerType
 
     context 'Initialize' do
-        game_settings = GameSettings.new(
+        game_settings = GameSetting.new(
             setting: OpponentType.new()
         )
         it 'sets name' do
@@ -17,7 +17,7 @@ describe 'Game Settings' do
     end
 
     context 'opponent type valid' do
-        game_settings = GameSettings.new(
+        game_settings = GameSetting.new(
             setting: OpponentType.new(),
         )
         it 'returns true if valid' do
@@ -29,7 +29,7 @@ describe 'Game Settings' do
     end
 
     context 'board size valid' do
-        game_settings = GameSettings.new(
+        game_settings = GameSetting.new(
             setting: BoardSize.new(),
         )
         it 'returns false if invalid' do

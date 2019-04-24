@@ -33,4 +33,8 @@ class TestIO
     def clear()
         return
     end
+
+    def game_setting_IO(message:)
+        return get_input
+    end
 end

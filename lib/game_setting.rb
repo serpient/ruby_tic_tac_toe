@@ -1,7 +1,7 @@
 require_relative '../lib/validator'
 require_relative '../lib/messages'
 
-class GameSettings
+class GameSetting
     attr_accessor :setting, :input
 
     def initialize(setting:)

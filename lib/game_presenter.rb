@@ -1,3 +1,5 @@
+require_relative '../lib/messages'
+
 class GamePresenter
     attr_accessor :presenter
 
@@ -16,9 +18,15 @@ class GamePresenter
     def clear
         presenter.clear
     end
+
+    def game_setting_IO(message:)
+        presenter.game_setting_IO(message: message)
+    end
 end
 
 class ConsoleIO
+    include Messages
+    
     def get_input(input=nil)
         return gets.chomp
     end
@@ -29,5 +37,12 @@ class ConsoleIO
 
     def clear
         print "\e[2J\e[f"
+    end
+
+    def game_setting_IO(message:)
+        clear
+        output_message(start_banner)
+        output_message(message)
+        return get_input
     end
 end
