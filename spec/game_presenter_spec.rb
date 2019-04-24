@@ -1,4 +1,5 @@
 require_relative '../lib/game_presenter'
+require_relative './test_io'
 
 describe 'Game Presenter' do
     context 'Initialization' do
