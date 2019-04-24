@@ -26,10 +26,11 @@ describe 'Board' do
             board = Board.new(
                 size: 2
             )
-            expect(board.update(
+            board.update(
                 position: 0, 
                 token: hero
-            )).to eq [hero, empty, empty, empty]
+            )
+            expect(board.positions).to eq [hero, empty, empty, empty]
         end
     end
 

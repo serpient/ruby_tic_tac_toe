@@ -11,9 +11,7 @@ class Board
     end
 
     def update(position:, token:)
-        positions[position] = token
-        @positions = positions;
-        return positions
+        @positions[position] = token
     end
 
     def is_full?()
@@ -25,8 +23,8 @@ class Board
     end
 
     def empty_positions()
-        positions.each_with_index.reduce([]) do |empty_positions, (position, idx)| 
-            position == empty && empty_positions.push(idx)
+        positions.each_with_index.reduce([]) do |empty_positions, (_position, idx)| 
+            empty_positions.push(idx) if is_position_empty?(idx)
             empty_positions
         end
     end
