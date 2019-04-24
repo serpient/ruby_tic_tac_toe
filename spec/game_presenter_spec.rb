@@ -24,7 +24,7 @@ describe 'Game Presenter' do
             presenter: ConsoleIO.new()
         )
         it 'through presenter' do
-            expect { game_presenter.output_message(message: "Player") }.to output("Player\n").to_stdout
+            expect { game_presenter.output_message("Player") }.to output("Player\n").to_stdout
         end
     end
 
@@ -33,7 +33,7 @@ describe 'Game Presenter' do
             presenter: TestIO.new()
         )
         it 'through presenter' do
-            expect(game_presenter.output_message(message: "Player")).to eq "Player\n"
+            expect(game_presenter.output_message("Player")).to eq "Player\n"
         end
     end
 end

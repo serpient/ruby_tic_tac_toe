@@ -4,8 +4,8 @@ require_relative '../lib/player'
 describe 'GameState' do
     context 'Initialization' do
         game_state = GameState.new(
-            player_1: Human.new(),
-            player_2: Computer.new(),
+            player_1: "H",
+            player_2: "C",
             board_size: 2
         )
         it 'sets player_1' do
@@ -23,17 +23,13 @@ describe 'GameState' do
         it 'sets new board' do
             expect(game_state.board.positions).to eq [:empty, :empty, :empty, :empty]
         end
-
-        # it 'sets presenter' do
-        #     expect(game_state.presenter.presenter.is_a?(ConsoleIO)).to eq true
-        # end
     end
 
     context 'switch_players' do
         it 'switches current player' do
             game_state = GameState.new(
-                player_1: Human.new(),
-                player_2: Computer.new(),
+                player_1: "H",
+                player_2: "C",
                 board_size: 3
             )
             game_state.switch_players()

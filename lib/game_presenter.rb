@@ -9,8 +9,8 @@ class GamePresenter
         presenter.get_input(input: input)
     end
 
-    def output_message(message:)
-        presenter.output_message(message: message)
+    def output_message(message)
+        presenter.output_message(message)
     end
 
     def clear()
@@ -23,7 +23,7 @@ class ConsoleIO
         return gets.chomp
     end
 
-    def output_message(message:)
+    def output_message(message)
         puts message
     end
 
@@ -60,7 +60,7 @@ class TestIO
         return value
     end
 
-    def output_message(message:)
+    def output_message(message)
         message + "\n"
     end
 

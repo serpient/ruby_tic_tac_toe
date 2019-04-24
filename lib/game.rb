@@ -3,7 +3,6 @@ require_relative '../lib/game_presenter'
 require_relative '../lib/messages'
 require_relative '../lib/board'
 require_relative '../lib/validator'
-require_relative '../lib/player'
 require_relative '../lib/game_settings'
 
 class Game
@@ -21,7 +20,7 @@ class Game
             input = nil
             while !setting_type.is_valid?(input: input)
                 print_banner()
-                game_presenter.output_message(message: setting_type.message())
+                game_presenter.output_message(setting_type.message())
                 input = game_presenter.get_input() 
             end
             map[setting_type.name] = setting_type.clean(input: input)
@@ -31,7 +30,7 @@ class Game
 
     def print_banner()
         game_presenter.clear()
-        game_presenter.output_message(message: start_banner())
+        game_presenter.output_message(start_banner())
     end
 
     def start()
@@ -42,11 +41,9 @@ class Game
         setting_results = set_game_settings(settings: settings)
 
         @game_state = GameState.new(
-            player_1: Human.new(),
-            player_2: setting_results["opponent_type"] == "H" ? Human.new() : Computer.new(),
+            player_2: setting_results["opponent_type"],
             board_size: setting_results["board_size"]
         )
-
     end
 end
 
