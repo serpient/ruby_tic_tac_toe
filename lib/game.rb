@@ -2,39 +2,47 @@ require_relative '../lib/game_state'
 require_relative '../lib/game_presenter'
 require_relative '../lib/messages'
 require_relative '../lib/game_setting'
+require_relative '../lib/game_rules'
 
 class Game
     include Validator
     include Messages
+    include GameRules
 
-    attr_accessor :game_state, :game_presenter
+    attr_accessor :game_state, :game_presenter, :status
 
-    def initialize(game_presenter: ConsoleIO.new)
+    def initialize(game_presenter: ConsoleIO.new, board_size:, player_2:)
         @game_presenter = game_presenter
-    end
-
-    def set_game_settings(settings:)
-        settings.reduce({}) do |map, setting_type|
-            input = nil
-            while !setting_type.valid?(input: input)
-                input = game_presenter.game_setting_IO(message: setting_type.message)
-            end
-            map[setting_type.name] = setting_type.clean(input: input)
-            map
-        end
-    end
-
-    def start()
-        settings = [
-            GameSetting.new(setting: BoardSize.new),
-            GameSetting.new(setting: OpponentType.new),
-        ]
-        setting_results = set_game_settings(settings: settings)
-
         @game_state = GameState.new(
-            player_2: setting_results["opponent_type"],
-            board_size: setting_results["board_size"]
+            player_2: player_2,
+            board_size: board_size
         )
+        @status = :play
+    end
+
+    def play
+        4.times { turn() }
+        puts "#{game_state.board.positions}"
+    end
+
+    def move()
+        game_state.current_player.move(board: game_state.board, presenter: game_presenter)
+    end
+
+    def turn
+        input = nil
+        while !position_valid?(input: input, board: game_state.board)
+            game_presenter.output_message(choose_position)
+            input = move(presenter: game_presenter)
+        end
+
+        game_state.update(position: input.to_i)
+        
+        @status = :win if win?(board: game_state.board)
+        @stats = :tie if tie?(board: game_state.board)
+
+        game_state.switch_players
+        return
     end
 end
 

@@ -14,4 +14,8 @@ module Messages
     def opponent_type_msg
         return "        Choose your Component        \n   (H)uman or (C)omputer opponent?   \n"
     end
+
+    def choose_position
+        return "Choose a valid position: "
+    end
 end

@@ -9,7 +9,7 @@ module Validator
     end
 
     def board_range_valid?(int, board)
-        int >= 1 && int <= board.max_positions
+        int >= 0 && int < board.max_positions
     end
     
     def board_size_valid?(input:)

@@ -6,15 +6,42 @@ require_relative '../lib/game_setting'
 
 describe 'Game' do
     include PlayerType
-    context 'set game settings' do
-        game = Game.new(game_presenter: TestIO.new())
-        it 'iterates over a series of game settings and compiles a settings list' do
-            settings = [
-                GameSetting.new(setting: BoardSize.new()),
-                GameSetting.new(setting: OpponentType.new()),
-            ]
-            resulting = { "opponent_type" => human, "board_size" => 4}
-            expect(game.set_game_settings(settings: settings)).to eql resulting
+    include Token
+    attr_accessor :game
+
+    context "Initialization" do
+        before(:all) do
+            @game = Game.new(
+                board_size: 3,
+                player_2: human,
+                game_presenter: TestIO.new()
+            )
+        end
+
+        it "has board_size used to create a Board instance" do
+            expect(game.game_state.board.size).to eql 3
+        end 
+
+        it "has game state generated" do
+            expect(game.game_state.is_a?(GameState)).to eql true
+        end 
+
+        it "has player 2 generated" do
+            expect(game.game_state.player_2.player.is_a?(Human)).to eql true
+        end 
+    end
+
+    context "Turn" do
+        before(:all) do
+            @game = Game.new(
+                board_size: 2,
+                player_2: human,
+                game_presenter: TestIO.new()
+            )
+        end
+        it 'updates game state and returns :continue if should continue' do
+            game.turn()
+            expect(game.game_state.board.positions.include?(hero)).to eql true
         end
     end
 end 

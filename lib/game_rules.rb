@@ -1,4 +1,5 @@
 require_relative './token'
+require_relative './board_transformer'
 
 module GameRules
     include Token

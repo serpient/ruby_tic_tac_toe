@@ -19,8 +19,10 @@ class TestIO
             "H"
         when 2
             "0"
+        when 3
+            "3"
         else
-            "1"
+            ["1", "H", "3", "4"].sample
         end
         update_count()
         return value

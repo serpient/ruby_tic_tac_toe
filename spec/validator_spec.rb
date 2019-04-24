@@ -20,6 +20,10 @@ describe 'Validator' do
         end
 
         it 'returns false if input is out of range' do
+            expect(position_valid?(input: "4", board: board)).to eq false
+        end
+
+        it 'returns false if input is out of range' do
             expect(position_valid?(input: "5", board: board)).to eq false
         end
     end
@@ -41,6 +45,21 @@ describe 'Validator' do
 
         it 'returns true if input is (H) or (C)' do
             expect(opponent_type_valid?(input: computer)).to eq true
+        end
+    end
+
+    context 'board_range_valid?' do
+        board = Board.new(size: 2)
+        it 'returns false if input is above 4' do
+            expect(board_range_valid?(4, board)).to eq false
+        end
+
+        it 'returns true if input is between 1 and 4' do
+            expect(board_range_valid?(3, board)).to eq true
+        end
+
+        it 'returns false if input is below 0' do
+            expect(board_range_valid?(-1, board)).to eq false
         end
     end
 end

@@ -1,5 +1,6 @@
 require_relative './token'
-require_relative '../lib/player'
+require_relative './player'
+require_relative './board'
 
 class GameState 
     include Token
@@ -19,6 +20,10 @@ class GameState
 
     def switch_players
         @current_player = current_player == player_1 ? player_2 : player_1
+    end
+
+    def update(position:)
+        board.update(position: position, token: current_player.token)
     end
 
     private
