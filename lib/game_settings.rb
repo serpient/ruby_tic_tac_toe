@@ -20,6 +20,10 @@ class GameSettings
     def message()
         setting.message
     end
+
+    def clean(input:)
+        setting.clean(input: input)
+    end
 end
 
 class OpponentType
@@ -35,6 +39,10 @@ class OpponentType
     def is_valid?(input: nil)
         opponent_type_valid?(input: input)
     end
+
+    def clean(input:)
+        return input
+    end
 end
 
 class BoardSize
@@ -49,5 +57,9 @@ class BoardSize
 
     def is_valid?(input: nil)
         board_size_valid?(input: input)
+    end
+
+    def clean(input:)
+        return input.to_i
     end
 end

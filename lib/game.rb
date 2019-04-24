@@ -17,14 +17,14 @@ class Game
     end
 
     def set_game_settings(settings:)
-        settings.each.reduce({}) do |map, setting_type|
+        settings.reduce({}) do |map, setting_type|
             input = nil
             while !setting_type.is_valid?(input: input)
                 print_banner()
                 game_presenter.output_message(message: setting_type.message())
                 input = game_presenter.get_input() 
             end
-            map[setting_type.name] = input
+            map[setting_type.name] = setting_type.clean(input: input)
             map
         end
     end
@@ -44,7 +44,7 @@ class Game
         @game_state = GameState.new(
             player_1: Human.new(),
             player_2: setting_results["opponent_type"] == "H" ? Human.new() : Computer.new(),
-            board_size: setting_results["board_size"].to_i
+            board_size: setting_results["board_size"]
         )
 
     end

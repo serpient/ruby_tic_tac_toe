@@ -12,7 +12,7 @@ describe 'Game' do
                 GameSettings.new(setting: BoardSize.new()),
                 GameSettings.new(setting: OpponentType.new()),
             ]
-            resulting = { "opponent_type" => "H", "board_size" => "4"}
+            resulting = { "opponent_type" => "H", "board_size" => 4}
             expect(game.set_game_settings(settings: settings)).to eql resulting
         end
     end
