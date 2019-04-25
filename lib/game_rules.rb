@@ -7,11 +7,8 @@ module GameRules
 
     def win?(board:) 
         horizontal_wins = any_row_a_win?(horizontal(board))
-
         vertical_wins = any_row_a_win?(vertical(board))
-
         diagonal_wins = any_row_a_win?(diagonal(board))
-
         horizontal_wins || vertical_wins || diagonal_wins
     end
 

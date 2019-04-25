@@ -37,20 +37,18 @@ class Game
         )
     end
 
+    def update_game_status
+        @status = :win if win?(board: game_state.board) 
+        @status = :tie if tie?(board: game_state.board) 
+    end
+
     def turn
         input = STARTING_INVALID_VALUE
 
         input = move while !position_valid?(input: input, board: game_state.board)
-
         game_state.update(position: input.to_i)
-
-        if win?(board: game_state.board) 
-            @status = :win
-        elsif tie?(board: game_state.board)
-            @status = :tie 
-        else
-            game_state.switch_players
-        end
+        update_game_status
+        game_state.switch_players if status == :play
     end
 end
 
