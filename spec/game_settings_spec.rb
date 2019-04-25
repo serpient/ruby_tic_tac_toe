@@ -1,5 +1,7 @@
-require_relative '../lib/game_setting'
-require_relative '../lib/player'
+require_relative '../lib/game_setting/game_setting'
+require_relative '../lib/game_setting/opponent_type'
+require_relative '../lib/game_setting/board_size'
+require_relative '../lib/player/player_types'
 
 describe 'Game Setting' do
     include PlayerType

@@ -1,4 +1,4 @@
-require_relative '../lib/player'
+require_relative './player/player_types'
 
 module Validator
     include PlayerType

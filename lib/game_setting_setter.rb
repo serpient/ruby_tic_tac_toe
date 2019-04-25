@@ -1,5 +1,8 @@
-require_relative './game_presenter'
-require_relative './game_setting'
+require_relative './game_presenter/game_presenter'
+require_relative './game_presenter/console_io'
+require_relative './game_setting/board_size'
+require_relative './game_setting/opponent_type'
+require_relative './game_setting/game_setting'
 require_relative './messages'
 
 class GameSettingSetter

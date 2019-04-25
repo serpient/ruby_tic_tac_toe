@@ -1,8 +1,7 @@
 require_relative '../lib/game'
 require_relative '../lib/game_state'
-require_relative '../lib/player'
-require_relative '../lib/game_presenter'
-require_relative '../lib/game_setting'
+require_relative '../lib/player/player_types'
+require_relative '../lib/game_presenter/test_io'
 
 describe 'Game' do
     include PlayerType

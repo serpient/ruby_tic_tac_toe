@@ -1,5 +1,5 @@
 require_relative '../lib/game_state'
-require_relative '../lib/player'
+require_relative '../lib/player/player_types'
 
 describe 'GameState' do
     include PlayerType

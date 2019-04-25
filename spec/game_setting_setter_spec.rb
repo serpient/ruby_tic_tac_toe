@@ -1,7 +1,9 @@
-require_relative '../lib/game_setting'
+require_relative '../lib/game_setting/game_setting'
+require_relative '../lib/game_setting/opponent_type'
+require_relative '../lib/game_setting/board_size'
+require_relative '../lib/player/player_types'
 require_relative '../lib/game_setting_setter'
-require_relative '../lib/game_presenter'
-require_relative '../lib/player'
+require_relative '../lib/game_presenter/test_io'
 
 describe 'Game Setting Setter' do
     include PlayerType

@@ -2,7 +2,7 @@
 
 require_relative '../lib/game'
 require_relative '../lib/game_setting_setter'
-require_relative '../lib/setting_types'
+require_relative '../lib/game_setting/setting_types'
 
 include SettingTypes
 

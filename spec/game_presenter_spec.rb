@@ -1,5 +1,6 @@
-require_relative '../lib/game_presenter'
-require_relative './test_io'
+require_relative '../lib/game_presenter/game_presenter'
+require_relative '../lib/game_presenter/test_io'
+require_relative '../lib/game_presenter/console_io'
 
 describe 'Game Presenter' do
     context 'Initialization' do

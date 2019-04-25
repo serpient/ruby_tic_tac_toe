@@ -1,4 +1,7 @@
-require_relative '../lib/player'
+require_relative '../lib/player/player'
+require_relative '../lib/player/human'
+require_relative '../lib/player/computer'
+require_relative '../lib/player/player_types'
 require_relative '../lib/token'
 
 describe 'Player' do

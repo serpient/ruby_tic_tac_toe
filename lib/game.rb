@@ -1,8 +1,8 @@
-require_relative '../lib/game_state'
-require_relative '../lib/game_presenter'
-require_relative '../lib/messages'
-require_relative '../lib/game_rules'
-require_relative '../lib/validator'
+require_relative './game_state'
+require_relative './game_presenter/console_io'
+require_relative './messages'
+require_relative './game_rules'
+require_relative './validator'
 
 class Game
     include Validator

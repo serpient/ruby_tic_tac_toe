@@ -1,5 +1,5 @@
 require_relative './token'
-require_relative './player'
+require_relative './player/player_types'
 require_relative './board'
 
 class GameState 
