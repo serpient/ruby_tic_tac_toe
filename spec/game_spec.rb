@@ -41,7 +41,7 @@ describe 'Game' do
         end
         it 'updates game state and returns :continue if should continue' do
             game.turn()
-            expect(game.game_state.board.positions.include?(hero)).to eql true
+            expect(game.game_state.board.positions.include?(player_x)).to eql true
         end
     end
 end 

@@ -1,10 +1,10 @@
 module Token
-    def hero
-        return :hero
+    def player_x
+        return :X
     end
 
-    def opponent
-        return :opponent
+    def player_o
+        return :O
     end
 
     def empty

@@ -28,9 +28,9 @@ describe 'Board' do
             )
             board.update(
                 position: 0, 
-                token: hero
+                token: player_x
             )
-            expect(board.positions).to eq [hero, empty, empty, empty]
+            expect(board.positions).to eq [player_x, empty, empty, empty]
         end
     end
 

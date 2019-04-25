@@ -4,11 +4,11 @@ describe 'Token' do
     include Token
     context 'gets tokens' do
         it '- player 1' do
-            expect(hero).to eq :hero
+            expect(player_x).to eq :X
         end
 
         it '- player 2' do
-            expect(opponent).to eq :opponent
+            expect(player_o).to eq :O
         end
 
         it '- empty' do

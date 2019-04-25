@@ -13,8 +13,8 @@ class GameState
         board_size:
     )
         @board = Board.new(size: board_size)
-        @player_1 = Player.new(player: get_player(player_1).new(), token: hero)
-        @player_2 = Player.new(player: get_player(player_2).new(), token: opponent)
+        @player_1 = Player.new(player: get_player(player_1).new(), token: player_x)
+        @player_2 = Player.new(player: get_player(player_2).new(), token: player_o)
         @current_player = @player_1
     end
 

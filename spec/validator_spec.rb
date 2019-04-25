@@ -1,16 +1,23 @@
 require_relative '../lib/validator'
 require_relative '../lib/board'
 require_relative '../lib/player'
+require_relative '../lib/token'
 
 describe 'Validator' do
     include Validator
     include PlayerType
+    include Token
+
+    attr_accessor :board
+
+    before(:all) do
+        @board = Board.new(size: 2)
+        board.update(position: 0, token: player_x)
+        board.update(position: 2, token: player_x)
+        board.update(position: 3, token: player_x)
+    end
 
     context 'position_valid?' do
-        board = Board.new(size: 2)
-        board.update(position: 0, token: :hero)
-        board.update(position: 2, token: :hero)
-        board.update(position: 3, token: :hero)
         it 'returns false if input is unusable' do
             expect(position_valid?(input: "2", board: board)).to eq false
         end
