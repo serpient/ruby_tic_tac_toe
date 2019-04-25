@@ -1,5 +1,6 @@
 require_relative '../lib/validator'
 require_relative '../lib/messages'
+require_relative '../lib/setting_types'
 
 class GameSetting
     attr_accessor :setting, :input
@@ -29,10 +30,11 @@ end
 class OpponentType
     include Messages
     include Validator
+    include SettingTypes
     attr_accessor :name, :message
     
     def initialize
-        @name = "opponent_type"
+        @name = opponent_type
         @message = opponent_type_msg
     end
 
@@ -48,10 +50,11 @@ end
 class BoardSize
     include Messages
     include Validator
+    include SettingTypes
     attr_accessor :name, :message
     
     def initialize
-        @name = "board_size"
+        @name = board_size
         @message = board_size_msg
     end
 
