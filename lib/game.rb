@@ -1,8 +1,8 @@
 require_relative '../lib/game_state'
 require_relative '../lib/game_presenter'
 require_relative '../lib/messages'
-require_relative '../lib/game_setting'
 require_relative '../lib/game_rules'
+require_relative '../lib/validator'
 
 class Game
     include Validator
@@ -10,6 +10,8 @@ class Game
     include GameRules
 
     attr_accessor :game_state, :game_presenter, :status
+
+    STARTING_INVALID_VALUE = -1
 
     def initialize(game_presenter: ConsoleIO.new, board_size:, player_2:)
         @game_presenter = game_presenter
@@ -24,28 +26,31 @@ class Game
         while status == :play
             turn
         end
-        puts "#{game_state.current_player.token} Wins" if status == :win
-        puts "Game is a Tie" if status == :tie 
+        game_presenter.output_message(win_msg(game_state.current_player.token)) if status == :win
+        game_presenter.output_message(tie_msg) if status == :tie 
     end
 
-    def move()
-        game_state.current_player.move(board: game_state.board, presenter: game_presenter)
+    def move
+        game_state.current_player.move(
+            board: game_state.board, 
+            presenter: game_presenter,
+        )
     end
 
     def turn
-        input = nil
-        while !position_valid?(input: input, board: game_state.board)
-            game_presenter.output_message(choose_position)
-            input = move
-        end
+        input = STARTING_INVALID_VALUE
+
+        input = move while !position_valid?(input: input, board: game_state.board)
 
         game_state.update(position: input.to_i)
 
-        @status = :win if win?(board: game_state.board)
-        @status = :tie if tie?(board: game_state.board)
-
-        game_state.switch_players
-        return
+        if win?(board: game_state.board) 
+            @status = :win
+        elsif tie?(board: game_state.board)
+            @status = :tie 
+        else
+            game_state.switch_players
+        end
     end
 end
 

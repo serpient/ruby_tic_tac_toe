@@ -15,7 +15,19 @@ module Messages
         return "        Choose your Component        \n   (H)uman or (C)omputer opponent?   \n"
     end
 
-    def choose_position
-        return "Choose a valid position: "
+    def choose_position(token)
+        return "Player #{token}: Choose a valid position: "
+    end
+    
+    def computer_chooses(position, token)
+        return "Player #{token} chooses position #{position}"
+    end
+
+    def win_msg(token)
+        return "Player #{token} Wins"
+    end
+
+    def tie_msg
+        return "Game is a Tie"
     end
 end

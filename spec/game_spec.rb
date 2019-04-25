@@ -68,6 +68,7 @@ describe 'Game' do
             game.turn()
             expect(game.game_state.board.positions).to eql updated_win_board
             expect(game.status).to eql :win
+            expect(game.game_state.current_player.token).to eql player_x
         end
     end
 end 
