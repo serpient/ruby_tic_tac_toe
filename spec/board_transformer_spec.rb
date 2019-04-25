@@ -13,7 +13,7 @@ describe 'Board Transformer' do
             ]
         end
 
-        it 'converts 3x3 board data to vertical rows' do
+        it 'converts 3x3 board data to horizontal rows' do
             board = Board.new(size: 3)
             new_3x3_board_positions = [1,2,3,4,5,6,7,8,9]
             board.update(position: nil, token: nil, all_positions: new_3x3_board_positions)
@@ -44,6 +44,17 @@ describe 'Board Transformer' do
                 [1, 4, 7],
                 [2, 5, 8],
                 [3, 6, 9],
+            ]
+        end
+
+        it 'converts 3x3 board data to vertical rows' do
+            board = Board.new(size: 3)
+            new_3x3_board_positions = [nil, "O", "X", "O", "O", "X", "O", "X", "O"]
+            board.update(position: nil, token: nil, all_positions: new_3x3_board_positions)
+            expect(vertical(board)).to eql [
+                [nil, "O", "O"],
+                ["O", "O", "X"],
+                ["X", "X", "O"],
             ]
         end
     end

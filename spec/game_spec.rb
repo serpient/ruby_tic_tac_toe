@@ -32,16 +32,42 @@ describe 'Game' do
     end
 
     context "Turn" do
-        before(:all) do
+        before(:each) do
             @game = Game.new(
-                board_size: 2,
-                player_2: human,
+                board_size: 3,
+                player_2: computer,
                 game_presenter: TestIO.new()
             )
         end
         it 'updates game state and returns :continue if should continue' do
             game.turn()
             expect(game.game_state.board.positions.include?(player_x)).to eql true
+        end
+
+        it 'updates game state and returns :tie if no win and board is full' do
+            tie_board = [
+                empty, player_o, player_x, 
+                player_o, player_o, player_x, 
+                player_o, player_x, player_o
+            ]
+            updated_tie_board = [player_x, player_o, player_x, player_o, player_o, player_x, player_o, player_x, player_o]
+            game.game_state.board.update(position: nil, token: nil, all_positions: tie_board)
+            game.turn()
+            expect(game.game_state.board.positions).to eql updated_tie_board
+            expect(game.status).to eql :tie
+        end
+
+        it 'updates game state and returns :win if there is a win' do
+            win_board = [
+                empty, player_o, player_o, 
+                player_x, player_x, player_o, 
+                player_o, player_o, player_x
+            ]
+            updated_win_board = [player_x, player_o, player_o, player_x, player_x, player_o, player_o, player_o, player_x]
+            game.game_state.board.update(position: nil, token: nil, all_positions: win_board)
+            game.turn()
+            expect(game.game_state.board.positions).to eql updated_win_board
+            expect(game.status).to eql :win
         end
     end
 end 

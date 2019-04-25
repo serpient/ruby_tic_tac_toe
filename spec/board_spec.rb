@@ -61,6 +61,17 @@ describe 'Board' do
 
             expect(board.full?()).to eq true
         end
+
+        it 'returns true when board is full' do
+            board = Board.new(
+                size: 3
+            )
+
+            tie_board = [player_x, player_x, player_x,player_x,player_x,player_x,player_x,player_x,player_x,]
+            board.update(position: nil, token: nil, all_positions: tie_board)
+
+            expect(board.full?()).to eq true
+        end
     end
 
     context 'Empty_Positions' do

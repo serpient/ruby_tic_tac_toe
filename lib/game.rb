@@ -21,8 +21,11 @@ class Game
     end
 
     def play
-        4.times { turn() }
-        puts "#{game_state.board.positions}"
+        while status == :play
+            turn
+        end
+        puts "#{game_state.current_player.token} Wins" if status == :win
+        puts "Game is a Tie" if status == :tie 
     end
 
     def move()
@@ -33,13 +36,13 @@ class Game
         input = nil
         while !position_valid?(input: input, board: game_state.board)
             game_presenter.output_message(choose_position)
-            input = move(presenter: game_presenter)
+            input = move
         end
 
         game_state.update(position: input.to_i)
-        
+
         @status = :win if win?(board: game_state.board)
-        @stats = :tie if tie?(board: game_state.board)
+        @status = :tie if tie?(board: game_state.board)
 
         game_state.switch_players
         return

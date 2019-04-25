@@ -4,7 +4,7 @@ module BoardTransformer
     end
     
     def vertical(board)
-        horizontal(board).transpose()
+        return horizontal(board).transpose()
     end
 
     def diagonal(board)

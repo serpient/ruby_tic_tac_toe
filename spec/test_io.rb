@@ -22,7 +22,9 @@ class TestIO
         when 3
             "3"
         else
-            ["1", "H", "3", "4"].sample
+            array = (0..4).to_a
+            array.push("H")
+            array.sample
         end
         update_count()
         return value
