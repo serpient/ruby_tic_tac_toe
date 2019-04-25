@@ -5,7 +5,7 @@ module Validator
 
     def position_valid?(input:, board:) 
         int = input.to_i
-        return board_range_valid?(int,board) && board.position_empty?(int)
+        board_range_valid?(int,board) && board.position_empty?(int)
     end
 
     def board_range_valid?(int, board)
@@ -14,10 +14,10 @@ module Validator
     
     def board_size_valid?(input:)
         int = input.to_i
-        return int == 3 || int == 4
+        int == 3 || int == 4
     end
 
     def opponent_type_valid?(input:)
-        return input == computer || input == human
+        input == computer || input == human
     end
 end

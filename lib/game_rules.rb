@@ -12,11 +12,11 @@ module GameRules
 
         diagonal_wins = any_row_a_win?(diagonal(board))
 
-        return horizontal_wins || vertical_wins || diagonal_wins
+        horizontal_wins || vertical_wins || diagonal_wins
     end
 
     def tie?(board:)
-        return !win?(board: board) && board.full?
+        !win?(board: board) && board.full?
     end
 
     private

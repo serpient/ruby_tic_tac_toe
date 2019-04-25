@@ -28,6 +28,6 @@ class GameState
 
     private
     def get_player(type)
-        return type == human ? Human : Computer
+        type == human ? Human : Computer
     end
 end

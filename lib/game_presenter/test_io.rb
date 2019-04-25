@@ -27,7 +27,7 @@ class TestIO
             array.sample
         end
         update_count()
-        return value
+        value
     end
 
     def output_message(message)
@@ -39,6 +39,6 @@ class TestIO
     end
 
     def game_setting_IO(message:)
-        return get_input
+        get_input
     end
 end

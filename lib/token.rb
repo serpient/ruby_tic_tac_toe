@@ -1,13 +1,13 @@
 module Token
     def player_x
-        return :X
+        :X
     end
 
     def player_o
-        return :O
+        :O
     end
 
     def empty
-        return :empty
+        :empty
     end
 end

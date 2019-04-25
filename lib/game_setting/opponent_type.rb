@@ -18,6 +18,6 @@ class OpponentType
     end
 
     def clean(input:)
-        return input
+        input
     end
 end

@@ -4,7 +4,7 @@ class ConsoleIO
     include Messages
     
     def get_input(input=nil)
-        return gets.chomp
+        gets.chomp
     end
 
     def output_message(message)
@@ -19,6 +19,6 @@ class ConsoleIO
         clear
         output_message(start_banner)
         output_message(message)
-        return get_input
+        get_input
     end
 end

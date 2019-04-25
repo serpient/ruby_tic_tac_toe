@@ -1,9 +1,9 @@
 module PlayerType
     def human
-        return "H"
+        "H"
     end
 
     def computer
-        return "C"
+        "C"
     end
 end

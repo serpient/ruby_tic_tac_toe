@@ -19,7 +19,7 @@ class Board
     end
 
     def position_available?(position)
-        return positions[position] == empty
+        positions[position] == empty
     end
 
     def empty_positions

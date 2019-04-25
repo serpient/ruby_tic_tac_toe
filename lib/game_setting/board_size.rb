@@ -18,6 +18,6 @@ class BoardSize
     end
 
     def clean(input:)
-        return input.to_i
+        input.to_i
     end
 end
