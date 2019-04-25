@@ -82,10 +82,8 @@ describe 'Game Rules' do
             expect(tie?(board: board)).to eq false
         end
         it 'returns true if game is tie / board is full' do
-            board.update(position: 0, token: :hero)
-            board.update(position: 1, token: :hero)
-            board.update(position: 2, token: :hero)
-            board.update(position: 3, token: :hero)
+            tie_board = [1,2,3,4]
+            board.update(position: nil, token: nil, all_positions: tie_board)
             expect(tie?(board: board)).to eq true
         end
     end

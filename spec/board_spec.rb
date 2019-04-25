@@ -34,12 +34,12 @@ describe 'Board' do
         end
     end
 
-    context 'Position_Is_Available' do
+    context 'position_available' do
         it 'returns true if position is empty' do
             board = Board.new(
                 size: 2
             )
-            expect(board.position_is_available?(0)).to eq true
+            expect(board.position_available?(0)).to eq true
         end
     end
 
@@ -56,10 +56,8 @@ describe 'Board' do
                 size: 2
             )
 
-            board.update(position: 0, token: hero)
-            board.update(position: 1, token: hero)
-            board.update(position: 2, token: hero)
-            board.update(position: 3, token: hero)
+            new_2x2_board_positions = [1,2,3,4]
+            board.update(position: nil, token: nil, all_positions: new_2x2_board_positions)
 
             expect(board.full?()).to eq true
         end

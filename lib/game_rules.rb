@@ -6,13 +6,13 @@ module GameRules
     include BoardTransformer
 
     def win?(board:) 
-        horizontal_wins = any_row_a_win?(horizontal_rows(board))
+        horizontal_wins = any_row_a_win?(horizontal(board))
 
-        vertical_wins = any_row_a_win?(vertical_rows(board))
+        vertical_wins = any_row_a_win?(vertical(board))
 
-        diagonal_wins = any_row_a_win?(diagonal_rows(board))
+        diagonal_wins = any_row_a_win?(diagonal(board))
 
-        return [ horizontal_wins, vertical_wins, diagonal_wins ].any?
+        return horizontal_wins || vertical_wins || diagonal_wins
     end
 
     def tie?(board:)

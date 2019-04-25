@@ -5,13 +5,22 @@ describe 'Board Transformer' do
     context 'Horizontal rows' do
         it 'converts board data to horizontal rows' do
             board = Board.new(size: 2)
-            board.update(position: 0, token: 1)
-            board.update(position: 1, token: 2)
-            board.update(position: 2, token: 3)
-            board.update(position: 3, token: 4)
-            expect(horizontal_rows(board)).to eql [
+            new_2x2_board_positions = [1,2,3,4]
+            board.update(position: nil, token: nil, all_positions: new_2x2_board_positions)
+            expect(horizontal(board)).to eql [
                 [1, 2],
                 [3, 4],
+            ]
+        end
+
+        it 'converts 3x3 board data to vertical rows' do
+            board = Board.new(size: 3)
+            new_3x3_board_positions = [1,2,3,4,5,6,7,8,9]
+            board.update(position: nil, token: nil, all_positions: new_3x3_board_positions)
+            expect(horizontal(board)).to eql [
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9],
             ]
         end
     end
@@ -19,11 +28,9 @@ describe 'Board Transformer' do
     context 'Vertical rows' do
         it 'converts 2x2 board data to vertical rows' do
             board = Board.new(size: 2)
-            board.update(position: 0, token: 1)
-            board.update(position: 1, token: 2)
-            board.update(position: 2, token: 3)
-            board.update(position: 3, token: 4)
-            expect(vertical_rows(board)).to eql [
+            new_2x2_board_positions = [1,2,3,4]
+            board.update(position: nil, token: nil, all_positions: new_2x2_board_positions)
+            expect(vertical(board)).to eql [
                 [1, 3],
                 [2, 4],
             ]
@@ -31,16 +38,9 @@ describe 'Board Transformer' do
 
         it 'converts 3x3 board data to vertical rows' do
             board = Board.new(size: 3)
-            board.update(position: 0, token: 1)
-            board.update(position: 1, token: 2)
-            board.update(position: 2, token: 3)
-            board.update(position: 3, token: 4)
-            board.update(position: 4, token: 5)
-            board.update(position: 5, token: 6)
-            board.update(position: 6, token: 7)
-            board.update(position: 7, token: 8)
-            board.update(position: 8, token: 9)
-            expect(vertical_rows(board)).to eql [
+            new_3x3_board_positions = [1,2,3,4,5,6,7,8,9]
+            board.update(position: nil, token: nil, all_positions: new_3x3_board_positions)
+            expect(vertical(board)).to eql [
                 [1, 4, 7],
                 [2, 5, 8],
                 [3, 6, 9],
@@ -51,31 +51,21 @@ describe 'Board Transformer' do
     context 'Diagonal rows' do
         it 'converts 2x2 board data to diagonal rows' do
             board = Board.new(size: 2)
-            board.update(position: 0, token: 1)
-            board.update(position: 1, token: 2)
-            board.update(position: 2, token: 3)
-            board.update(position: 3, token: 4)
-            expect(diagonal_rows(board)).to eql [
+            new_2x2_board_positions = [1,2,3,4]
+            board.update(position: nil, token: nil, all_positions: new_2x2_board_positions)
+            expect(diagonal(board)).to eql [
                 [1, 4],
                 [2, 3],
             ]
         end
 
-        it 'converts board data to vertical rows' do
+        it 'converts 3x3 data to diagonal rows' do
             board = Board.new(size: 3)
-            board.update(position: 0, token: 1)
-            board.update(position: 1, token: 2)
-            board.update(position: 2, token: 3)
-            board.update(position: 3, token: 4)
-            board.update(position: 4, token: 5)
-            board.update(position: 5, token: 6)
-            board.update(position: 6, token: 7)
-            board.update(position: 7, token: 8)
-            board.update(position: 8, token: 9)
-            expect(vertical_rows(board)).to eql [
-                [1, 4, 7],
-                [2, 5, 8],
-                [3, 6, 9],
+            new_3x3_board_positions = [1,2,3,4,5,6,7,8,9]
+            board.update(position: nil, token: nil, all_positions: new_3x3_board_positions)
+            expect(diagonal(board)).to eql [
+                [1, 5, 9],
+                [3, 5, 7],
             ]
         end
     end

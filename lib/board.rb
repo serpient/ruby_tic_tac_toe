@@ -10,15 +10,15 @@ class Board
         @positions = (1..max_positions).map {|num| num = empty }
     end
 
-    def update(position:, token:)
-        @positions[position] = token
+    def update(position:, token:, all_positions: nil)
+        all_positions ? @positions = all_positions : @positions[position] = token
     end
 
     def full?
         positions.all? {|position| position != empty }
     end
 
-    def position_is_available?(position)
+    def position_available?(position)
         return positions[position] == empty
     end
 

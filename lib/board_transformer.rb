@@ -1,42 +1,28 @@
 module BoardTransformer
-    def horizontal_rows(board)
+    def horizontal(board)
         return board.positions.each_slice(board.size).to_a
     end
     
-    def vertical_rows(board)
-        max_positions = board.max_positions
-        size = board.size 
-        (0...size).map do |starting_row|
-            generate_row_value(range: starting_row..(max_positions), num_to_take: size, board: board)
-        end
+    def vertical(board)
+        horizontal(board).transpose()
     end
 
-    def diagonal_rows(board)
-        top_left_corner = 0
-        top_right_corner = board.size - 1
-        max_positions = board.max_positions
-        size = board.size
-        [
-            generate_row_value(
-                range: top_left_corner..max_positions, 
-                num_to_take: size + 1, 
-                board: board
-            ),
-            generate_row_value(
-                range: top_right_corner..max_positions, 
-                num_to_take: size - 1, 
-                board: board
-            )
+    def diagonal(board)
+        array = horizontal(board)
+        last_idx = board.size - 1
+        row_length = 0...board.size
+        return [
+            row_length.map {|idx| array[idx][idx] },
+            row_length.map do |idx| 
+                case idx
+                when 0
+                    array[0][last_idx] 
+                when last_idx
+                    array[last_idx][0]
+                else
+                    array[idx][idx]
+                end
+            end
         ]
-    end
-
-    private
-    def generate_row_value(range:, num_to_take:, board:)
-        row_values = range.select.with_index do |_,position| 
-            position % num_to_take == 0
-        end
-        row_values.take(board.size).map do |idx|
-            board.positions[idx]
-        end
     end
 end
