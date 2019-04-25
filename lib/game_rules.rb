@@ -16,7 +16,7 @@ module GameRules
     end
 
     def tie?(board:)
-        return board.full?
+        return !win?(board: board) && board.full?
     end
 
     private
