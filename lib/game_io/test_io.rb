@@ -21,6 +21,8 @@ class TestIO
             "0"
         when 3
             "3"
+        when 4
+            "4"
         else
             array = (0..4).to_a
             array.push("H")
