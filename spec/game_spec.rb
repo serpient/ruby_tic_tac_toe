@@ -43,9 +43,11 @@ describe 'Game' do
                 game_io: TestIO.new()
             )
         end
+        
         it 'updates game state and returns :continue if should continue' do
             game.take_turn()
-            
+
+            expect(game.status).to eql :play
             expect(game.game_state.board.positions.include?(player_x)).to eql true
         end
 

@@ -25,7 +25,6 @@ class Game
 
     def play
         while status == :play
-            output_board
             take_turn
         end
         output_board
@@ -34,6 +33,7 @@ class Game
     end
 
     def take_turn
+        output_board
         get_valid_move
         update_board
         update_game_status
@@ -46,7 +46,7 @@ class Game
     end
 
     def get_valid_move
-        game_state.current_player.get_valid_move(board: game_state.board, presenter: game_io)
+        @input = game_state.current_player.get_valid_move(board: game_state.board, presenter: game_io)
     end
 
     def update_board
