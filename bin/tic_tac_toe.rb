@@ -11,6 +11,6 @@ game_settings = GameSettingSetter.new()
 game = Game.new(
     board_size: game_settings.settings[BOARD_SIZE],
     player_2: game_settings.settings[OPPONENT_TYPE_SETTING],
-    game_presenter: game_settings.game_presenter
+    game_io: game_settings.game_io
 )
 game.play()

@@ -17,7 +17,7 @@ class BoardSize
         board_size_valid?(input: input)
     end
 
-    def clean(input:) # rename to parse
+    def parse(input:)
         input.to_i
     end
 end

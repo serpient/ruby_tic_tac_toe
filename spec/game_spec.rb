@@ -1,7 +1,7 @@
 require_relative '../lib/game'
 require_relative '../lib/game_state'
 require_relative '../lib/player/player_types'
-require_relative '../lib/game_presenter/test_io'
+require_relative '../lib/game_io/test_io'
 
 describe 'Game' do
     include PlayerType
@@ -9,11 +9,11 @@ describe 'Game' do
     attr_accessor :game
 
     context "Initialization" do
-        before(:all) do
+        before(:each) do
             @game = Game.new(
                 board_size: 3,
                 player_2: human,
-                game_presenter: TestIO.new()
+                game_io: TestIO.new()
             )
         end
 
@@ -30,16 +30,16 @@ describe 'Game' do
         end 
     end
 
-    context "Turn" do
+    context "take_turn" do
         before(:each) do
             @game = Game.new(
                 board_size: 3,
                 player_2: computer,
-                game_presenter: TestIO.new()
+                game_io: TestIO.new()
             )
         end
         it 'updates game state and returns :continue if should continue' do
-            game.turn()
+            game.take_turn()
             expect(game.game_state.board.positions.include?(player_x)).to eql true
         end
 
@@ -51,7 +51,7 @@ describe 'Game' do
             ]
             updated_tie_board = [player_x, player_o, player_x, player_o, player_o, player_x, player_o, player_x, player_o]
             game.game_state.board.update(position: nil, token: nil, all_positions: tie_board)
-            game.turn()
+            game.take_turn()
             expect(game.game_state.board.positions).to eql updated_tie_board
             expect(game.status).to eql :tie
         end
@@ -64,7 +64,7 @@ describe 'Game' do
             ]
             updated_win_board = [player_x, player_o, player_o, player_x, player_x, player_o, player_o, player_o, player_x]
             game.game_state.board.update(position: nil, token: nil, all_positions: win_board)
-            game.turn()
+            game.take_turn()
             expect(game.game_state.board.positions).to eql updated_win_board
             expect(game.status).to eql :win
             expect(game.game_state.current_player.token).to eql player_x

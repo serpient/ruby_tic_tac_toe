@@ -17,7 +17,7 @@ class OpponentType
         opponent_type_valid?(input: input)
     end
 
-    def clean(input:)
+    def parse(input:)
         input
     end
 end

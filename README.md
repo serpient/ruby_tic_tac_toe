@@ -1,11 +1,12 @@
 # Run tests
+`rspec`
 `guard`
 
 # Install dependencies
 `bundle install`
 
 # Running the executable
-`ruby bin/tic_tac_toe.rb`
+`bin/tic_tac_toe.rb`
 
 [More CLI executable Reading](https://learn.co/lessons/ruby-cli-applications-readme)
 

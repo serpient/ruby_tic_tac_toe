@@ -4,7 +4,7 @@ require_relative '../lib/game_setting/board_size'
 require_relative '../lib/game_setting/setting_types'
 require_relative '../lib/player/player_types'
 require_relative '../lib/game_setting_setter'
-require_relative '../lib/game_presenter/test_io'
+require_relative '../lib/game_io/test_io'
 
 describe 'Game Setting Setter' do
     include PlayerType
@@ -17,10 +17,10 @@ describe 'Game Setting Setter' do
         GameSetting.new(setting: OpponentType.new()),
     ]
 
-    before(:all) do
+    before(:each) do
         @game_setting_setter = GameSettingSetter.new(
             setting_types: setting_types,
-            game_presenter: TestIO.new()
+            game_io: TestIO.new()
         )
     end
 
@@ -31,7 +31,7 @@ describe 'Game Setting Setter' do
         end
 
         it 'sets presenter' do
-            expect(game_setting_setter.game_presenter.is_a?(TestIO)).to eql true
+            expect(game_setting_setter.game_io.is_a?(TestIO)).to eql true
         end
 
         it 'sets settings' do

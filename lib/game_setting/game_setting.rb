@@ -21,7 +21,7 @@ class GameSetting
         setting.message
     end
 
-    def clean(input:)
-        setting.clean(input: input)
+    def parse(input:)
+        setting.parse(input: input)
     end
 end

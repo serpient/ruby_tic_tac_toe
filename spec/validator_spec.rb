@@ -10,7 +10,7 @@ describe 'Validator' do
 
     attr_accessor :board
 
-    before(:all) do
+    before(:each) do
         @board = Board.new(size: 2)
         board.update(position: 0, token: player_x)
         board.update(position: 2, token: player_x)

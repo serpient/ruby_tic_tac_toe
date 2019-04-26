@@ -6,7 +6,7 @@ describe 'GameState' do
     attr_accessor :game_state
 
     context 'Initialization' do
-        before(:all) do
+        before(:each) do
             @game_state = GameState.new(
                 player_1: human,
                 player_2: computer,

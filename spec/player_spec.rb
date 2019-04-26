@@ -3,6 +3,8 @@ require_relative '../lib/player/human'
 require_relative '../lib/player/computer'
 require_relative '../lib/player/player_types'
 require_relative '../lib/token'
+require_relative '../lib/game_io/game_io'
+require_relative '../lib/game_io/test_io'
 
 describe 'Player' do
     include Token
@@ -24,7 +26,7 @@ describe 'Player' do
                 token: player_x,
             )
             board = Board.new(size: 2)
-            presenter = GamePresenter.new(presenter: TestIO.new())
+            presenter = GameIO.new(presenter: TestIO.new())
             expect(human_player.move(board: board, presenter: presenter)).to eq "4"
         end
 
@@ -34,7 +36,7 @@ describe 'Player' do
                 token: player_x,
             )
             board = Board.new(size: 2)
-            presenter = GamePresenter.new(presenter: TestIO.new())
+            presenter = GameIO.new(presenter: TestIO.new())
             board.update(position: 0, token: player_x)
             board.update(position: 2, token: player_x)
             board.update(position: 3, token: player_x)
@@ -50,7 +52,7 @@ describe 'Computer' do
     context 'Move' do
         it 'returns a random empty space' do
             computer = Computer.new()
-            presenter = GamePresenter.new(presenter: TestIO.new())
+            presenter = GameIO.new(presenter: TestIO.new())
             board = Board.new(size: 2)
             board.update(position: 0, token: player_x)
             board.update(position: 1, token: player_x)

@@ -6,9 +6,9 @@ describe 'Game Rules' do
     include GameRules
     include Token
 
-    context 'win? 2x2' do
+    context 'win? 4x4' do
         before(:each) do
-            @board = Board.new(size: 2)
+            @board = Board.new(size: 4)
         end
         it 'returns false on initial board' do
             expect(win?(board: board)).to eq false
@@ -20,18 +20,24 @@ describe 'Game Rules' do
         it 'returns true if there are matching horizontal symbols' do
             board.update(position: 0, token: player_x)
             board.update(position: 1, token: player_x)
+            board.update(position: 2, token: player_x)
+            board.update(position: 3, token: player_x)
             expect(win?(board: board)).to eq true
         end
 
         it 'returns true if there are matching vertical symbols' do
             board.update(position: 0, token: player_x)
-            board.update(position: 2, token: player_x)
+            board.update(position: 4, token: player_x)
+            board.update(position: 8, token: player_x)
+            board.update(position: 12, token: player_x)
             expect(win?(board: board)).to eq true
         end
 
         it 'returns true if there are matching diagonal symbols' do
             board.update(position: 0, token: player_x)
-            board.update(position: 3, token: player_x)
+            board.update(position: 5, token: player_x)
+            board.update(position: 10, token: player_x)
+            board.update(position: 15, token: player_x)
             expect(win?(board: board)).to eq true
         end
     end

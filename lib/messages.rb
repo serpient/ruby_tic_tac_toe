@@ -1,9 +1,5 @@
 module Messages
     def start_banner 
-        border = "=====================================\n"
-        empty = "                                     \n                                     \n"
-        title = "         T I C  T A C  T O E         \n"
-
         "\n#{border}#{empty}#{title}#{empty}#{border}\n"
     end
 
@@ -29,5 +25,18 @@ module Messages
 
     def tie_msg
         "Game is a Tie"
+    end
+
+    private
+    def border
+        "=====================================\n"
+    end
+
+    def empty
+        "                                     \n                                     \n"
+    end
+
+    def title
+        "         T I C  T A C  T O E         \n"
     end
 end
