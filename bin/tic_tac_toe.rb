@@ -7,6 +7,7 @@ require_relative '../lib/game_setting/setting_types'
 include SettingTypes
 
 game_settings = GameSettingSetter.new()
+game_settings.create_settings
 
 game = Game.new(
     board_size: game_settings.settings[BOARD_SIZE],

@@ -21,10 +21,9 @@ class GameSettingSetter
     )
         @setting_types = setting_types
         @game_io = game_io
-        @settings = gets
     end
 
-    def gets
+    def create_settings
         setting_types.reduce({}) do |map, setting_type|
             input = nil
             while !setting_type[:valid?].(input: input)
