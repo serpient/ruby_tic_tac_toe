@@ -43,4 +43,9 @@ class TestIO
     def game_setting_IO(message:)
         get_input
     end
+
+    def output_board(board:, board_presenter:)
+        board_presenter.generate(board: board)
+        board_presenter.output
+    end
 end

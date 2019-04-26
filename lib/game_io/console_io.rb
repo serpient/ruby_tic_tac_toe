@@ -21,4 +21,10 @@ class ConsoleIO
         output_message(message)
         get_input
     end
+
+    def output_board(board:, board_presenter:)
+        game_io.clear
+        board_presenter.generate(board: board)
+        game_io.output_message(board_presenter.output)
+    end
 end

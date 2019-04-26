@@ -45,6 +45,7 @@ describe 'Game' do
         end
         it 'updates game state and returns :continue if should continue' do
             game.take_turn()
+            
             expect(game.game_state.board.positions.include?(player_x)).to eql true
         end
 
@@ -57,6 +58,7 @@ describe 'Game' do
             updated_tie_board = [player_x, player_o, player_x, player_o, player_o, player_x, player_o, player_x, player_o]
             game.game_state.board.update(position: nil, token: nil, all_positions: tie_board)
             game.take_turn()
+
             expect(game.game_state.board.positions).to eql updated_tie_board
             expect(game.status).to eql :tie
         end
@@ -70,6 +72,7 @@ describe 'Game' do
             updated_win_board = [player_x, player_o, player_o, player_x, player_x, player_o, player_o, player_o, player_x]
             game.game_state.board.update(position: nil, token: nil, all_positions: win_board)
             game.take_turn()
+
             expect(game.game_state.board.positions).to eql updated_win_board
             expect(game.status).to eql :win
             expect(game.game_state.current_player.token).to eql player_x

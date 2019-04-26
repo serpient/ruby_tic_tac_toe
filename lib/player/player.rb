@@ -12,4 +12,8 @@ class Player
     def move(board:, presenter:)
         player.move(board: board, presenter: presenter)
     end
+
+    def get_valid_move(board:, presenter:)
+        player.get_valid_move(board: board, presenter: presenter)
+    end
 end

@@ -13,8 +13,6 @@ class Game
 
     attr_accessor :game_state, :game_io, :status, :input, :board_presenter
 
-    STARTING_INVALID_VALUE = -1
-
     def initialize(game_io: ConsoleIO.new, board_size:, player_2:, board_presenter: StringBoard.new())
         @game_io = game_io
         @game_state = GameState.new(
@@ -43,23 +41,12 @@ class Game
     end
 
     private
-    def move
-        game_state.current_player.move(
-            board: game_state.board, 
-            presenter: game_io,
-        )
-    end
-
     def output_board
-        game_io.clear
-        board_presenter.generate(board: game_state.board)
-        game_io.output_message(board_presenter.output)
+        game_io.output_board(board: game_state.board, board_presenter: board_presenter)
     end
 
     def get_valid_move
-        input = STARTING_INVALID_VALUE
-        input = move while !position_valid?(input: input, board: game_state.board)
-        @input = input
+        game_state.current_player.get_valid_move(board: game_state.board, presenter: game_io)
     end
 
     def update_board
