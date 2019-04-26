@@ -6,11 +6,8 @@ require_relative './setting_types'
 require_relative './game_settings'
 
 class GameSettingSetter
-    include Messages
-    include Validator
-    include SettingTypes
     include GameSettings
-    attr_accessor :settings, :setting_types, :game_io
+    attr_accessor :setting_types, :game_io
 
     def initialize(
         setting_types: [
@@ -24,13 +21,13 @@ class GameSettingSetter
     end
 
     def create_settings
-        setting_types.reduce({}) do |map, setting_type|
+        return setting_types.reduce({}) do |map, setting_type|
             input = nil
             while !setting_type[:valid?].(input: input)
                 input = game_io.game_setting_IO(message: setting_type[:message])
             end
             map[setting_type[:name]] = setting_type[:parse].(input: input)
-            @settings = map
+            map
         end
     end
 end

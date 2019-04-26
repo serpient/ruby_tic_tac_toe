@@ -22,10 +22,10 @@ describe 'Game Setting Setter' do
 
     context 'create_settings' do
         it 'retrieves settings input' do
-            game_setting_setter.create_settings
+            settings = game_setting_setter.create_settings
             resulting = { :opponent_type => human, :board_size => 4}
-            expect(game_setting_setter.settings).to eql resulting
-            expect(game_setting_setter.settings[:opponent_type]).to eql human
+            expect(settings).to eql resulting
+            expect(settings[:opponent_type]).to eql human
         end
     end
 end
