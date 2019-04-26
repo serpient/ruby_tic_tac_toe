@@ -5,7 +5,7 @@ require_relative './game_setting/opponent_type'
 require_relative './game_setting/game_setting'
 require_relative './messages'
 
-class GameSettingSetter
+class GameSettingSetter # tic tac toe config wizard
     include Messages
     attr_accessor :settings, :setting_types, :game_presenter
 

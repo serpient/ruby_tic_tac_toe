@@ -9,7 +9,7 @@ class OpponentType
     attr_accessor :name, :message
     
     def initialize
-        @name = opponent_type
+        @name = OPPONENT_TYPE_SETTING
         @message = opponent_type_msg
     end
 

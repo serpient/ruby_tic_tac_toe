@@ -1,9 +1,4 @@
 module SettingTypes
-    def board_size
-        "board_size"
-    end
-    
-    def opponent_type
-        "opponent_type"
-    end
+    BOARD_SIZE = :board_size
+    OPPONENT_TYPE_SETTING = :opponent_type
 end

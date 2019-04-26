@@ -10,7 +10,6 @@ class GameSetting
     end
 
     def valid?(input: nil)
-        @input = input
         setting.valid?(input: input)
     end
 

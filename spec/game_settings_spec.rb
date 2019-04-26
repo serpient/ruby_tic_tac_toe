@@ -1,17 +1,20 @@
 require_relative '../lib/game_setting/game_setting'
 require_relative '../lib/game_setting/opponent_type'
 require_relative '../lib/game_setting/board_size'
+require_relative '../lib/game_setting/setting_types'
 require_relative '../lib/player/player_types'
+
 
 describe 'Game Setting' do
     include PlayerType
+    include SettingTypes
 
     context 'Initialize' do
         game_settings = GameSetting.new(
             setting: OpponentType.new()
         )
         it 'sets name' do
-            expect(game_settings.name).to eql 'opponent_type'
+            expect(game_settings.name).to eql :opponent_type
         end
         it 'sets setting class' do
             expect(game_settings.setting.is_a?(OpponentType)).to eql true

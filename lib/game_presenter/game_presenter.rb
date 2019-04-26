@@ -1,6 +1,6 @@
 require_relative '../messages'
 
-class GamePresenter
+class GamePresenter # rename to game io
     attr_accessor :presenter
 
     def initialize(presenter:) 
