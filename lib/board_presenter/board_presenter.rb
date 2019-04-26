@@ -1,14 +1,12 @@
 class BoardPresenter
-    attr_accessor :presenter, :board
+    attr_accessor :presenter
 
-    def initialize(presenter:, board:)
+    def initialize(presenter:)
         @presenter = presenter
-        @board = board
-        presenter.board = board
     end
 
-    def generate
-        presenter.generate
+    def generate(board:)
+        presenter.generate(board: board)
     end
 
     def output

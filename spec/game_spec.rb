@@ -13,7 +13,8 @@ describe 'Game' do
             @game = Game.new(
                 board_size: 3,
                 player_2: human,
-                game_io: TestIO.new()
+                game_io: TestIO.new(),
+                board_presenter: StringBoard.new()
             )
         end
 
@@ -27,6 +28,10 @@ describe 'Game' do
 
         it "has player 2 generated" do
             expect(game.game_state.player_2.player.is_a?(Human)).to eql true
+        end 
+
+        it "has board presenter" do
+            expect(game.board_presenter.is_a?(StringBoard)).to eql true
         end 
     end
 
