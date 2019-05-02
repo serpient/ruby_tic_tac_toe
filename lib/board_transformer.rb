@@ -1,4 +1,6 @@
 module BoardTransformer
+    extend self
+    
     def horizontal(board)
         board.positions.each_slice(board.size).to_a
     end

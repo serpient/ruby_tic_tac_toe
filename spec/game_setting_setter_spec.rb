@@ -4,7 +4,7 @@ require_relative '../lib/game_io/test_io'
 
 describe 'Game Setting Setter' do
     include PlayerType
-    # include SettingTypes
+    include SettingTypes
     
     attr_accessor :game_setting_setter
 
@@ -23,9 +23,9 @@ describe 'Game Setting Setter' do
     context 'create_settings' do
         it 'retrieves settings input' do
             settings = game_setting_setter.create_settings
-            resulting = { :opponent_type => PlayerType::HUMAN, :board_size => 4}
+            resulting = { SettingTypes::OPPONENT_TYPE_SETTING => PlayerType::HUMAN, :board_size => 4}
             expect(settings).to eql resulting
-            expect(settings[:opponent_type]).to eql PlayerType::HUMAN
+            expect(settings[SettingTypes::OPPONENT_TYPE_SETTING]).to eql PlayerType::HUMAN
         end
     end
 end

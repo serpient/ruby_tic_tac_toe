@@ -11,8 +11,8 @@ class GameSettingSetter
 
     def initialize(
         setting_types: [
-            board_size,
-            opponent_type,
+            GameSettings.board_size,
+            GameSettings.opponent_type,
         ],
         game_io: ConsoleIO.new
     )

@@ -1,4 +1,6 @@
 module Messages
+    extend self
+    
     def start_banner 
         "\n#{border}#{space}#{title}#{space}#{border}\n"
     end

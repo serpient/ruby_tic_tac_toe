@@ -1,6 +1,8 @@
 require_relative './player/player_types'
 
 module Validator
+    extend self
+    
     include PlayerType
 
     def position_valid?(input:, board:) 

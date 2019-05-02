@@ -53,7 +53,11 @@ describe 'Game' do
                 Token::O, Token::O, Token::X, 
                 Token::O, Token::X, Token::O
             ]
-            updated_tie_board = [Token::X, Token::O, Token::X, Token::O, Token::O, Token::X, Token::O, Token::X, Token::O]
+            updated_tie_board = [
+                Token::X, Token::O, Token::X, 
+                Token::O, Token::O, Token::X, 
+                Token::O, Token::X, Token::O
+            ]
             game.game_state.board.update(position: nil, token: nil, all_positions: tie_board)
             game.play()
 

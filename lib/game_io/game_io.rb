@@ -1,5 +1,3 @@
-require_relative '../messages'
-
 class GameIO
     attr_accessor :presenter
 

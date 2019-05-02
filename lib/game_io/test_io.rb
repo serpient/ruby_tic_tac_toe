@@ -1,14 +1,4 @@
 class TestIO
-    attr_accessor :count
-
-    def initialize()
-        @count = 0
-    end
-
-    def update_count()
-        @count += 1
-    end
-
     def get_input(input=nil)
         return input if input != nil
 
@@ -38,5 +28,16 @@ class TestIO
 
     def clear()
         return
+    end
+
+    private
+    attr_accessor :count
+
+    def initialize()
+        @count = 0
+    end
+
+    def update_count()
+        @count += 1
     end
 end

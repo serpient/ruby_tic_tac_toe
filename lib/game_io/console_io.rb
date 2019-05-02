@@ -1,8 +1,4 @@
-require_relative '../messages'
-
 class ConsoleIO
-    include Messages
-    
     def get_input(input=nil)
         gets.chomp
     end

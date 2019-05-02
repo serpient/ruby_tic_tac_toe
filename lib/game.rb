@@ -37,7 +37,7 @@ class Game
     end
 
     private
-    attr_accessor :game_io, :input, :board_presenter
+    attr_accessor :game_io, :board_presenter
 
     def output_board
         game_io.clear
@@ -47,7 +47,7 @@ class Game
 
     def get_valid_move(board:, presenter:)
         input = -1
-        input = game_state.current_player.move(board: board, presenter: presenter) while !position_valid?(input: input, board: board)
+        input = game_state.current_player.move(board: board, presenter: presenter) while !Validator.position_valid?(input: input, board: board)
         input
     end
 
@@ -57,16 +57,16 @@ class Game
     end
 
     def update_game_status(board:)
-        @status = :win if win?(board: board) 
-        @status = :tie if tie?(board: board) 
+        @status = :win if GameRules.win?(board: board) 
+        @status = :tie if GameRules.tie?(board: board) 
     end
 
     def output_win
-        game_io.output_message(win_msg(game_state.current_player.token))
+        game_io.output_message(Messages.win_msg(game_state.current_player.token))
     end
 
     def output_tie
-        game_io.output_message(tie_msg) 
+        game_io.output_message(Messages.tie_msg) 
     end
 end
 

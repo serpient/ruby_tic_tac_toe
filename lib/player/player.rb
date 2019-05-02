@@ -1,5 +1,3 @@
-require_relative '../messages'
-
 class Player
     attr_accessor :player, :token
 
