@@ -39,7 +39,7 @@ describe 'Board' do
             board = Board.new(
                 size: 2
             )
-            expect(board.position_available?(0)).to eq true
+            expect(board.position_empty?(0)).to eq true
         end
     end
 

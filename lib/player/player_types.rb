@@ -13,4 +13,8 @@ module PlayerType
         return Computer.new if type == COMPUTER
         return SmartComputer.new if type == SMART_COMPUTER
     end
+
+    def valid_players
+        [HUMAN, COMPUTER, SMART_COMPUTER]
+    end
 end
