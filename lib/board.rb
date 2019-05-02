@@ -18,10 +18,6 @@ class Board
         positions.all? {|position| position != Token::EMPTY }
     end
 
-    def xf?(position)
-        positions[position] == Token::EMPTY
-    end
-
     def empty_positions
         positions.each_with_index.reduce([]) do |empty_positions, (_position, idx)| 
             empty_positions.push(idx) if position_empty?(idx)
