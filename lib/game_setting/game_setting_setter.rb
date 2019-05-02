@@ -7,6 +7,8 @@ require_relative './game_settings'
 
 class GameSettingSetter
     include GameSettings
+    include Messages
+
     attr_accessor :setting_types, :game_io
 
     def initialize(
@@ -34,7 +36,7 @@ class GameSettingSetter
     private
     def game_setting_IO(message:)
         game_io.clear
-        game_io.output_message(start_banner)
+        game_io.output_message(Messages.start_banner)
         game_io.output_message(message)
         game_io.get_input
     end
