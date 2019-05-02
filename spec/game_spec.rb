@@ -43,7 +43,7 @@ describe 'Game' do
         it 'continues game loop and returns :win or :tie' do
             game.play()
 
-            expect(game.status).to eql (:win or :tie)
+            expect(game.status).to eql(:win).or eq(:tie)
             expect(game.game_state.board.positions.include?(Token::X)).to eql true
         end
 
