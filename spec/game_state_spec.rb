@@ -1,15 +1,17 @@
 require_relative '../lib/game_state'
 require_relative '../lib/player/player_types'
+require_relative '../lib/token'
 
 describe 'GameState' do
     include PlayerType
+    include Token
     attr_accessor :game_state
 
     context 'Initialization' do
         before(:each) do
             @game_state = GameState.new(
-                player_1: human,
-                player_2: computer,
+                player_1: PlayerType::HUMAN,
+                player_2: PlayerType::COMPUTER,
                 board_size: 2
             )
         end
@@ -27,15 +29,15 @@ describe 'GameState' do
         end
 
         it 'sets new board' do
-            expect(game_state.board.positions).to eq [:empty, :empty, :empty, :empty]
+            expect(game_state.board.positions).to eq [Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY]
         end
     end
 
     context 'switch_players' do
         it 'switches current player' do
             new_game_state = GameState.new(
-                player_1: human,
-                player_2: computer,
+                player_1: PlayerType::HUMAN,
+                player_2: PlayerType::COMPUTER,
                 board_size: 3
             )
             new_game_state.switch_players()

@@ -1,9 +1,4 @@
 module PlayerType
-    def human
-        "H"
-    end
-
-    def computer
-        "C"
-    end
+    HUMAN = "H"
+    COMPUTER = "C"
 end

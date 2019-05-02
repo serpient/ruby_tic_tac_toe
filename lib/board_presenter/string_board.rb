@@ -13,9 +13,9 @@ class StringBoard
     private
     def string_positions(positions)
         positions.map do |position|
-            if position == empty
+            if position == Token::EMPTY
                 " "
-            elsif position == player_x
+            elsif position == Token::X
                 "X"
             else
                 "O"

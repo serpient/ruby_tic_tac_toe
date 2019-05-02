@@ -15,6 +15,8 @@ class ConsoleIO
         print "\e[2J\e[f"
     end
 
+
+    # maybe game setting IO should be moved to game setting
     def game_setting_IO(message:)
         clear
         output_message(start_banner)
@@ -22,6 +24,7 @@ class ConsoleIO
         get_input
     end
 
+    # this should be moved to Game
     def output_board(board:, board_presenter:)
         clear
         board_presenter.generate(board: board)

@@ -1,6 +1,6 @@
 module Messages
     def start_banner 
-        "\n#{border}#{empty}#{title}#{empty}#{border}\n"
+        "\n#{border}#{space}#{title}#{space}#{border}\n"
     end
 
     def board_size_msg
@@ -32,7 +32,7 @@ module Messages
         "=====================================\n"
     end
 
-    def empty
+    def space
         "                                     \n                                     \n"
     end
 

@@ -12,9 +12,9 @@ describe 'Validator' do
 
     before(:each) do
         @board = Board.new(size: 2)
-        board.update(position: 0, token: player_x)
-        board.update(position: 2, token: player_x)
-        board.update(position: 3, token: player_x)
+        board.update(position: 0, token: Token::X)
+        board.update(position: 2, token: Token::X)
+        board.update(position: 3, token: Token::X)
     end
 
     context 'position_valid?' do
@@ -51,7 +51,7 @@ describe 'Validator' do
         end
 
         it 'returns true if input is (H) or (C)' do
-            expect(opponent_type_valid?(input: computer)).to eq true
+            expect(opponent_type_valid?(input: PlayerType::COMPUTER)).to eq true
         end
     end
 

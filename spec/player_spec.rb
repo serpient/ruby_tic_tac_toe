@@ -13,7 +13,7 @@ describe 'Player' do
         it 'sets player' do
             human_player = Player.new(
                 player: Human.new(),
-                token: player_x,
+                token: Token::X,
             )
             expect(human_player.player.is_a?(Human)).to eq true
         end
@@ -23,7 +23,7 @@ describe 'Player' do
         it 'gets valid human input' do
             human_player = Player.new(
                 player: Human.new(),
-                token: player_x,
+                token: Token::X,
             )
             board = Board.new(size: 3)
             presenter = GameIO.new(presenter: TestIO.new())
@@ -33,13 +33,13 @@ describe 'Player' do
         it 'gets valid computer input' do
             computer_player = Player.new(
                 player: Computer.new(),
-                token: player_x,
+                token: Token::X,
             )
             board = Board.new(size: 2)
             presenter = GameIO.new(presenter: TestIO.new())
-            board.update(position: 0, token: player_x)
-            board.update(position: 2, token: player_x)
-            board.update(position: 3, token: player_x)
+            board.update(position: 0, token: Token::X)
+            board.update(position: 2, token: Token::X)
+            board.update(position: 3, token: Token::X)
 
             expect(computer_player.get_valid_move(board: board, presenter: presenter)).to eq 1
         end

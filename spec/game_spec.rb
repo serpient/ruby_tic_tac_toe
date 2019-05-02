@@ -12,7 +12,7 @@ describe 'Game' do
         before(:each) do
             @game = Game.new(
                 board_size: 3,
-                player_2: human,
+                player_2: PlayerType::HUMAN,
                 game_io: TestIO.new(),
                 board_presenter: StringBoard.new()
             )
@@ -39,7 +39,7 @@ describe 'Game' do
         before(:each) do
             @game = Game.new(
                 board_size: 3,
-                player_2: computer,
+                player_2: PlayerType::COMPUTER,
                 game_io: TestIO.new()
             )
         end
@@ -48,16 +48,16 @@ describe 'Game' do
             game.take_turn()
 
             expect(game.status).to eql :play
-            expect(game.game_state.board.positions.include?(player_x)).to eql true
+            expect(game.game_state.board.positions.include?(Token::X)).to eql true
         end
 
         it 'updates game state and returns :tie if no win and board is full' do
             tie_board = [
-                empty, player_o, player_x, 
-                player_o, player_o, player_x, 
-                player_o, player_x, player_o
+                Token::EMPTY, Token::O, Token::X, 
+                Token::O, Token::O, Token::X, 
+                Token::O, Token::X, Token::O
             ]
-            updated_tie_board = [player_x, player_o, player_x, player_o, player_o, player_x, player_o, player_x, player_o]
+            updated_tie_board = [Token::X, Token::O, Token::X, Token::O, Token::O, Token::X, Token::O, Token::X, Token::O]
             game.game_state.board.update(position: nil, token: nil, all_positions: tie_board)
             game.take_turn()
 
@@ -67,17 +67,17 @@ describe 'Game' do
 
         it 'updates game state and returns :win if there is a win' do
             win_board = [
-                empty, player_o, player_o, 
-                player_x, player_x, player_o, 
-                player_o, player_o, player_x
+                Token::EMPTY, Token::O, Token::O, 
+                Token::X, Token::X, Token::O, 
+                Token::O, Token::O, Token::X
             ]
-            updated_win_board = [player_x, player_o, player_o, player_x, player_x, player_o, player_o, player_o, player_x]
+            updated_win_board = [Token::X, Token::O, Token::O, Token::X, Token::X, Token::O, Token::O, Token::O, Token::X]
             game.game_state.board.update(position: nil, token: nil, all_positions: win_board)
             game.take_turn()
 
             expect(game.game_state.board.positions).to eql updated_win_board
             expect(game.status).to eql :win
-            expect(game.game_state.current_player.token).to eql player_x
+            expect(game.game_state.current_player.token).to eql Token::X
         end
     end
 end 

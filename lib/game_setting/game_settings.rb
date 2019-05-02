@@ -9,7 +9,7 @@ module GameSettings
 
     def opponent_type
         {
-            :name => OPPONENT_TYPE_SETTING,
+            :name => SettingTypes::OPPONENT_TYPE_SETTING,
             :message => opponent_type_msg,
             :valid? => -> (input: nil) { opponent_type_valid?(input: input) },
             :parse => -> (input:) { input },
@@ -18,7 +18,7 @@ module GameSettings
 
     def board_size
         {
-            :name => BOARD_SIZE,
+            :name => SettingTypes::BOARD_SIZE,
             :message => board_size_msg,
             :valid? => -> (input: nil) { board_size_valid?(input: input) },
             :parse => -> (input:) { input.to_i },

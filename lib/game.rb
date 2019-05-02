@@ -32,6 +32,11 @@ class Game
         output_tie if status == :tie 
     end
 
+    # return values from function, to see the flow of data in the take_turn functions
+    # take_turn move into play(). and adjust tests 
+    # should test play()
+    # what needs to be a private vs public instance accessor variable . u can move the attr_accessor under private as well
+    # attr_reader to make it readable only for outside the class
     def take_turn
         output_board
         get_valid_move
