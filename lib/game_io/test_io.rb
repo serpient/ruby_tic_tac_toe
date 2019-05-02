@@ -18,7 +18,7 @@ class TestIO
             array.push("H")
             array.sample
         end
-        update_count()
+        update_count
         value
     end
 
@@ -26,18 +26,18 @@ class TestIO
         message + "\n"
     end
 
-    def clear()
+    def clear
         return
     end
 
     private
     attr_accessor :count
 
-    def initialize()
+    def initialize
         @count = 0
     end
 
-    def update_count()
+    def update_count
         @count += 1
     end
 end

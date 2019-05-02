@@ -10,7 +10,7 @@ describe 'Game Setting Setter' do
 
     before(:each) do
         @game_setting_setter = GameSettingSetter.new(
-            game_io: TestIO.new()
+            game_io: TestIO.new
         )
     end
 

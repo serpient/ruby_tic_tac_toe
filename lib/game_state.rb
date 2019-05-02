@@ -31,6 +31,6 @@ class GameState
 
     private
     def get_player(type)
-        type == PlayerType::HUMAN ? Human.new() : Computer.new()
+        type == PlayerType::HUMAN ? Human.new : Computer.new
     end
 end

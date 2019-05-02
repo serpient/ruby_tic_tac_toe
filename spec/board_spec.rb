@@ -48,7 +48,7 @@ describe 'Board' do
             board = Board.new(
                 size: 2
             )
-            expect(board.full?()).to eq false
+            expect(board.full?).to eq false
         end
 
         it 'returns true when board is full' do
@@ -59,7 +59,7 @@ describe 'Board' do
             new_2x2_board_positions = [1,2,3,4]
             board.update(position: nil, token: nil, all_positions: new_2x2_board_positions)
 
-            expect(board.full?()).to eq true
+            expect(board.full?).to eq true
         end
 
         it 'returns true when board is full' do
@@ -70,7 +70,7 @@ describe 'Board' do
             tie_board = [Token::X, Token::X, Token::X,Token::X,Token::X,Token::X,Token::X,Token::X,Token::X,]
             board.update(position: nil, token: nil, all_positions: tie_board)
 
-            expect(board.full?()).to eq true
+            expect(board.full?).to eq true
         end
     end
 
@@ -78,7 +78,7 @@ describe 'Board' do
         it 'returns a list of Token::EMPTY position indexes' do
             board = Board.new(size: 2)
 
-            expect(board.empty_positions()).to eq [0,1,2,3]
+            expect(board.empty_positions).to eq [0,1,2,3]
         end
     end
 end

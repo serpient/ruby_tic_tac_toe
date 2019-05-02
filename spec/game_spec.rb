@@ -13,8 +13,8 @@ describe 'Game' do
             @game = Game.new(
                 board_size: 3,
                 player_2: PlayerType::HUMAN,
-                game_io: TestIO.new(),
-                board_presenter: StringBoard.new()
+                game_io: TestIO.new,
+                board_presenter: StringBoard.new
             )
         end
 
@@ -36,12 +36,12 @@ describe 'Game' do
             @game = Game.new(
                 board_size: 3,
                 player_2: PlayerType::COMPUTER,
-                game_io: TestIO.new()
+                game_io: TestIO.new
             )
         end
         
         it 'continues game loop and returns :win or :tie' do
-            game.play()
+            game.play
 
             expect(game.status).to eql(:win).or eq(:tie)
             expect(game.game_state.board.positions.include?(Token::X)).to eql true
@@ -59,7 +59,7 @@ describe 'Game' do
                 Token::O, Token::X, Token::O
             ]
             game.game_state.board.update(position: nil, token: nil, all_positions: tie_board)
-            game.play()
+            game.play
 
             expect(game.game_state.board.positions).to eql updated_tie_board
             expect(game.status).to eql :tie
@@ -73,7 +73,7 @@ describe 'Game' do
             ]
             updated_win_board = [Token::X, Token::O, Token::O, Token::X, Token::X, Token::O, Token::O, Token::O, Token::X]
             game.game_state.board.update(position: nil, token: nil, all_positions: win_board)
-            game.play()
+            game.play
 
             expect(game.game_state.board.positions).to eql updated_win_board
             expect(game.status).to eql :win

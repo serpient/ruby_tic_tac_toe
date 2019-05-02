@@ -40,7 +40,7 @@ describe 'GameState' do
                 player_2: PlayerType::COMPUTER,
                 board_size: 3
             )
-            new_game_state.switch_players()
+            new_game_state.switch_players
             expect(new_game_state.current_player).to eq new_game_state.player_2
         end
     end

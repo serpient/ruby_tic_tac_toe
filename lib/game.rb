@@ -13,7 +13,7 @@ class Game
 
     attr_accessor :game_state, :status
 
-    def initialize(game_io: ConsoleIO.new, board_size:, player_2:, board_presenter: StringBoard.new())
+    def initialize(game_io: ConsoleIO.new, board_size:, player_2:, board_presenter: StringBoard.new)
         @game_io = game_io
         @game_state = GameState.new(
             player_2: player_2,

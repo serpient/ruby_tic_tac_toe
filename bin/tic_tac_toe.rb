@@ -6,7 +6,7 @@ require_relative '../lib/game_setting/setting_types'
 
 include SettingTypes
 
-game_settings = GameSettingSetter.new()
+game_settings = GameSettingSetter.new
 settings = game_settings.create_settings
 
 game = Game.new(
@@ -14,4 +14,4 @@ game = Game.new(
     player_2: settings[SettingTypes::OPPONENT_TYPE_SETTING],
     game_io: game_settings.game_io
 )
-game.play()
+game.play
