@@ -1,8 +1,6 @@
 require_relative '../game_io/game_io'
 require_relative '../game_io/console_io'
-require_relative '../validator'
 require_relative '../messages'
-require_relative './setting_types'
 require_relative './game_settings'
 
 class GameSettingSetter
@@ -16,7 +14,7 @@ class GameSettingSetter
             GameSettings.board_size,
             GameSettings.opponent_type,
         ],
-        game_io: ConsoleIO.new
+        game_io: GameIO.new(presenter: ConsoleIO.new)
     )
         @setting_types = setting_types
         @game_io = game_io

@@ -10,7 +10,7 @@ module Messages
     end
 
     def opponent_type_msg
-        "        Choose your Component        \n   (H)uman or (C)omputer opponent?   \n"
+        "         Choose your Opponent:        \n         * (H)uman\n         * (D)umb Computer\n         * (S)mart Computer" 
     end
 
     def choose_position(token)

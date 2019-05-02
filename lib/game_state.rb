@@ -1,7 +1,5 @@
 require_relative './token'
 require_relative './player/player'
-require_relative './player/human'
-require_relative './player/computer'
 require_relative './player/player_types'
 require_relative './board'
 
@@ -16,8 +14,8 @@ class GameState
         board_size:
     )
         @board = Board.new(size: board_size)
-        @player_1 = Player.new(player: get_player(player_1), token: Token::X)
-        @player_2 = Player.new(player: get_player(player_2), token: Token::O)
+        @player_1 = Player.new(player: PlayerType.get_player(player_1), token: Token::X)
+        @player_2 = Player.new(player: PlayerType.get_player(player_2), token: Token::O)
         @current_player = @player_1
     end
 
@@ -27,10 +25,5 @@ class GameState
 
     def update(position:)
         board.update(position: position, token: current_player.token)
-    end
-
-    private
-    def get_player(type)
-        type == PlayerType::HUMAN ? Human.new : Computer.new
     end
 end

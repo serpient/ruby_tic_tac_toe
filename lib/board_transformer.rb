@@ -1,16 +1,17 @@
 module BoardTransformer
     extend self
 
-    def horizontal(board)
-        board.positions.each_slice(board.size).to_a
+    def horizontal(board, with_idx: false)
+        board_data = with_idx ? board.positions_with_idx : board.positions
+        board_data.each_slice(board.size).to_a
     end
     
-    def vertical(board)
-        horizontal(board).transpose
+    def vertical(board, with_idx: false)
+        horizontal(board, with_idx: with_idx).transpose
     end
 
-    def diagonal(board)
-        array = horizontal(board)
+    def diagonal(board, with_idx: false)
+        array = horizontal(board, with_idx: with_idx)
         last_idx = board.size - 1
         row_length = 0...board.size
         [
@@ -22,7 +23,7 @@ module BoardTransformer
                 when last_idx
                     array[last_idx][0]
                 else
-                    array[idx][idx]
+                    array[idx][last_idx - idx]
                 end
             end
         ]

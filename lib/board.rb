@@ -18,7 +18,7 @@ class Board
         positions.all? {|position| position != Token::EMPTY }
     end
 
-    def position_available?(position)
+    def xf?(position)
         positions[position] == Token::EMPTY
     end
 
@@ -31,5 +31,21 @@ class Board
 
     def position_empty?(position)
         positions[position] == Token::EMPTY
+    end
+
+    def positions_with_idx
+        positions.map.with_index { |val, idx| [val, idx] }
+    end
+
+    def center
+        size == 3 ? 4 : nil
+    end
+
+    def corners
+        if size == 3
+            return [0, 2, 6, 8]
+        else
+            return [0, 3, 12, 15]
+        end
     end
 end
