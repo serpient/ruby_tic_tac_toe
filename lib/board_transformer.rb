@@ -28,4 +28,12 @@ module BoardTransformer
             end
         ]
     end
+
+    def transform_with_idx(board)
+        [
+            horizontal(board, with_idx: true),
+            vertical(board, with_idx: true),
+            diagonal(board, with_idx: true)
+        ]
+    end
 end

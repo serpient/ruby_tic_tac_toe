@@ -274,6 +274,24 @@ describe 'Player' do
                 board.update(position: nil, token: nil, all_positions: smart_computer_board)
                 expect(computer_player.move(board: board, presenter: presenter)).to eq(0).or eq(3).or eq(12).or eq(15)
             end
+
+
+        it 'takes next best move to win if center or corner is not available' do
+            computer_player = Player.new(
+                player: SmartComputer.new,
+                token: Token::O,
+            )
+            board = Board.new(size: 4)
+            presenter = GameIO.new(presenter: TestIO.new)
+            smart_computer_board = [
+                Token::O, Token::EMPTY, Token::EMPTY, Token::O,
+                Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
+                Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
+                Token::X, Token::EMPTY, Token::EMPTY, Token::X,
+            ]
+            board.update(position: nil, token: nil, all_positions: smart_computer_board)
+            expect(computer_player.move(board: board, presenter: presenter)).to eq(1).or eq(2)
+        end
         end
 end
 

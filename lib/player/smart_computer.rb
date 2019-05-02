@@ -3,30 +3,23 @@ require_relative '../Token'
 require_relative '../board_transformer'
 
 class SmartComputer
-    include Messages
     include Token
     include BoardTransformer
     attr_accessor :token
 
     def move(board:, presenter:)
         @board = board
-        @all_transformed_boards = transform(board)
+        @transformed_boards = BoardTransformer.transform_with_idx(board)
 
-        takes_winning_move || takes_blocking_move || takes_next_optimal_move
+        takes_winning_move || 
+        takes_blocking_move || 
+        takes_next_optimal_move
     end
 
     private
-    attr_accessor :all_transformed_boards, :board
-    def transform(board)
-        [
-            horizontal(board, with_idx: true),
-            vertical(board, with_idx: true),
-            diagonal(board, with_idx: true)
-        ]
-    end
-
+    attr_accessor :transformed_boards, :board
     def takes_winning_move
-        find_finishing_move(token_to_find: Token::O)
+        find_finishing_move(token_to_find: token)
     end
 
     def takes_blocking_move
@@ -34,40 +27,64 @@ class SmartComputer
     end
 
     def takes_next_optimal_move
-        return board.center if board.center && board.position_empty?(board.center)
-        corner = board.corners.find do |corner_position|
-            board.position_empty?(corner_position)
-        end
-        return corner ? corner : board.empty_positions.sample
+        choose_center || 
+        choose_empty_corner || 
+        find_finishing_move(token_to_find: token, num_of_moves_before_win: 2) || 
+        board.empty_positions.sample
     end
 
-    def find_finishing_move(token_to_find:)
+    def find_finishing_move(token_to_find:, num_of_moves_before_win: 1)
         valid_move = nil
-        all_transformed_boards.each do |rows|
-            position = find_almost_winning_position(rows: rows, board: board, token_to_find: token_to_find)
-            valid_move = position if position
+        transformed_boards.find do |transformed_board|
+            valid_move = find_winning_position(
+                transformed_board: transformed_board, 
+                num_of_moves_before_win: num_of_moves_before_win, 
+                token_to_find: token_to_find
+            )
         end
         return valid_move
     end
 
-    def find_almost_winning_position(rows:, board:, token_to_find:) 
-        move = nil
-        rows.find do |row|
-            counter_of = {
-                Token::O => 0,
-                Token::X => 0,
-                Token::EMPTY => 0
-            }
-            row.each do |position|
-                counter_of[Token::O] += 1 if position.first == Token::O
-                counter_of[Token::EMPTY] += 1 if position.first == Token::EMPTY
-                counter_of[Token::X] += 1 if position.first == Token::X
+    def find_winning_position(transformed_board:, num_of_moves_before_win:, token_to_find:) 
+        transformed_board.find.reduce(nil) do |move, row|
+            token_count = count_tokens(row)
+
+            close_to_win = token_count[token_to_find] >= board.size - num_of_moves_before_win
+            has_empty_position = token_count[Token::EMPTY] >= 1
+
+            if (close_to_win && has_empty_position)
+                move = find_empty_position(row)
             end
-            if (counter_of[token_to_find] == (board.size - 1) && counter_of[Token::EMPTY] >= 1)
-                position = row.find { |position| position[0] != Token::O && position[0] != Token::X }
-                move = position[1]
-            end
+
+            move
         end
-        move
+    end
+
+    def count_tokens(row)
+        token_count = {
+            Token::O => 0,
+            Token::X => 0,
+            Token::EMPTY => 0
+        }
+        row.each do |position|
+            token_count[Token::O] += 1 if position.first == Token::O
+            token_count[Token::EMPTY] += 1 if position.first == Token::EMPTY
+            token_count[Token::X] += 1 if position.first == Token::X
+        end
+        return token_count
+    end
+
+    def find_empty_position(row)
+        row.find { |position| position[0] == Token::EMPTY }[1]
+    end
+
+    def choose_center 
+        board.center if board.center && board.position_empty?(board.center)
+    end
+
+    def choose_empty_corner
+        board.corners.find do |corner_position|
+            board.position_empty?(corner_position)
+        end
     end
 end
