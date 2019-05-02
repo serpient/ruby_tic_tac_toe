@@ -24,7 +24,7 @@ class TestIO
         when 4
             "4"
         else
-            array = (0..4).to_a
+            array = (0..9).to_a
             array.push("H")
             array.sample
         end
@@ -38,14 +38,5 @@ class TestIO
 
     def clear()
         return
-    end
-
-    def game_setting_IO(message:)
-        get_input
-    end
-
-    def output_board(board:, board_presenter:)
-        board_presenter.generate(board: board)
-        board_presenter.output
     end
 end

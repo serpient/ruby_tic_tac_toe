@@ -19,7 +19,7 @@ describe 'Player' do
         end
     end
 
-    context 'get_valid_move' do
+    context 'move' do
         it 'gets valid human input' do
             human_player = Player.new(
                 player: Human.new(),
@@ -27,7 +27,7 @@ describe 'Player' do
             )
             board = Board.new(size: 3)
             presenter = GameIO.new(presenter: TestIO.new())
-            expect(human_player.get_valid_move(board: board, presenter: presenter)).to eq "4"
+            expect(human_player.move(board: board, presenter: presenter)).to eq "4"
         end
 
         it 'gets valid computer input' do
@@ -41,7 +41,7 @@ describe 'Player' do
             board.update(position: 2, token: Token::X)
             board.update(position: 3, token: Token::X)
 
-            expect(computer_player.get_valid_move(board: board, presenter: presenter)).to eq 1
+            expect(computer_player.move(board: board, presenter: presenter)).to eq 1
         end
     end
 end
