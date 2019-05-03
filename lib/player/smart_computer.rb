@@ -1,4 +1,3 @@
-require_relative '../messages'
 require_relative '../Token'
 require_relative '../board_transformer'
 
@@ -9,7 +8,7 @@ class SmartComputer
 
     def move(board:, presenter:)
         @board = board
-        @transformed_boards = BoardTransformer.transform_with_idx(board)
+        @transformed_boards = BoardTransformer.transform_with_index(board)
         @winning_token_count = board.size 
 
         take_winning || 
@@ -23,6 +22,7 @@ class SmartComputer
 
     private
     attr_accessor :transformed_boards, :board
+
     def take_winning
         find_optimal_move(token_to_find: token, target_token_count: winning_token_count - 1)
     end
@@ -37,11 +37,11 @@ class SmartComputer
 
     def find_optimal_move(token_to_find: , target_token_count:)
         row = find_row_with_token_count(token_to_find: token_to_find, target_token_count: target_token_count)
-        return row ? find_empty_position(row) : nil
+        find_empty_position(row) if row
     end
 
     def find_row_with_token_count(token_to_find:, target_token_count:)
-        return transformed_boards.find do |transformed_board|
+        transformed_boards.find do |transformed_board|
             transformed_board.find do |row|
                 row_token_count = count_tokens(row)
     
@@ -68,7 +68,7 @@ class SmartComputer
             row_token_count[Token::EMPTY] += 1 if position.first == Token::EMPTY
             row_token_count[Token::X] += 1 if position.first == Token::X
         end
-        return row_token_count
+        row_token_count
     end
 
     def take_center 

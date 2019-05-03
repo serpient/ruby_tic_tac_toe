@@ -19,8 +19,8 @@ class Board
     end
 
     def empty_positions
-        positions.each_with_index.reduce([]) do |empty_positions, (_position, idx)| 
-            empty_positions.push(idx) if position_empty?(idx)
+        positions.each_with_index.reduce([]) do |empty_positions, (_position, index)| 
+            empty_positions.push(index) if position_empty?(index)
             empty_positions
         end
     end
@@ -29,19 +29,19 @@ class Board
         positions[position] == Token::EMPTY
     end
 
-    def positions_with_idx
-        positions.map.with_index { |val, idx| [val, idx] }
+    def positions_with_index
+        positions.map.with_index { |val, index| [val, index] }
     end
 
     def center
-        size == 3 ? 4 : nil
+        4 if size == 3
     end
 
     def corners
-        if size == 3
-            return [0, 2, 6, 8]
-        else
-            return [0, 3, 12, 15]
-        end
+        corners = [0]
+        corners[1] = size - 1
+        corners[2] = corners[1] * size
+        corners[3] = corners[2] + size
+        corners
     end
 end

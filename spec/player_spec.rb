@@ -53,15 +53,23 @@ describe 'Player' do
             expect(computer_player.move(board: board, presenter: presenter)).to eq 1
         end
     end
+end
 
-    context 'smart computer - winning move - 3x3' do
+describe 'Smart Computer' do
+
+    attr_accessor :computer_player, :board, :presenter
+
+    before(:all) do
+        @computer_player = Player.new(
+            player: SmartComputer.new,
+            token: Token::O,
+        )
+        @board = Board.new(size: 3)
+        @presenter = GameIO.new(presenter: TestIO.new)
+    end
+
+    context 'winning move - 3x3' do
         it 'takes diagonal winning move if possible' do
-            computer_player = Player.new(
-                player: SmartComputer.new,
-                token: Token::O,
-            )
-            board = Board.new(size: 3)
-            presenter = GameIO.new(presenter: TestIO.new)
             smart_computer_board = [
                 Token::X, Token::EMPTY, Token::O, 
                 Token::EMPTY, Token::EMPTY, Token::X, 
@@ -72,12 +80,6 @@ describe 'Player' do
         end
 
         it 'takes horizontal winning move if possible' do
-            computer_player = Player.new(
-                player: SmartComputer.new,
-                token: Token::O,
-            )
-            board = Board.new(size: 3)
-            presenter = GameIO.new(presenter: TestIO.new)
             smart_computer_board = [
                 Token::O, Token::EMPTY, Token::O, 
                 Token::EMPTY, Token::EMPTY, Token::EMPTY, 
@@ -89,12 +91,6 @@ describe 'Player' do
 
 
         it 'takes vertical winning move if possible' do
-            computer_player = Player.new(
-                player: SmartComputer.new,
-                token: Token::O,
-            )
-            board = Board.new(size: 3)
-            presenter = GameIO.new(presenter: TestIO.new)
             smart_computer_board = [
                 Token::EMPTY, Token::EMPTY, Token::O, 
                 Token::EMPTY, Token::EMPTY, Token::O, 
@@ -105,14 +101,8 @@ describe 'Player' do
         end
     end
 
-    context 'smart computer - blocking move' do
+    context 'blocking move' do
         it 'takes vertical blocking move if possible' do
-            computer_player = Player.new(
-                player: SmartComputer.new,
-                token: Token::O,
-            )
-            board = Board.new(size: 3)
-            presenter = GameIO.new(presenter: TestIO.new)
             smart_computer_board = [
                 Token::EMPTY, Token::X, Token::EMPTY, 
                 Token::EMPTY, Token::EMPTY, Token::EMPTY, 
@@ -123,12 +113,6 @@ describe 'Player' do
         end
 
         it 'takes horizontal blocking move if possible' do
-            computer_player = Player.new(
-                player: SmartComputer.new,
-                token: Token::O,
-            )
-            board = Board.new(size: 3)
-            presenter = GameIO.new(presenter: TestIO.new)
             smart_computer_board = [
                 Token::EMPTY, Token::EMPTY, Token::EMPTY, 
                 Token::EMPTY, Token::EMPTY, Token::EMPTY, 
@@ -139,12 +123,6 @@ describe 'Player' do
         end
 
         it 'takes diagonal blocking move if possible' do
-            computer_player = Player.new(
-                player: SmartComputer.new,
-                token: Token::O,
-            )
-            board = Board.new(size: 3)
-            presenter = GameIO.new(presenter: TestIO.new)
             smart_computer_board = [
                 Token::EMPTY, Token::EMPTY, Token::EMPTY, 
                 Token::EMPTY, Token::X, Token::EMPTY, 
@@ -155,14 +133,8 @@ describe 'Player' do
         end
     end
 
-    context 'smart computer - optimal move' do
+    context 'optimal move' do
         it 'takes center move in a 3x3 board' do
-            computer_player = Player.new(
-                player: SmartComputer.new,
-                token: Token::O,
-            )
-            board = Board.new(size: 3)
-            presenter = GameIO.new(presenter: TestIO.new)
             smart_computer_board = [
                 Token::EMPTY, Token::EMPTY, Token::EMPTY, 
                 Token::EMPTY, Token::EMPTY, Token::EMPTY, 
@@ -173,12 +145,6 @@ describe 'Player' do
         end
 
         it 'takes corner move if center is not available board' do
-            computer_player = Player.new(
-                player: SmartComputer.new,
-                token: Token::O,
-            )
-            board = Board.new(size: 3)
-            presenter = GameIO.new(presenter: TestIO.new)
             smart_computer_board = [
                 Token::EMPTY, Token::EMPTY, Token::EMPTY, 
                 Token::EMPTY, Token::X, Token::EMPTY, 
@@ -189,12 +155,6 @@ describe 'Player' do
         end
 
         it 'takes random move if center or corner is not available' do
-            computer_player = Player.new(
-                player: SmartComputer.new,
-                token: Token::O,
-            )
-            board = Board.new(size: 3)
-            presenter = GameIO.new(presenter: TestIO.new)
             smart_computer_board = [
                 Token::X, Token::EMPTY, Token::X, 
                 Token::EMPTY, Token::X, Token::EMPTY, 
@@ -205,14 +165,8 @@ describe 'Player' do
         end
     end
 
-    context 'smart computer - all strategies' do
+    context 'all strategies' do
         it 'takes the best move' do
-            computer_player = Player.new(
-                player: SmartComputer.new,
-                token: Token::O,
-            )
-            board = Board.new(size: 3)
-            presenter = GameIO.new(presenter: TestIO.new)
             smart_computer_board = [
                 Token::X, Token::EMPTY, Token::EMPTY, 
                 Token::EMPTY, Token::O, Token::EMPTY, 
@@ -223,66 +177,47 @@ describe 'Player' do
         end
     end
 
-        context 'smart computer - 4x4' do
-            it 'takes winning move if possible' do
-                computer_player = Player.new(
-                    player: SmartComputer.new,
-                    token: Token::O,
-                )
-                board = Board.new(size: 4)
-                presenter = GameIO.new(presenter: TestIO.new)
-                smart_computer_board = [
-                    Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::O,
-                    Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
-                    Token::EMPTY, Token::O, Token::EMPTY, Token::EMPTY,
-                    Token::O, Token::EMPTY, Token::EMPTY, Token::EMPTY,
-                ]
-                board.update(position: nil, token: nil, all_positions: smart_computer_board)
-                expect(computer_player.move(board: board, presenter: presenter)).to eq 6
-            end
+    context '4x4' do
 
-            it 'takes blocking move if possible' do
-                computer_player = Player.new(
-                    player: SmartComputer.new,
-                    token: Token::O,
-                )
-                board = Board.new(size: 4)
-                presenter = GameIO.new(presenter: TestIO.new)
-                smart_computer_board = [
-                    Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
-                    Token::X, Token::EMPTY, Token::X, Token::X,
-                    Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
-                    Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
-                ]
-                board.update(position: nil, token: nil, all_positions: smart_computer_board)
-                expect(computer_player.move(board: board, presenter: presenter)).to eq 5
-            end
+        before(:all) do
+            @board = Board.new(size: 4)
+        end
 
-            it 'takes corner if possible' do
-                computer_player = Player.new(
-                    player: SmartComputer.new,
-                    token: Token::O,
-                )
-                board = Board.new(size: 4)
-                presenter = GameIO.new(presenter: TestIO.new)
-                smart_computer_board = [
-                    Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
-                    Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::X,
-                    Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
-                    Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
-                ]
-                board.update(position: nil, token: nil, all_positions: smart_computer_board)
-                expect(computer_player.move(board: board, presenter: presenter)).to eq(0).or eq(3).or eq(12).or eq(15)
-            end
+        it 'takes winning move if possible' do
+            smart_computer_board = [
+                Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::O,
+                Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
+                Token::EMPTY, Token::O, Token::EMPTY, Token::EMPTY,
+                Token::O, Token::EMPTY, Token::EMPTY, Token::EMPTY,
+            ]
+            board.update(position: nil, token: nil, all_positions: smart_computer_board)
+            expect(computer_player.move(board: board, presenter: presenter)).to eq 6
+        end
+
+        it 'takes blocking move if possible' do
+            smart_computer_board = [
+                Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
+                Token::X, Token::EMPTY, Token::X, Token::X,
+                Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
+                Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
+            ]
+            board.update(position: nil, token: nil, all_positions: smart_computer_board)
+            expect(computer_player.move(board: board, presenter: presenter)).to eq 5
+        end
+
+        it 'takes corner if possible' do
+            smart_computer_board = [
+                Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
+                Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::X,
+                Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
+                Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
+            ]
+            board.update(position: nil, token: nil, all_positions: smart_computer_board)
+            expect(computer_player.move(board: board, presenter: presenter)).to eq(0).or eq(3).or eq(12).or eq(15)
+        end
 
 
         it 'takes next best move to win if center or corner is not available' do
-            computer_player = Player.new(
-                player: SmartComputer.new,
-                token: Token::O,
-            )
-            board = Board.new(size: 4)
-            presenter = GameIO.new(presenter: TestIO.new)
             smart_computer_board = [
                 Token::O, Token::EMPTY, Token::EMPTY, Token::O,
                 Token::EMPTY, Token::EMPTY, Token::EMPTY, Token::EMPTY,
@@ -292,6 +227,6 @@ describe 'Player' do
             board.update(position: nil, token: nil, all_positions: smart_computer_board)
             expect(computer_player.move(board: board, presenter: presenter)).to eq(1).or eq(2)
         end
-        end
+    end
 end
 
