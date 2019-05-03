@@ -9,9 +9,16 @@ module PlayerType
     SMART_COMPUTER = "S"
 
     def get_player(type)
-        return Human.new if type == HUMAN
-        return Computer.new if type == COMPUTER
-        return SmartComputer.new if type == SMART_COMPUTER
+        case type
+        when HUMAN
+            return Human.new
+        when COMPUTER
+            return Computer.new
+        when SMART_COMPUTER
+            return SmartComputer.new
+        else
+            return Human.new
+        end
     end
 
     def valid_players
