@@ -11,13 +11,13 @@ module PlayerType
     def get_player(type)
         case type
         when HUMAN
-            return Human.new
+            Human.new
         when COMPUTER
-            return Computer.new
+            Computer.new
         when SMART_COMPUTER
-            return SmartComputer.new
+            SmartComputer.new
         else
-            return Human.new
+            Human.new
         end
     end
 
