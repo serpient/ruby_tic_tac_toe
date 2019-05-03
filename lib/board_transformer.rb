@@ -12,20 +12,11 @@ module BoardTransformer
 
     def diagonal(board, with_index: false)
         array = horizontal(board, with_index: with_index)
-        last_index = board.size - 1
+        last_column = board.size - 1
         row_length = 0...board.size
         [
             row_length.map {|index| array[index][index] },
-            row_length.map do |index| 
-                case index
-                when 0
-                    array[0][last_index] 
-                when last_index
-                    array[last_index][0]
-                else
-                    array[index][last_index - index]
-                end
-            end
+            row_length.map {|index| array[index][last_column - index] }
         ]
     end
 
