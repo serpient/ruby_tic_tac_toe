@@ -12,39 +12,39 @@ class SmartComputer
         @transformed_boards = BoardTransformer.transform_with_idx(board)
 
         take_winning || 
-        take_blocking || 
+        take_blocking(token_count: board.size - 1) || 
         take_center || 
         take_empty_corner || 
         take_row_completing_move || 
+        take_blocking(token_count: board.size - 2) || 
         take_random_position
     end
 
     private
     attr_accessor :transformed_boards, :board
     def take_winning
-        find_optimal_move(token_to_find: token)
+        find_optimal_move(token_to_find: token, consecutive_token_count: board.size - 1)
     end
 
-    def take_blocking
-        find_optimal_move(token_to_find: Token::X)
+    def take_blocking(token_count:)
+        find_optimal_move(token_to_find: Token::X, consecutive_token_count: token_count)
     end
 
     def take_row_completing_move
-        find_optimal_move(token_to_find: token, num_of_consecutive_tokens: board.size - 2) 
+        find_optimal_move(token_to_find: token, consecutive_token_count: board.size - 2) 
     end
 
-
-    def find_optimal_move(token_to_find: , num_of_consecutive_tokens: board.size - 1)
-        row = find_row_with_token_count(token_to_find: token_to_find, num_of_consecutive_tokens: num_of_consecutive_tokens)
+    def find_optimal_move(token_to_find: , consecutive_token_count:)
+        row = find_row_with_token_count(token_to_find: token_to_find, consecutive_token_count: consecutive_token_count)
         return row ? find_empty_position(row) : nil
     end
 
-    def find_row_with_token_count(token_to_find:, num_of_consecutive_tokens: board.size - 1)
+    def find_row_with_token_count(token_to_find:, consecutive_token_count:)
         return transformed_boards.find do |transformed_board|
             transformed_board.find do |row|
                 token_count = count_tokens(row)
     
-                has_potential_win = token_count[token_to_find] >= num_of_consecutive_tokens
+                has_potential_win = token_count[token_to_find] >= consecutive_token_count
                 has_empty_position = token_count[Token::EMPTY] >= 1
     
                 return row if (has_potential_win && has_empty_position)
