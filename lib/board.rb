@@ -41,7 +41,7 @@ class Board
         corners = [0]
         corners[1] = size - 1
         corners[2] = corners[1] * size
-        corners[3] = corners[2] + size
+        corners[3] = corners[2] + corners[1]
         corners
     end
 end
