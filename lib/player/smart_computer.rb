@@ -11,53 +11,49 @@ class SmartComputer
         @board = board
         @transformed_boards = BoardTransformer.transform_with_idx(board)
 
-        takes_winning_move || 
-        takes_blocking_move || 
-        takes_next_optimal_move
+        take_winning || 
+        take_blocking || 
+        take_center || 
+        take_empty_corner || 
+        take_row_completing_move || 
+        take_random_position
     end
 
     private
     attr_accessor :transformed_boards, :board
-    def takes_winning_move
-        find_finishing_move(token_to_find: token)
+    def take_winning
+        find_optimal_move(token_to_find: token)
     end
 
-    def takes_blocking_move
-        find_finishing_move(token_to_find: Token::X)
+    def take_blocking
+        find_optimal_move(token_to_find: Token::X)
     end
 
-    def takes_next_optimal_move
-        choose_center || 
-        choose_empty_corner || 
-        find_finishing_move(token_to_find: token, num_of_moves_before_win: 2) || 
-        board.empty_positions.sample
+    def take_row_completing_move
+        find_optimal_move(token_to_find: token, num_of_consecutive_tokens: board.size - 2) 
     end
 
-    def find_finishing_move(token_to_find:, num_of_moves_before_win: 1)
-        valid_move = nil
-        transformed_boards.find do |transformed_board|
-            valid_move = find_winning_position(
-                transformed_board: transformed_board, 
-                num_of_moves_before_win: num_of_moves_before_win, 
-                token_to_find: token_to_find
-            )
-        end
-        return valid_move
+
+    def find_optimal_move(token_to_find: , num_of_consecutive_tokens: board.size - 1)
+        row = find_row_with_token_count(token_to_find: token_to_find, num_of_consecutive_tokens: num_of_consecutive_tokens)
+        return row ? find_empty_position(row) : nil
     end
 
-    def find_winning_position(transformed_board:, num_of_moves_before_win:, token_to_find:) 
-        transformed_board.find.reduce(nil) do |move, row|
-            token_count = count_tokens(row)
-
-            close_to_win = token_count[token_to_find] >= board.size - num_of_moves_before_win
-            has_empty_position = token_count[Token::EMPTY] >= 1
-
-            if (close_to_win && has_empty_position)
-                move = find_empty_position(row)
+    def find_row_with_token_count(token_to_find:, num_of_consecutive_tokens: board.size - 1)
+        return transformed_boards.find do |transformed_board|
+            transformed_board.find do |row|
+                token_count = count_tokens(row)
+    
+                has_potential_win = token_count[token_to_find] >= num_of_consecutive_tokens
+                has_empty_position = token_count[Token::EMPTY] >= 1
+    
+                return row if (has_potential_win && has_empty_position)
             end
-
-            move
         end
+    end
+
+    def find_empty_position(row)
+        row.find { |position| position[0] == Token::EMPTY }[1]
     end
 
     def count_tokens(row)
@@ -74,17 +70,17 @@ class SmartComputer
         return token_count
     end
 
-    def find_empty_position(row)
-        row.find { |position| position[0] == Token::EMPTY }[1]
-    end
-
-    def choose_center 
+    def take_center 
         board.center if board.center && board.position_empty?(board.center)
     end
 
-    def choose_empty_corner
+    def take_empty_corner
         board.corners.find do |corner_position|
             board.position_empty?(corner_position)
         end
+    end
+
+    def take_random_position
+        board.empty_positions.sample
     end
 end
