@@ -4,7 +4,7 @@ require_relative '../board_transformer'
 class SmartComputer
     include Token
     include BoardTransformer
-    attr_accessor :token, :winning_token_count
+    attr_accessor :token
 
     def move(board:, presenter:)
         @board = board
@@ -21,7 +21,7 @@ class SmartComputer
     end
 
     private
-    attr_accessor :transformed_boards, :board
+    attr_accessor :transformed_boards, :board, :winning_token_count
 
     def take_winning
         find_optimal_move(token_to_find: token, target_token_count: winning_token_count - 1)

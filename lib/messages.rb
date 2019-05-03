@@ -6,11 +6,11 @@ module Messages
     end
 
     def board_size_msg
-        "           Choose your Board         \n         (3)x3 or (4)x4 board?       \n"
+        "           Choose your Board\n         (3)x3 or (4)x4 board?\n"
     end
 
     def opponent_type_msg
-        "         Choose your Opponent:        \n         * (H)uman\n         * (D)umb Computer\n         * (S)mart Computer" 
+        "         Choose your Opponent:\n         * (H)uman\n         * (D)umb Computer\n         * (S)mart Computer" 
     end
 
     def choose_position(token)

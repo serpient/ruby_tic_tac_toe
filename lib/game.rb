@@ -20,7 +20,7 @@ class Game
             board_size: board_size
         )
         @status = :play
-        @board_presenter = board_presenter
+        @board_presenter = BoardPresenter.new(presenter: board_presenter)
     end
 
     def play
