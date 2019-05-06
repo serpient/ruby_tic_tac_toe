@@ -18,18 +18,32 @@ class Board
         positions.all? {|position| position != Token::EMPTY }
     end
 
-    def position_available?(position)
-        positions[position] == Token::EMPTY
-    end
-
     def empty_positions
-        positions.each_with_index.reduce([]) do |empty_positions, (_position, idx)| 
-            empty_positions.push(idx) if position_empty?(idx)
+        positions.each_with_index.reduce([]) do |empty_positions, (_position, index)| 
+            empty_positions.push(index) if position_empty?(index)
             empty_positions
         end
     end
 
     def position_empty?(position)
         positions[position] == Token::EMPTY
+    end
+
+    PositionWithIndex = Struct.new(:value, :index)
+
+    def positions_with_index
+        positions.map.with_index { |value, index| PositionWithIndex.new(value, index) }
+    end
+
+    def center
+        4 if size == 3
+    end
+
+    def corners
+        corners = [0]
+        corners[1] = size - 1
+        corners[2] = corners[1] * size
+        corners[3] = corners[2] + corners[1]
+        corners
     end
 end

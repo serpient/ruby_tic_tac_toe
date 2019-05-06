@@ -39,7 +39,7 @@ describe 'Board' do
             board = Board.new(
                 size: 2
             )
-            expect(board.position_available?(0)).to eq true
+            expect(board.position_empty?(0)).to eq true
         end
     end
 
@@ -74,11 +74,28 @@ describe 'Board' do
         end
     end
 
-    context 'Token::EMPTY_Positions' do
+    context 'empty_positions' do
         it 'returns a list of Token::EMPTY position indexes' do
             board = Board.new(size: 2)
 
             expect(board.empty_positions).to eq [0,1,2,3]
+        end
+    end
+
+    context 'corners' do
+        it 'returns a list of corners per 3x3 board size' do
+            board = Board.new(size: 3)
+            expect(board.corners).to eq [0,2,6,8]
+        end
+
+        it 'returns a list of corners per 4x4 board size' do
+            board = Board.new(size: 4)
+            expect(board.corners).to eq [0,3,12,15]
+        end
+
+        it 'returns a list of corners per 5x5 board size' do
+            board = Board.new(size: 5)
+            expect(board.corners).to eq [0,4,20,24]
         end
     end
 end

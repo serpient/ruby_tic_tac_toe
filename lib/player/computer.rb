@@ -1,12 +1,7 @@
-require_relative '../messages'
-
 class Computer 
-    include Messages
     attr_accessor :token
 
     def move(board:, presenter:)
-        position = board.empty_positions.sample
-        presenter.output_message(Messages.computer_chooses(position, token))
-        position
+        board.empty_positions.sample
     end
 end

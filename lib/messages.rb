@@ -5,12 +5,12 @@ module Messages
         "\n#{border}#{space}#{title}#{space}#{border}\n"
     end
 
-    def board_size_msg
-        "           Choose your Board         \n         (3)x3 or (4)x4 board?       \n"
+    def board_size_options
+        "           Choose your Board\n         (3)x3 or (4)x4 board?\n"
     end
 
-    def opponent_type_msg
-        "        Choose your Component        \n   (H)uman or (C)omputer opponent?   \n"
+    def opponent_type_options
+        "         Choose your Opponent:\n         * (H)uman\n         * (D)umb Computer\n         * (S)mart Computer" 
     end
 
     def choose_position(token)
@@ -21,11 +21,11 @@ module Messages
         "Player #{token} chooses position #{position}"
     end
 
-    def win_msg(token)
+    def win(token)
         "Player #{token} Wins"
     end
 
-    def tie_msg
+    def tie
         "Game is a Tie"
     end
 

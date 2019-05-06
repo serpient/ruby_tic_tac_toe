@@ -20,14 +20,14 @@ class Game
             board_size: board_size
         )
         @status = :play
-        @board_presenter = board_presenter
+        @board_presenter = BoardPresenter.new(presenter: board_presenter)
     end
 
     def play
         while status == :play
             output_board
-            input = get_valid_move(board: game_state.board, presenter: game_io)
-            board = update_board(input: input)
+            position = get_valid_move(board: game_state.board, presenter: game_io)
+            board = update_board(input: position)
             update_game_status(board: board)
             game_state.switch_players if status == :play
         end
@@ -62,11 +62,11 @@ class Game
     end
 
     def output_win
-        game_io.output_message(Messages.win_msg(game_state.current_player.token))
+        game_io.output_message(Messages.win(game_state.current_player.token))
     end
 
     def output_tie
-        game_io.output_message(Messages.tie_msg) 
+        game_io.output_message(Messages.tie) 
     end
 end
 

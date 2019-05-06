@@ -20,6 +20,6 @@ module Validator
     end
 
     def opponent_type_valid?(input:)
-        input == PlayerType::COMPUTER || input == PlayerType::HUMAN
+        PlayerType.valid_players.include?(input)
     end
 end
