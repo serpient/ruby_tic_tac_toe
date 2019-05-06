@@ -84,7 +84,7 @@ describe 'GameState Lite 3 mode' do
             game_state.switch_players
         end
 
-        it 'Player O - 1' do
+        it 'Player O - Move 1' do
             game_state.update(position: 0)
             expect(game_state.board.positions).to eq [
                 Token::O,Token::EMPTY,Token::EMPTY,
@@ -93,7 +93,7 @@ describe 'GameState Lite 3 mode' do
             ]
         end
 
-        it 'Player X - 1' do
+        it 'Player X - Move 1' do
             game_state.update(position: 1)
             expect(game_state.board.positions).to eq [
                 Token::O,Token::X,Token::EMPTY,
@@ -103,7 +103,7 @@ describe 'GameState Lite 3 mode' do
         end
         
 
-        it 'Player O - 2' do
+        it 'Player O - Move 2' do
             game_state.update(position: 2)
             expect(game_state.board.positions).to eq [
                 Token::O,Token::X,Token::O,
@@ -112,7 +112,7 @@ describe 'GameState Lite 3 mode' do
             ]
         end
 
-        it 'Player X - 2' do
+        it 'Player X - Move 2' do
             game_state.update(position: 3)
             expect(game_state.board.positions).to eq [
                 Token::O,Token::X,Token::O,
@@ -122,7 +122,7 @@ describe 'GameState Lite 3 mode' do
         end
 
 
-        it 'Player O - 3' do
+        it 'Player O - Move 3' do
             game_state.update(position: 4)
             expect(game_state.board.positions).to eq [
                 Token::O,Token::X,Token::O,
@@ -131,7 +131,7 @@ describe 'GameState Lite 3 mode' do
             ]
         end
 
-        it 'Player X - 3' do
+        it 'Player X - Move 3' do
             game_state.update(position: 5)
             expect(game_state.board.positions).to eq [
                 Token::O,Token::X,Token::O,
@@ -140,7 +140,7 @@ describe 'GameState Lite 3 mode' do
             ]
         end
 
-        it 'Player O - 4 ; Removes oldest position' do
+        it 'Player O - Move 4 ; Removes oldest position' do
             game_state.update(position: 6)
             expect(game_state.board.positions).to eq [
                 Token::EMPTY,Token::X,Token::O,
@@ -149,7 +149,7 @@ describe 'GameState Lite 3 mode' do
             ]
         end
 
-        it 'Player X - 4 ; Removes oldest position' do
+        it 'Player X - Move 4 ; Removes oldest position' do
             game_state.update(position: 0)
             expect(game_state.board.positions).to eq [
                 Token::X,Token::EMPTY,Token::O,
