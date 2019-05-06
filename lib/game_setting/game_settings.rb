@@ -12,7 +12,7 @@ module GameSettings
     def opponent_type
         {
             :name => SettingTypes::OPPONENT_TYPE_SETTING,
-            :message => Messages.opponent_type_msg,
+            :message => Messages.opponent_type_options,
             :valid? => -> (input: nil) { Validator.opponent_type_valid?(input: input) },
             :parse => -> (input:) { input },
         }
@@ -21,7 +21,7 @@ module GameSettings
     def board_size
         {
             :name => SettingTypes::BOARD_SIZE,
-            :message => Messages.board_size_msg,
+            :message => Messages.board_size_options,
             :valid? => -> (input: nil) { Validator.board_size_valid?(input: input) },
             :parse => -> (input:) { input.to_i },
         }

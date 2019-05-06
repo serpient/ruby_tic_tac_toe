@@ -7,32 +7,30 @@ class SmartComputer
     attr_accessor :token
 
     def move(board:, presenter:)
-        @board = board
         @transformed_boards = BoardTransformer.transform_with_index(board)
-        @winning_token_count = board.size 
+        opponent_token = token == Token::O ? Token::X : Token::O
+        winning_token_count = board.size 
+        one_before_win = winning_token_count - 1
+        two_before_win = winning_token_count - 2
 
-        take_winning || 
-        take_blocking(row_token_count: winning_token_count - 1) || 
-        take_center || 
-        take_empty_corner || 
-        take_row_completing_move(row_token_count: winning_token_count - 2) || 
-        take_blocking(row_token_count: winning_token_count - 2) || 
-        take_random_position
+        take_winning(target_token_count: one_before_win, token_to_find: token) || 
+        take_blocking(target_token_count: one_before_win, token_to_find: opponent_token) || 
+        take_center(board) || 
+        take_empty_corner(board) || 
+        take_winning(target_token_count: two_before_win, token_to_find: token ) || 
+        take_blocking(target_token_count: two_before_win, token_to_find: opponent_token) || 
+        take_random_position(board)
     end
 
     private
-    attr_accessor :transformed_boards, :board, :winning_token_count
+    attr_accessor :transformed_boards
 
-    def take_winning
-        find_optimal_move(token_to_find: token, target_token_count: winning_token_count - 1)
+    def take_winning(token_to_find:, target_token_count:)
+        find_optimal_move(token_to_find: token_to_find, target_token_count: target_token_count)
     end
 
-    def take_blocking(row_token_count:)
-        find_optimal_move(token_to_find: Token::X, target_token_count: row_token_count)
-    end
-
-    def take_row_completing_move(row_token_count: )
-        find_optimal_move(token_to_find: token, target_token_count: row_token_count) 
+    def take_blocking(token_to_find:, target_token_count:)
+        find_optimal_move(token_to_find: token_to_find, target_token_count: target_token_count)
     end
 
     def find_optimal_move(token_to_find: , target_token_count:)
@@ -64,24 +62,24 @@ class SmartComputer
             Token::EMPTY => 0
         }
         row.each do |position|
-            row_token_count[Token::O] += 1 if position.first == Token::O
-            row_token_count[Token::EMPTY] += 1 if position.first == Token::EMPTY
-            row_token_count[Token::X] += 1 if position.first == Token::X
+            row_token_count[Token::O] += 1 if position.value == Token::O
+            row_token_count[Token::EMPTY] += 1 if position.value == Token::EMPTY
+            row_token_count[Token::X] += 1 if position.value == Token::X
         end
         row_token_count
     end
 
-    def take_center 
+    def take_center(board)
         board.center if board.center && board.position_empty?(board.center)
     end
 
-    def take_empty_corner
+    def take_empty_corner(board)
         board.corners.find do |corner_position|
             board.position_empty?(corner_position)
         end
     end
 
-    def take_random_position
+    def take_random_position(board)
         board.empty_positions.sample
     end
 end

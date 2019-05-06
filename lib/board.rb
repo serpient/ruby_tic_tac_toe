@@ -29,8 +29,10 @@ class Board
         positions[position] == Token::EMPTY
     end
 
+    PositionWithIndex = Struct.new(:value, :index)
+
     def positions_with_index
-        positions.map.with_index { |val, index| [val, index] }
+        positions.map.with_index { |value, index| PositionWithIndex.new(value, index) }
     end
 
     def center
