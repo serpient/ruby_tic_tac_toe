@@ -13,6 +13,10 @@ module Messages
         "         Choose your Opponent:\n         * (H)uman\n         * (D)umb Computer\n         * (S)mart Computer" 
     end
 
+    def game_mode_options
+        "         Choose the Game Mode:\n         * (R)egular\n         * (L)ite 3\n" 
+    end
+
     def choose_position(token)
         "Player #{token}: Choose a valid position: "
     end

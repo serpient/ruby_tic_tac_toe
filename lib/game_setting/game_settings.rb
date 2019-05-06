@@ -8,6 +8,14 @@ module GameSettings
     include Messages
     include Validator
     include SettingTypes
+    
+    def types
+        [
+            game_mode,
+            opponent_type,
+            board_size
+        ]
+    end
 
     def opponent_type
         {
@@ -24,6 +32,15 @@ module GameSettings
             :message => Messages.board_size_options,
             :valid? => -> (input: nil) { Validator.board_size_valid?(input: input) },
             :parse => -> (input:) { input.to_i },
+        }
+    end
+
+    def game_mode
+        {
+            :name => SettingTypes::GAME_MODE,
+            :message => Messages.game_mode_options,
+            :valid? => -> (input: nil) { Validator.game_mode_valid?(input: input) },
+            :parse => -> (input:) { input },
         }
     end
 end
