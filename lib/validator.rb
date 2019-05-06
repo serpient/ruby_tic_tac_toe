@@ -1,6 +1,8 @@
 require_relative './player/player_types'
 
 module Validator
+    extend self
+    
     include PlayerType
 
     def position_valid?(input:, board:) 
@@ -18,6 +20,6 @@ module Validator
     end
 
     def opponent_type_valid?(input:)
-        input == computer || input == human
+        input == PlayerType::COMPUTER || input == PlayerType::HUMAN
     end
 end

@@ -1,10 +1,12 @@
 module BoardTransformer
+    extend self
+
     def horizontal(board)
         board.positions.each_slice(board.size).to_a
     end
     
     def vertical(board)
-        horizontal(board).transpose()
+        horizontal(board).transpose
     end
 
     def diagonal(board)

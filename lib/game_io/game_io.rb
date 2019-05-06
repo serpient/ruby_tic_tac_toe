@@ -1,5 +1,3 @@
-require_relative '../messages'
-
 class GameIO
     attr_accessor :presenter
 
@@ -17,13 +15,5 @@ class GameIO
 
     def clear
         presenter.clear
-    end
-
-    def game_setting_IO(message:)
-        presenter.game_setting_IO(message: message)
-    end
-
-    def output_board(board:, board_presenter:)
-        presenter.output_board(board: board, board_presenter: board_presenter)
     end
 end

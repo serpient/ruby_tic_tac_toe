@@ -8,7 +8,7 @@ describe 'Board Presenter' do
 
     context 'Initialization' do
         board_presenter = BoardPresenter.new(
-            presenter: StringBoard.new()
+            presenter: StringBoard.new
         )
         it 'sets a presenter' do
             expect(board_presenter.presenter.is_a?(StringBoard)).to eql true
@@ -18,11 +18,10 @@ describe 'Board Presenter' do
     context 'generate 3x3' do
         new_board = Board.new(size: 3)
         board_presenter = BoardPresenter.new(
-            presenter: StringBoard.new()
+            presenter: StringBoard.new
         )
 
         p = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-        # p = ["X", "O", "X", "O", "O", "O", "X", "X", "X"]
 
         margin_top = "\n"
         row1 = "0    |1    |2    \n  #{p[0]}  |  #{p[1]}  |  #{p[2]}  \n_____|_____|_____\n"
@@ -47,7 +46,7 @@ describe 'Board Presenter' do
         ]
         new_board.update(position: nil, token:nil, all_positions: updated_board)
         board_presenter = BoardPresenter.new(
-            presenter: StringBoard.new()
+            presenter: StringBoard.new
         )
 
         p = [

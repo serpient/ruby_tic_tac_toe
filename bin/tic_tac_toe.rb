@@ -6,12 +6,12 @@ require_relative '../lib/game_setting/setting_types'
 
 include SettingTypes
 
-game_settings = GameSettingSetter.new()
+game_settings = GameSettingSetter.new
 settings = game_settings.create_settings
 
 game = Game.new(
-    board_size: settings[BOARD_SIZE],
-    player_2: settings[OPPONENT_TYPE_SETTING],
+    board_size: settings[SettingTypes::BOARD_SIZE],
+    player_2: settings[SettingTypes::OPPONENT_TYPE_SETTING],
     game_io: game_settings.game_io
 )
-game.play()
+game.play

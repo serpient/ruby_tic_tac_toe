@@ -11,9 +11,9 @@ class Game
     include Messages
     include GameRules
 
-    attr_accessor :game_state, :game_io, :status, :input, :board_presenter
+    attr_accessor :game_state, :status
 
-    def initialize(game_io: ConsoleIO.new, board_size:, player_2:, board_presenter: StringBoard.new())
+    def initialize(game_io: ConsoleIO.new, board_size:, player_2:, board_presenter: StringBoard.new)
         @game_io = game_io
         @game_state = GameState.new(
             player_2: player_2,
@@ -25,45 +25,48 @@ class Game
 
     def play
         while status == :play
-            take_turn
+            output_board
+            input = get_valid_move(board: game_state.board, presenter: game_io)
+            board = update_board(input: input)
+            update_game_status(board: board)
+            game_state.switch_players if status == :play
         end
         output_board
         output_win if status == :win
         output_tie if status == :tie 
     end
 
-    def take_turn
-        output_board
-        get_valid_move
-        update_board
-        update_game_status
-        game_state.switch_players if status == :play
-    end
-
     private
+    attr_accessor :game_io, :board_presenter
+
     def output_board
-        game_io.output_board(board: game_state.board, board_presenter: board_presenter)
+        game_io.clear
+        board_presenter.generate(board: game_state.board)
+        game_io.output_message(board_presenter.output)
     end
 
-    def get_valid_move
-        @input = game_state.current_player.get_valid_move(board: game_state.board, presenter: game_io)
+    def get_valid_move(board:, presenter:)
+        input = -1
+        input = game_state.current_player.move(board: board, presenter: presenter) while !Validator.position_valid?(input: input, board: board)
+        input
     end
 
-    def update_board
+    def update_board(input:)
         game_state.update(position: input.to_i)
+        game_state.board
     end
 
-    def update_game_status
-        @status = :win if win?(board: game_state.board) 
-        @status = :tie if tie?(board: game_state.board) 
+    def update_game_status(board:)
+        @status = :win if GameRules.win?(board: board) 
+        @status = :tie if GameRules.tie?(board: board) 
     end
 
     def output_win
-        game_io.output_message(win_msg(game_state.current_player.token))
+        game_io.output_message(Messages.win_msg(game_state.current_player.token))
     end
 
     def output_tie
-        game_io.output_message(tie_msg) 
+        game_io.output_message(Messages.tie_msg) 
     end
 end
 

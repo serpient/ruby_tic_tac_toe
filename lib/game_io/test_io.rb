@@ -1,14 +1,4 @@
 class TestIO
-    attr_accessor :count
-
-    def initialize()
-        @count = 0
-    end
-
-    def update_count()
-        @count += 1
-    end
-
     def get_input(input=nil)
         return input if input != nil
 
@@ -24,11 +14,11 @@ class TestIO
         when 4
             "4"
         else
-            array = (0..4).to_a
+            array = (0..9).to_a
             array.push("H")
             array.sample
         end
-        update_count()
+        update_count
         value
     end
 
@@ -36,16 +26,18 @@ class TestIO
         message + "\n"
     end
 
-    def clear()
+    def clear
         return
     end
 
-    def game_setting_IO(message:)
-        get_input
+    private
+    attr_accessor :count
+
+    def initialize
+        @count = 0
     end
 
-    def output_board(board:, board_presenter:)
-        board_presenter.generate(board: board)
-        board_presenter.output
+    def update_count
+        @count += 1
     end
 end

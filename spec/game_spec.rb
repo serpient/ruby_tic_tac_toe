@@ -12,9 +12,9 @@ describe 'Game' do
         before(:each) do
             @game = Game.new(
                 board_size: 3,
-                player_2: human,
-                game_io: TestIO.new(),
-                board_presenter: StringBoard.new()
+                player_2: PlayerType::HUMAN,
+                game_io: TestIO.new,
+                board_presenter: StringBoard.new
             )
         end
 
@@ -29,37 +29,37 @@ describe 'Game' do
         it "has player 2 generated" do
             expect(game.game_state.player_2.player.is_a?(Human)).to eql true
         end 
-
-        it "has board presenter" do
-            expect(game.board_presenter.is_a?(StringBoard)).to eql true
-        end 
     end
 
-    context "take_turn" do
+    context "play" do
         before(:each) do
             @game = Game.new(
                 board_size: 3,
-                player_2: computer,
-                game_io: TestIO.new()
+                player_2: PlayerType::COMPUTER,
+                game_io: TestIO.new
             )
         end
         
-        it 'updates game state and returns :continue if should continue' do
-            game.take_turn()
+        it 'continues game loop and returns :win or :tie' do
+            game.play
 
-            expect(game.status).to eql :play
-            expect(game.game_state.board.positions.include?(player_x)).to eql true
+            expect(game.status).to eql(:win).or eq(:tie)
+            expect(game.game_state.board.positions.include?(Token::X)).to eql true
         end
 
         it 'updates game state and returns :tie if no win and board is full' do
             tie_board = [
-                empty, player_o, player_x, 
-                player_o, player_o, player_x, 
-                player_o, player_x, player_o
+                Token::EMPTY, Token::O, Token::X, 
+                Token::O, Token::O, Token::X, 
+                Token::O, Token::X, Token::O
             ]
-            updated_tie_board = [player_x, player_o, player_x, player_o, player_o, player_x, player_o, player_x, player_o]
+            updated_tie_board = [
+                Token::X, Token::O, Token::X, 
+                Token::O, Token::O, Token::X, 
+                Token::O, Token::X, Token::O
+            ]
             game.game_state.board.update(position: nil, token: nil, all_positions: tie_board)
-            game.take_turn()
+            game.play
 
             expect(game.game_state.board.positions).to eql updated_tie_board
             expect(game.status).to eql :tie
@@ -67,17 +67,17 @@ describe 'Game' do
 
         it 'updates game state and returns :win if there is a win' do
             win_board = [
-                empty, player_o, player_o, 
-                player_x, player_x, player_o, 
-                player_o, player_o, player_x
+                Token::EMPTY, Token::O, Token::O, 
+                Token::X, Token::X, Token::O, 
+                Token::O, Token::O, Token::X
             ]
-            updated_win_board = [player_x, player_o, player_o, player_x, player_x, player_o, player_o, player_o, player_x]
+            updated_win_board = [Token::X, Token::O, Token::O, Token::X, Token::X, Token::O, Token::O, Token::O, Token::X]
             game.game_state.board.update(position: nil, token: nil, all_positions: win_board)
-            game.take_turn()
+            game.play
 
             expect(game.game_state.board.positions).to eql updated_win_board
             expect(game.status).to eql :win
-            expect(game.game_state.current_player.token).to eql player_x
+            expect(game.game_state.current_player.token).to eql Token::X
         end
     end
 end 

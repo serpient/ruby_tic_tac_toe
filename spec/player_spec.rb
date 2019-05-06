@@ -12,36 +12,36 @@ describe 'Player' do
     context 'Initialization' do
         it 'sets player' do
             human_player = Player.new(
-                player: Human.new(),
-                token: player_x,
+                player: Human.new,
+                token: Token::X,
             )
             expect(human_player.player.is_a?(Human)).to eq true
         end
     end
 
-    context 'get_valid_move' do
+    context 'move' do
         it 'gets valid human input' do
             human_player = Player.new(
-                player: Human.new(),
-                token: player_x,
+                player: Human.new,
+                token: Token::X,
             )
             board = Board.new(size: 3)
-            presenter = GameIO.new(presenter: TestIO.new())
-            expect(human_player.get_valid_move(board: board, presenter: presenter)).to eq "4"
+            presenter = GameIO.new(presenter: TestIO.new)
+            expect(human_player.move(board: board, presenter: presenter)).to eq "4"
         end
 
         it 'gets valid computer input' do
             computer_player = Player.new(
-                player: Computer.new(),
-                token: player_x,
+                player: Computer.new,
+                token: Token::X,
             )
             board = Board.new(size: 2)
-            presenter = GameIO.new(presenter: TestIO.new())
-            board.update(position: 0, token: player_x)
-            board.update(position: 2, token: player_x)
-            board.update(position: 3, token: player_x)
+            presenter = GameIO.new(presenter: TestIO.new)
+            board.update(position: 0, token: Token::X)
+            board.update(position: 2, token: Token::X)
+            board.update(position: 3, token: Token::X)
 
-            expect(computer_player.get_valid_move(board: board, presenter: presenter)).to eq 1
+            expect(computer_player.move(board: board, presenter: presenter)).to eq 1
         end
     end
 end

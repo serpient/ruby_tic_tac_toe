@@ -14,30 +14,30 @@ describe 'Game Rules' do
             expect(win?(board: board)).to eq false
         end
         it 'returns false if there are no matching symbols' do
-            board.update(position: 0, token: player_x)
+            board.update(position: 0, token: Token::X)
             expect(win?(board: board)).to eq false
         end
         it 'returns true if there are matching horizontal symbols' do
-            board.update(position: 0, token: player_x)
-            board.update(position: 1, token: player_x)
-            board.update(position: 2, token: player_x)
-            board.update(position: 3, token: player_x)
+            board.update(position: 0, token: Token::X)
+            board.update(position: 1, token: Token::X)
+            board.update(position: 2, token: Token::X)
+            board.update(position: 3, token: Token::X)
             expect(win?(board: board)).to eq true
         end
 
         it 'returns true if there are matching vertical symbols' do
-            board.update(position: 0, token: player_x)
-            board.update(position: 4, token: player_x)
-            board.update(position: 8, token: player_x)
-            board.update(position: 12, token: player_x)
+            board.update(position: 0, token: Token::X)
+            board.update(position: 4, token: Token::X)
+            board.update(position: 8, token: Token::X)
+            board.update(position: 12, token: Token::X)
             expect(win?(board: board)).to eq true
         end
 
         it 'returns true if there are matching diagonal symbols' do
-            board.update(position: 0, token: player_x)
-            board.update(position: 5, token: player_x)
-            board.update(position: 10, token: player_x)
-            board.update(position: 15, token: player_x)
+            board.update(position: 0, token: Token::X)
+            board.update(position: 5, token: Token::X)
+            board.update(position: 10, token: Token::X)
+            board.update(position: 15, token: Token::X)
             expect(win?(board: board)).to eq true
         end
     end
@@ -47,38 +47,38 @@ describe 'Game Rules' do
             @board = Board.new(size: 3)
         end
         it 'returns false if there are no matching symbols' do
-            board.update(position: 0, token: player_x)
+            board.update(position: 0, token: Token::X)
             expect(win?(board: board)).to eq false
         end
         it 'returns true if there are matching horizontal symbols' do
-            board.update(position: 0, token: player_x)
-            board.update(position: 1, token: player_x)
-            board.update(position: 2, token: player_x)
+            board.update(position: 0, token: Token::X)
+            board.update(position: 1, token: Token::X)
+            board.update(position: 2, token: Token::X)
             expect(win?(board: board)).to eq true
         end
         it 'returns false if there are no matching horizontal symbols' do
-            board.update(position: 0, token: player_x)
-            board.update(position: 5, token: player_x)
-            board.update(position: 2, token: player_x)
+            board.update(position: 0, token: Token::X)
+            board.update(position: 5, token: Token::X)
+            board.update(position: 2, token: Token::X)
             expect(win?(board: board)).to eq false
         end
         it 'returns true if there are matching vertical symbols' do
-            board.update(position: 0, token: player_x)
-            board.update(position: 3, token: player_x)
-            board.update(position: 6, token: player_x)
+            board.update(position: 0, token: Token::X)
+            board.update(position: 3, token: Token::X)
+            board.update(position: 6, token: Token::X)
             expect(win?(board: board)).to eq true
         end
         it 'returns true if there are matching diagonal symbols' do
-            board.update(position: 0, token: player_x)
-            board.update(position: 4, token: player_x)
-            board.update(position: 8, token: player_x)
+            board.update(position: 0, token: Token::X)
+            board.update(position: 4, token: Token::X)
+            board.update(position: 8, token: Token::X)
             expect(win?(board: board)).to eq true
         end
 
         it 'returns true if there are no matching diagonal symbols' do
-            board.update(position: 0, token: player_x)
-            board.update(position: 2, token: player_x)
-            board.update(position: 8, token: player_x)
+            board.update(position: 0, token: Token::X)
+            board.update(position: 2, token: Token::X)
+            board.update(position: 8, token: Token::X)
             expect(win?(board: board)).to eq false
         end
     end

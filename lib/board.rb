@@ -7,7 +7,7 @@ class Board
     def initialize(size:)
         @size = size
         @max_positions = size * size
-        @positions = (1..max_positions).map {|num| num = empty }
+        @positions = (1..max_positions).map {|num| num = Token::EMPTY }
     end
 
     def update(position:, token:, all_positions: nil)
@@ -15,11 +15,11 @@ class Board
     end
 
     def full?
-        positions.all? {|position| position != empty }
+        positions.all? {|position| position != Token::EMPTY }
     end
 
     def position_available?(position)
-        positions[position] == empty
+        positions[position] == Token::EMPTY
     end
 
     def empty_positions
@@ -30,6 +30,6 @@ class Board
     end
 
     def position_empty?(position)
-        positions[position] == empty
+        positions[position] == Token::EMPTY
     end
 end

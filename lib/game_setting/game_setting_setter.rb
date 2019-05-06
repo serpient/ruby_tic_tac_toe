@@ -7,12 +7,14 @@ require_relative './game_settings'
 
 class GameSettingSetter
     include GameSettings
+    include Messages
+
     attr_accessor :setting_types, :game_io
 
     def initialize(
         setting_types: [
-            board_size,
-            opponent_type,
+            GameSettings.board_size,
+            GameSettings.opponent_type,
         ],
         game_io: ConsoleIO.new
     )
@@ -24,10 +26,18 @@ class GameSettingSetter
         return setting_types.reduce({}) do |map, setting_type|
             input = nil
             while !setting_type[:valid?].(input: input)
-                input = game_io.game_setting_IO(message: setting_type[:message])
+                input = game_setting_IO(message: setting_type[:message])
             end
             map[setting_type[:name]] = setting_type[:parse].(input: input)
             map
         end
+    end
+
+    private
+    def game_setting_IO(message:)
+        game_io.clear
+        game_io.output_message(Messages.start_banner)
+        game_io.output_message(message)
+        game_io.get_input
     end
 end
