@@ -2,11 +2,13 @@ require_relative '../lib/validator'
 require_relative '../lib/board'
 require_relative '../lib/player/player_types'
 require_relative '../lib/token'
+require_relative '../lib/game_mode/game_mode_types'
 
 describe 'Validator' do
     include Validator
     include PlayerType
     include Token
+    include GameModeTypes
 
     attr_accessor :board
 
@@ -67,6 +69,16 @@ describe 'Validator' do
 
         it 'returns false if input is below 0' do
             expect(board_range_valid?(-1, board)).to eq false
+        end
+    end
+
+    context 'game_mode_valid?' do
+        it 'returns false if input is not valid ' do
+            expect(game_mode_valid?(input: "1")).to eq false
+        end
+
+        it 'returns true if input is representation of Lite 3' do
+            expect(game_mode_valid?(input: GameModeTypes::LITE_3_MODE)).to eq true
         end
     end
 end
