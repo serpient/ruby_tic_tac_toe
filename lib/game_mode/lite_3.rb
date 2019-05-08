@@ -2,6 +2,7 @@ require_relative '../token'
 
 class Lite3
     include Token
+    attr_accessor :player_1_moves, :player_2_moves
 
     def update(board:, position:, current_player:)
         max_num_of_moves = board.size
@@ -16,8 +17,11 @@ class Lite3
         board.update(position: position, token: current_player.token)
     end
 
+    def new_position(token:, position:)
+        PositionWithIndex.new(token, position)
+    end
+
     private
-    attr_accessor :player_1_moves, :player_2_moves
     PositionWithIndex = Struct.new(:token, :position)
 
     def initialize
@@ -30,7 +34,7 @@ class Lite3
     end
 
     def remember_move(move_collection:, position:, token:)
-        move_collection.push(PositionWithIndex.new(token, position))
+        move_collection.push(new_position(token: token, position: position))
     end
 
     def remove_oldest_move(move_collection:, board:)

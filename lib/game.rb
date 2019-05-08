@@ -15,7 +15,7 @@ class Game
     include SettingTypes
     include GameModeTypes
 
-    attr_accessor :game_state, :status
+    attr_accessor :game_state, :status,  :board_presenter
 
     def initialize(
         game_io: ConsoleIO.new, 
@@ -47,7 +47,7 @@ class Game
     end
 
     private
-    attr_accessor :game_io, :board_presenter
+    attr_accessor :game_io
 
     def output_board
         game_io.clear
