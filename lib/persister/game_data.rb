@@ -12,7 +12,6 @@ class GameData
             game_mode,
             board_positions,
             board_size,
-            current_player_type,
             current_player_token,
             player_2,
             player_1_moves,
