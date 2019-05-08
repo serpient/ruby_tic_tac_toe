@@ -79,8 +79,8 @@ class GameData
         lite_3_mode = game.game_state.game_mode.is_a?(Lite3)
         {
             :name => :player_1_moves,   
-            :data => lite_3_mode && array_of_struct_to_hash(game.game_state.game_mode.player_1_moves),
-            :deserialize => -> (array) { array_of_hash_to_struct(array) }
+            :data => lite_3_mode && struct_to_hash(game.game_state.game_mode.player_1_moves),
+            lite_3_mode && :deserialize => -> (array) { hash_to_struct(array) }
         }
     end 
 
@@ -88,8 +88,8 @@ class GameData
         lite_3_mode = game.game_state.game_mode.is_a?(Lite3)
         {
             :name => :player_2_moves,  
-            :data => lite_3_mode && array_of_struct_to_hash(game.game_state.game_mode.player_2_moves),
-            :deserialize => -> (array) { array_of_hash_to_struct(array) }
+            :data => lite_3_mode && struct_to_hash(game.game_state.game_mode.player_2_moves),
+            lite_3_mode && :deserialize => -> (array) { hash_to_struct(array) }
         }
     end 
 
@@ -97,11 +97,11 @@ class GameData
         string.to_sym
     end
 
-    def array_of_struct_to_hash(array)
+    def struct_to_hash(array)
         array.map { |struct| struct.to_h }
     end
     
-    def array_of_hash_to_struct(array)
+    def hash_to_struct(array)
         lite_3 = Lite3.new
         array.map { |hash| lite_3.new_position(token: convert_to_symbol(hash[:token]), position: hash[:position]) }
     end
