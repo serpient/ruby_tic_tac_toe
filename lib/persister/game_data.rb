@@ -14,6 +14,7 @@ class GameData
             board_size,
             current_player_type,
             current_player_token,
+            player_2,
             player_1_moves,
             player_2_moves
         ]
@@ -40,7 +41,7 @@ class GameData
     def game_mode
         {
             name: :game_mode,
-            data: game.game_state.game_mode.class.name,
+            data: game.game_state.game_mode.type,
         }
     end
 
@@ -62,7 +63,7 @@ class GameData
     def current_player_type
         {
             name: :current_player_type,   
-            data: game.game_state.current_player.player.class.name,
+            data: game.game_state.current_player.player.type,
         }
     end
 
@@ -74,7 +75,13 @@ class GameData
         }
     end
 
-    
+    def player_2
+        {
+            name: :player_2,   
+            data: game.game_state.player_2.player.type,
+        }
+    end
+
     def player_1_moves
         lite_3_mode = game.game_state.game_mode.is_a?(Lite3)
         {

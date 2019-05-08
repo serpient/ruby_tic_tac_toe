@@ -1,5 +1,6 @@
 require_relative '../Token'
 require_relative '../board_transformer'
+require_relative './player_types';
 
 class SmartComputer
     include Token
@@ -20,6 +21,10 @@ class SmartComputer
         take_winning(target_token_count: two_before_win, token_to_find: token ) || 
         take_blocking(target_token_count: two_before_win, token_to_find: opponent_token) || 
         take_random_position(board)
+    end
+
+    def type
+        PlayerType::SMART_COMPUTER
     end
 
     private

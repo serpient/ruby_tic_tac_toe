@@ -104,11 +104,12 @@ def deserialized_output(game)
     {
         :board_presenter => game.board_presenter.presenter.class.name,
         :status => game.status,
-        :game_mode => game.game_state.game_mode.class.name,
+        :game_mode => game.game_state.game_mode.type,
         :board_positions => game.game_state.board.positions,
         :board_size => game.game_state.board.size,
-        :current_player_type => game.game_state.current_player.player.class.name,
+        :current_player_type => game.game_state.current_player.player.type,
         :current_player_token => game.game_state.current_player.player.token,
+        :player_2 => game.game_state.player_2.player.type,
         :player_1_moves => lite_3_mode?(game) && game.game_state.game_mode.player_1_moves,
         :player_2_moves => lite_3_mode?(game) && game.game_state.game_mode.player_2_moves,
     }
@@ -117,11 +118,12 @@ end
 SERIALIZED_LITE_3_OUTPUT = {
     "board_presenter":"StringBoard",
     "status":"play",
-    "game_mode":"Lite3",
+    "game_mode":"L",
     "board_positions":["X","empty","empty","O","empty","X","empty","empty","empty"],
     "board_size":3,
-    "current_player_type":"Human",
+    "current_player_type":"H",
     "current_player_token":"X",
+    "player_2": "H",
     "player_1_moves":[
         {"token":"X","position":0},
         {"token":"X","position":5}
@@ -132,11 +134,12 @@ SERIALIZED_LITE_3_OUTPUT = {
 SERIALIZED_LITE_3_NO_MOVES_OUTPUT = {
     "board_presenter":"StringBoard",
     "status":"play",
-    "game_mode":"Lite3",
+    "game_mode":"L",
     "board_positions":["empty","empty","empty","empty","empty","empty","empty","empty","empty"],
     "board_size":3,
-    "current_player_type":"Human",
+    "current_player_type":"H",
     "current_player_token":"X",
+    "player_2": "H",
     "player_1_moves":[],
     "player_2_moves":[]
 }
@@ -144,11 +147,12 @@ SERIALIZED_LITE_3_NO_MOVES_OUTPUT = {
 SERIALIZED_REGULAR_OUTPUT = {
     "board_presenter":"StringBoard",
     "status":"play",
-    "game_mode":"Regular",
+    "game_mode":"R",
     "board_positions":["X","empty","empty","O","empty","X","empty","empty","empty"],
     "board_size":3,
-    "current_player_type":"Human",
+    "current_player_type":"H",
     "current_player_token":"X",
+    "player_2": "H",
     "player_1_moves":false,
     "player_2_moves":false
 }

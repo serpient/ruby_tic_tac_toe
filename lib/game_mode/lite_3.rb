@@ -1,4 +1,5 @@
 require_relative '../token'
+require_relative './game_mode_types'
 
 class Lite3
     include Token
@@ -19,6 +20,10 @@ class Lite3
 
     def new_position(token:, position:)
         PositionWithIndex.new(token, position)
+    end
+
+    def type
+        GameModeTypes::LITE_3_MODE
     end
 
     private
