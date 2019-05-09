@@ -18,6 +18,10 @@ class Repository
         storage.retrieve_all
     end
 
+    def retrieve_list
+        storage.retrieve_list
+    end
+
     def db
         storage.db
     end

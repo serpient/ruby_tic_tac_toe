@@ -22,4 +22,10 @@ class Memory
         })
         nil
     end
+
+    def retrieve_list
+        retrieve_all.map do |data|
+            data[:id]
+        end
+    end
 end

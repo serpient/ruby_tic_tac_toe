@@ -51,6 +51,17 @@ describe 'Repository - Memory' do
             expect(all_data[2][:game_data]).to eq OUTPUT_1
         end
     end
+
+    context 'retrieve_list' do
+        it 'retrieves a list of id/created_at items' do
+            repository = Repository.new(storage: Memory.new(:test))
+            OUTPUT_1 = JSON.dump({
+                "game_mode":"L",
+            })
+            repository.save(OUTPUT_1)
+            expect(repository.retrieve_list[0].is_a?(Integer)).to eq true
+        end
+    end
 end
 
 describe 'Repository - Local' do
@@ -114,6 +125,17 @@ describe 'Repository - Local' do
             })
             repository.save(OUTPUT_1)
             expect(repository.retrieve_by_id(1)[:game_data]).to eq OUTPUT_1
+        end
+    end
+
+    context 'retrieve_list' do
+        it 'retrieves a list of id/created_at items' do
+            repository = Repository.new(storage: Local.new(:test))
+            OUTPUT_1 = JSON.dump({
+                "game_mode":"L",
+            })
+            repository.save(OUTPUT_1)
+            expect(repository.retrieve_list[0].is_a?(Integer)).to eq true
         end
     end
 end

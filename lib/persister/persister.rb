@@ -22,6 +22,10 @@ class Persister
         Reinitializer.generate(game_data: deserialized_data)
     end
 
+    def get_list_of_suspended_games
+        repository.retrieve_list
+    end
+
     private
     attr_accessor :serializer
     def get_recent_game_id

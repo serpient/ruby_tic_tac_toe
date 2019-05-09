@@ -21,6 +21,12 @@ class Local
         save_game_data(data)
     end
 
+    def retrieve_list
+        retrieve_id_and_date.to_a.map do |game_log|
+            game_log[:id]
+        end
+    end
+
     private
     def clean_table
         drop_table
@@ -40,6 +46,12 @@ class Local
         sql = "SELECT * from #{table} ORDER BY created_at DESC LIMIT 6"
         db.fetch sql
     end
+
+    def retrieve_id_and_date
+        sql = "SELECT id, created_at from #{table} ORDER BY created_at DESC LIMIT 6"
+        db.fetch sql
+    end
+
 
     def retrieve_game_data_by_id(id)
         db[table].where(id: id)
