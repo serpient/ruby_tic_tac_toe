@@ -30,7 +30,6 @@ module MockTestHelper
         game.game_state.game_mode.player_2_moves
     end
 
-
     def deserialized_output(game)
         {
             :board_presenter => game.board_presenter.presenter.class.name,

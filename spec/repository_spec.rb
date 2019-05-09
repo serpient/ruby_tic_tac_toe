@@ -113,7 +113,7 @@ describe 'Repository - Local' do
                 "game_mode":"L",
             })
             repository.save(OUTPUT_1)
-            expect(repository.retrieve_by_id(1)[0][:game_data]).to eq OUTPUT_1
+            expect(repository.retrieve_by_id(1)[:game_data]).to eq OUTPUT_1
         end
     end
 end

@@ -14,7 +14,7 @@ class Local
     end
 
     def retrieve_by_id(id)
-        retrieve_game_data_by_id(id).to_a
+        retrieve_game_data_by_id(id).to_a[0]
     end
 
     def save(data)

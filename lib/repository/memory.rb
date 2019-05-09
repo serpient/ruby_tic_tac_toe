@@ -11,7 +11,7 @@ class Memory
     end
 
     def retrieve_by_id(id)
-        [db[table].find { |value| value.id == id }]
+        db[table].find { |value| value[:id] == id }
     end
 
     def save(data)
@@ -20,5 +20,6 @@ class Memory
             created_at: Time.new(2010,8,10,db[table].length),
             id: rand(1000)
         })
+        nil
     end
 end
