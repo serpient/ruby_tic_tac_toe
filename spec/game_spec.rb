@@ -2,6 +2,7 @@ require_relative '../lib/game'
 require_relative '../lib/game_state'
 require_relative '../lib/player/player_types'
 require_relative '../lib/game_io/test_io'
+require_relative '../lib/game_mode/regular'
 
 describe 'Game' do
     include PlayerType
@@ -14,7 +15,8 @@ describe 'Game' do
                 board_size: 3,
                 player_2: PlayerType::HUMAN,
                 game_io: TestIO.new,
-                board_presenter: StringBoard.new
+                board_presenter: StringBoard.new,
+                game_mode: "R"
             )
         end
 
@@ -28,6 +30,10 @@ describe 'Game' do
 
         it "has player 2 generated" do
             expect(game.game_state.player_2.player.is_a?(Human)).to eql true
+        end 
+
+        it "set to regular game mode" do
+            expect(game.game_state.game_mode.is_a?(Regular)).to eql true
         end 
     end
 

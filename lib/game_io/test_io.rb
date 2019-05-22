@@ -6,16 +6,15 @@ class TestIO
         when 0
             "4"
         when 1
-            "H"
+            "R"
         when 2
-            "0"
+            "H"
         when 3
-            "3"
-        when 4
             "4"
         else
             array = (0..9).to_a
             array.push("H")
+            array.push("R")
             array.sample
         end
         update_count

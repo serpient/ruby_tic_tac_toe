@@ -3,7 +3,6 @@ require_relative '../lib/game_setting/game_settings'
 
 describe 'Game Settings' do
     include GameSettings
-    # include PlayerTypes
 
     context 'opponent type valid' do
         it 'returns true if valid' do
@@ -20,6 +19,18 @@ describe 'Game Settings' do
         end
         it 'returns true if valid' do
             expect(board_size[:valid?].(input: "3")).to eql true
+        end
+    end
+
+    context 'game mode valid' do
+        it 'returns false if invalid' do
+            expect(game_mode[:valid?].(input: "1")).to eql false
+        end
+        it 'returns true if valid' do
+            expect(game_mode[:valid?].(input: "L")).to eql true
+        end
+        it 'returns true if valid' do
+            expect(game_mode[:valid?].(input: "R")).to eql true
         end
     end
 end

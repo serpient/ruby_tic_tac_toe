@@ -10,10 +10,7 @@ class GameSettingSetter
     attr_accessor :setting_types, :game_io
 
     def initialize(
-        setting_types: [
-            GameSettings.board_size,
-            GameSettings.opponent_type,
-        ],
+        setting_types: GameSettings.types,
         game_io: GameIO.new(presenter: ConsoleIO.new)
     )
         @setting_types = setting_types

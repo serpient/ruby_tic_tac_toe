@@ -5,19 +5,29 @@ require_relative './game_rules'
 require_relative './validator'
 require_relative './board_presenter/board_presenter'
 require_relative './board_presenter/string_board'
+require_relative './game_setting/setting_types'
+require_relative './game_mode/game_mode_types'
 
 class Game
     include Validator
     include Messages
     include GameRules
+    include SettingTypes
+    include GameModeTypes
 
     attr_accessor :game_state, :status
 
-    def initialize(game_io: ConsoleIO.new, board_size:, player_2:, board_presenter: StringBoard.new)
+    def initialize(
+        game_io: ConsoleIO.new, 
+        board_size:, player_2:, 
+        board_presenter: StringBoard.new,
+        game_mode: GameModeTypes::REGULAR_MODE
+    )
         @game_io = game_io
         @game_state = GameState.new(
             player_2: player_2,
-            board_size: board_size
+            board_size: board_size,
+            game_mode: game_mode
         )
         @status = :play
         @board_presenter = BoardPresenter.new(presenter: board_presenter)
