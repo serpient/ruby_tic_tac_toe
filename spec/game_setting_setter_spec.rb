@@ -34,4 +34,11 @@ describe 'Game Setting Setter' do
             expect(settings[SettingTypes::OPPONENT_TYPE_SETTING]).to eql PlayerType::HUMAN
         end
     end
+
+    context 'get_paused_games_input' do
+        it 'returns :new_game or number' do
+            settings = game_setting_setter.get_paused_games_input([[1, "date"]], [0,1,2,3])
+            expect(settings).to eql(:new_game).or be_a(Integer)        
+        end
+    end
 end

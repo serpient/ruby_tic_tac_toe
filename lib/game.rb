@@ -7,6 +7,8 @@ require_relative './board_presenter/board_presenter'
 require_relative './board_presenter/string_board'
 require_relative './game_setting/setting_types'
 require_relative './game_mode/game_mode_types'
+require_relative './persister/persister'
+require_relative './repository/local'
 
 class Game
     include Validator
@@ -36,12 +38,18 @@ class Game
     def play
         while status == :play
             output_board
-            position = get_valid_move(board: game_state.board, presenter: game_io)
-            board = update_board(input: position)
-            update_game_status(board: board)
-            game_state.switch_players if status == :play
+            output_save_option
+            position = get_valid_input(board: game_state.board, presenter: game_io)
+            if position == SettingTypes::SAVE
+                @status = :save
+            else
+                board = update_board(input: position) 
+                update_game_status(board: board)
+                game_state.switch_players if status == :play
+            end
         end
         output_board
+        save_game if status == :save
         output_win if status == :win
         output_tie if status == :tie 
     end
@@ -55,10 +63,18 @@ class Game
         game_io.output_message(board_presenter.output)
     end
 
-    def get_valid_move(board:, presenter:)
+    def output_save_option
+        game_io.output_message(Messages.output_save_option)
+    end
+
+    def get_valid_input(board:, presenter:)
         input = -1
-        input = game_state.current_player.move(board: board, presenter: presenter) while !Validator.position_valid?(input: input, board: board)
+        input = game_state.current_player.move(board: board, presenter: presenter) while input_not_valid(input: input, board: board) 
         input
+    end
+
+    def input_not_valid(input:, board:) 
+        !Validator.position_valid?(input: input, board: board) && !Validator.save_game?(input: input)
     end
 
     def update_board(input:)
@@ -77,6 +93,15 @@ class Game
 
     def output_tie
         game_io.output_message(Messages.tie) 
+    end
+
+    def save_game
+        repository_type = game_io.is_a?(ConsoleIO) ? Memory.new : Local.new
+        at_exit do
+            persister = Persister.new(repository_type: repository_type)
+            persister.suspend(self)
+            game_io.output_message(Messages.game_save)
+        end
     end
 end
 

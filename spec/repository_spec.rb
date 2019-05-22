@@ -5,21 +5,22 @@ require_relative '../lib/game'
 require_relative './persistence/helper'
 
 describe 'Repository - Memory' do
+    attr_accessor :repository
+    before(:each) do
+        @repository = Repository.new(storage: Memory.new(:test))
+    end
     context 'initialize' do
         it 'sets storage' do
-            repository = Repository.new(storage: Memory.new(:test))
             expect(repository.storage.is_a?(Memory)).to eq true
         end
 
         it 'has a hash and access to DB attribute' do
-            repository = Repository.new(storage: Memory.new(:test))
             expect(repository.db.is_a?(Hash)).to eq true
         end
     end
 
     context 'save' do
         it 'adds a new row to db' do
-            repository = Repository.new(storage: Memory.new(:test))
             SERIALIZED_LITE_3_OUTPUT = JSON.dump({
                 "board_positions":["X","empty","empty","O","empty","X","empty","empty","empty"],
             })
@@ -32,7 +33,6 @@ describe 'Repository - Memory' do
 
     context 'retrieve_all' do
         it 'returns result by newest to oldest' do
-            repository = Repository.new(storage: Memory.new(:test))
             OUTPUT_1 = JSON.dump({
                 "game_mode":"L",
             })
@@ -54,7 +54,6 @@ describe 'Repository - Memory' do
 
     context 'retrieve_list' do
         it 'retrieves a list of id/created_at items' do
-            repository = Repository.new(storage: Memory.new(:test))
             OUTPUT_1 = JSON.dump({
                 "game_mode":"L",
             })
@@ -65,21 +64,25 @@ describe 'Repository - Memory' do
 end
 
 describe 'Repository - Local' do
+    attr_accessor :repository
+    before(:each) do
+        @repository = Repository.new(storage: Local.new(:test))
+    end
+    after(:each) do
+        repository.disconnect
+    end
     context 'initialize' do
         it 'sets storage' do
-            repository = Repository.new(storage: Local.new(:test))
             expect(repository.storage.is_a?(Local)).to eq true
         end
 
         it 'connects to local DB and access to DB attribute' do
-            repository = Repository.new(storage: Local.new(:test))
             expect(repository.db.is_a?(Sequel::Postgres::Database)).to eq true
         end
     end
 
     context 'save' do
         it 'adds a new row to db' do
-            repository = Repository.new(storage: Local.new(:test))
             SERIALIZED_LITE_3_OUTPUT = JSON.dump({
                 "board_positions":["X","empty","empty","O","empty","X","empty","empty","empty"],
             })
@@ -92,12 +95,10 @@ describe 'Repository - Local' do
 
     context 'retrieve_all' do
         it 'returns array' do
-            repository = Repository.new(storage: Local.new(:test))
             expect(repository.retrieve_all.is_a?(Array)).to eq true
         end
 
         it 'returns result by newest to oldest' do
-            repository = Repository.new(storage: Local.new(:test))
             OUTPUT_1 = JSON.dump({
                 "game_mode":"L",
             })
@@ -119,7 +120,6 @@ describe 'Repository - Local' do
 
     context 'retrieve_by_id' do
         it 'returns a result by id' do
-            repository = Repository.new(storage: Local.new(:test))
             OUTPUT_1 = JSON.dump({
                 "game_mode":"L",
             })
@@ -130,12 +130,11 @@ describe 'Repository - Local' do
 
     context 'retrieve_list' do
         it 'retrieves a list of id/created_at items' do
-            repository = Repository.new(storage: Local.new(:test))
             OUTPUT_1 = JSON.dump({
                 "game_mode":"L",
             })
             repository.save(OUTPUT_1)
-            expect(repository.retrieve_list[0].is_a?(Integer)).to eq true
+            expect(repository.retrieve_list[0][0].is_a?(Integer)).to eq true
         end
     end
 end

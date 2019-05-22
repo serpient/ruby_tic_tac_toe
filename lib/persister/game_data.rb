@@ -33,7 +33,7 @@ class GameData
         {
             name: :status,
             data: game.status,
-            deserialize: -> (string) { convert_to_symbol(string) }
+            deserialize: -> (string) { status = convert_to_symbol(string); status = status == :save ? :play : status  }
         }
     end
 

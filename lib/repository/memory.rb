@@ -1,7 +1,7 @@
 class Memory
     attr_accessor :db, :table
     
-    def initialize(table_name)
+    def initialize(table_name = :test)
         @db = {table_name => []}
         @table = table_name
     end
@@ -27,5 +27,14 @@ class Memory
         retrieve_all.map do |data|
             data[:id]
         end
+    end
+
+    def disconnect
+        initialize_table
+    end
+
+    private
+    def initialize_table
+        @db = {}
     end
 end

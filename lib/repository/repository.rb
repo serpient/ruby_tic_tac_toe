@@ -2,7 +2,7 @@ require_relative './memory'
 
 class Repository
     attr_accessor :storage
-    def initialize(storage:, table: :tic_tac_toe)
+    def initialize(storage:)
         @storage = storage
     end
 
@@ -24,5 +24,9 @@ class Repository
 
     def db
         storage.db
+    end
+
+    def disconnect
+        storage.disconnect
     end
 end

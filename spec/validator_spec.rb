@@ -81,4 +81,22 @@ describe 'Validator' do
             expect(game_mode_valid?(input: GameModeTypes::LITE_3_MODE)).to eq true
         end
     end
+
+    context 'resume_option_valid?' do
+        it 'returns false if input is not valid' do
+            expect(resume_option_valid?(input: "a", valid_game_ids: [1,2])).to eq false
+        end
+
+        it 'returns true if input is N' do
+            expect(resume_option_valid?(input: "N", valid_game_ids: [1,2])).to eq true
+        end
+
+        it 'returns true if input is valid game ID' do
+            expect(resume_option_valid?(input: "3", valid_game_ids: [3,4])).to eq true
+        end
+
+        it 'returns false if input is not a valid game ID' do
+            expect(resume_option_valid?(input: "3", valid_game_ids: [0,1,2])).to eq false
+        end
+    end
 end

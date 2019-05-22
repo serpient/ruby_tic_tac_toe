@@ -3,10 +3,10 @@ require 'sequel'
 class Local
     attr_accessor :db, :table
 
-    def initialize(table_name)
-        @db = Sequel.connect('postgres://postgres:postgres@localhost/postgres')
+    def initialize(table_name = :tic_tac_toe)
+        @db = Sequel.connect('postgres://postgres:postgres@localhost/tic_tac_toe')
         @table = table_name.to_sym
-        clean_table if table == :test
+        clean_table if table_name == :test
     end
 
     def retrieve_all
@@ -23,8 +23,12 @@ class Local
 
     def retrieve_list
         retrieve_id_and_date.to_a.map do |game_log|
-            game_log[:id]
+            [game_log[:id], game_log[:created_at]]
         end
+    end
+
+    def disconnect
+        db.disconnect
     end
 
     private
@@ -52,12 +56,12 @@ class Local
         db.fetch sql
     end
 
-
     def retrieve_game_data_by_id(id)
         db[table].where(id: id)
     end
 
     def create_table
+        puts "creating table"
         sql = "CREATE TABLE #{table} (
             id SERIAL PRIMARY KEY,
             game_data JSON,

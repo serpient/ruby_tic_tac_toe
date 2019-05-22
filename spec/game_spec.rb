@@ -46,11 +46,10 @@ describe 'Game' do
             )
         end
         
-        it 'continues game loop and returns :win or :tie' do
+        it 'continues game loop and returns :win or :tie or :save' do
             game.play
 
-            expect(game.status).to eql(:win).or eq(:tie)
-            expect(game.game_state.board.positions.include?(Token::X)).to eql true
+            expect(game.status).to eql(:win).or eq(:tie).or eq(:save)
         end
 
         it 'updates game state and returns :tie if no win and board is full' do

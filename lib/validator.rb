@@ -14,6 +14,10 @@ module Validator
         board_range_valid?(int,board) && board.position_empty?(int)
     end
 
+    def save_game?(input:) 
+        input == SettingTypes::SAVE
+    end
+
     def board_range_valid?(int, board)
         int >= 0 && int < board.max_positions
     end
@@ -29,5 +33,9 @@ module Validator
 
     def game_mode_valid?(input:)
         GameModeTypes::GAME_MODES.include?(input)
+    end
+
+    def resume_option_valid?(input:, valid_game_ids:)
+        input == "N" || valid_game_ids.include?(input.to_i)
     end
 end
