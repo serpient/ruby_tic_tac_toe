@@ -19,9 +19,9 @@ module GameSettings
         ]
     end
 
-    def resume_game(list_of_saved_games, valid_game_ids)
+    def new_or_suspended_game(list_of_saved_games, valid_game_ids)
         [{
-            :name => SettingTypes::RESUME_GAME_SETTING,
+            :name => SettingTypes::NEW_OR_SUSPENDED_GAME,
             :message => Messages.resume_game_options(list_of_saved_games),
             :valid? => -> (input: nil) { Validator.resume_option_valid?(input: input, valid_game_ids: valid_game_ids) },
             :parse => -> (input:) { input == "N" ? :new_game : input.to_i },

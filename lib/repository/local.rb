@@ -4,7 +4,7 @@ class Local
     attr_accessor :db, :table
 
     def initialize(table_name = :tic_tac_toe)
-        @db = Sequel.connect('postgres://postgres:postgres@localhost/tic_tac_toe')
+        @db = Sequel.connect(adapter: 'postgres', host: 'localhost', database: 'tic_tac_toe', user: 'postgres', password: 'postgres')
         @table = table_name.to_sym
         clean_table if table_name == :test
     end
@@ -32,6 +32,7 @@ class Local
     end
 
     private
+
     def clean_table
         drop_table
         create_table

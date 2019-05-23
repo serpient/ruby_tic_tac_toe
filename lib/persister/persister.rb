@@ -32,7 +32,7 @@ class Persister
         list.length > 0
     end
 
-    def valid_game_ids(list)
+    def suspended_game_ids(list)
         list.map do |data|
             data[0].to_i
         end

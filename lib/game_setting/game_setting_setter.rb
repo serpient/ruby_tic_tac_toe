@@ -29,12 +29,7 @@ class GameSettingSetter
             map
         end
     end
-
-    def get_paused_games_input(list_of_saved_games, valid_game_ids)
-        setting_map = create_settings(settings: GameSettings.resume_game(list_of_saved_games, valid_game_ids))
-        setting_map[SettingTypes::RESUME_GAME_SETTING]
-    end
-
+    
     private
     def game_setting_IO(message:)
         game_io.clear
