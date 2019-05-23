@@ -1,9 +1,25 @@
 require_relative '../game_mode/lite_3';
 
-class GameData
-    def initialize(game)
+module GameData
+    extend self
+
+    def serializer_types(game)
         @game = game
+        types.map do |type|
+            type.delete(:deserialize)
+            type
+        end
     end
+
+    def deserializer_types
+        types.map do |type|
+            type.delete(:data)
+            type
+        end
+    end
+
+    private
+    attr_accessor :game
 
     def types
         [
@@ -19,20 +35,17 @@ class GameData
         ]
     end
 
-    private
-    attr_accessor :game
-
     def board_presenter
         {
             name: :board_presenter,
-            data: game.board_presenter.presenter.class.name
+            data: game && game.board_presenter.presenter.class.name
         }
     end
 
     def status
         {
             name: :status,
-            data: game.status,
+            data: game && game.status,
             deserialize: -> (string) { status = convert_to_symbol(string); status = status == :save ? :play : status  }
         }
     end
@@ -40,14 +53,14 @@ class GameData
     def game_mode
         {
             name: :game_mode,
-            data: game.game_state.game_mode.type,
+            data: game && game.game_state.game_mode.type,
         }
     end
 
     def board_positions
         {
             name: :board_positions,           
-            data: game.game_state.board.positions,
+            data: game && game.game_state.board.positions,
             deserialize: -> (array) { array.map { |string| convert_to_symbol(string) } },
         }
     end
@@ -55,21 +68,21 @@ class GameData
     def board_size
         {
             name: :board_size,   
-            data: game.game_state.board.size,
+            data: game && game.game_state.board.size,
         }
     end
 
     def current_player_type
         {
             name: :current_player_type,   
-            data: game.game_state.current_player.player.type,
+            data: game && game.game_state.current_player.player.type,
         }
     end
 
     def current_player_token
         {
             name: :current_player_token,   
-            data: game.game_state.current_player.player.token,
+            data: game && game.game_state.current_player.player.token,
             deserialize: -> (string) { convert_to_symbol(string) }
         }
     end
@@ -77,24 +90,22 @@ class GameData
     def player_2
         {
             name: :player_2,   
-            data: game.game_state.player_2.player.type,
+            data: game && game.game_state.player_2.player.type,
         }
     end
 
     def player_1_moves
-        lite_3_mode = game.game_state.game_mode.is_a?(Lite3)
         {
             name: :player_1_moves,   
-            data: lite_3_mode && struct_to_hash(game.game_state.game_mode.player_1_moves),
+            data: is_lite_3_mode(game) && struct_to_hash(game.game_state.game_mode.player_1_moves),
             deserialize: -> (array) { hash_to_struct(array) }
         }
     end 
 
     def player_2_moves
-        lite_3_mode = game.game_state.game_mode.is_a?(Lite3)
         {
             name: :player_2_moves,  
-            data: lite_3_mode && struct_to_hash(game.game_state.game_mode.player_2_moves),
+            data: is_lite_3_mode(game) && struct_to_hash(game.game_state.game_mode.player_2_moves),
             deserialize: -> (array) { hash_to_struct(array) }
         }
     end 
@@ -111,5 +122,9 @@ class GameData
         return array if !array
         lite_3 = Lite3.new
         array.map { |hash| lite_3.new_position(token: convert_to_symbol(hash[:token]), position: hash[:position]) }
+    end
+
+    def is_lite_3_mode(game)
+        game && game.game_state.game_mode.is_a?(Lite3)
     end
 end

@@ -4,6 +4,7 @@ require_relative './helper'
 require 'json'
 
 describe 'GameSerializer - Lite 3 Mode - With Moves' do
+    include GameSerializer
     attr_accessor :game_serializer, :game
 
     before(:each) do
@@ -15,7 +16,6 @@ describe 'GameSerializer - Lite 3 Mode - With Moves' do
             game_mode: "L"
         )
         MockTestHelper.update_board(game)
-        @game_serializer = GameSerializer.new(game)
     end
 
     context 'serialize' do
@@ -34,20 +34,21 @@ describe 'GameSerializer - Lite 3 Mode - With Moves' do
                 ],
                 "player_2_moves":[{"token":"O","position":3}]
             }
-            expect(game_serializer.serialize(game: game)).to eq JSON.dump(SERIALIZED_LITE_3_OUTPUT)
+            expect(GameSerializer.serialize(game: game)).to eq JSON.dump(SERIALIZED_LITE_3_OUTPUT)
         end
     end
 
     context 'deserialze' do
         it 'takes in JSON and outputs game data' do
-            json = game_serializer.serialize(game: game)
-            expect(game_serializer.deserialize(json: json)).to eq MockTestHelper.deserialized_output(game)
+            json = GameSerializer.serialize(game: game)
+            expect(GameSerializer.deserialize(json: json)).to eq MockTestHelper.deserialized_output(game)
         end
     end
 end
 
 describe 'GameSerializer - Lite 3 Mode - No Moves' do
-    attr_accessor :game_serializer, :game
+    include GameSerializer
+    attr_accessor :game
 
     before(:each) do
         @game = Game.new(
@@ -57,7 +58,6 @@ describe 'GameSerializer - Lite 3 Mode - No Moves' do
             board_presenter: StringBoard.new,
             game_mode: "L"
         )
-        @game_serializer = GameSerializer.new(game)
     end
 
     context 'serialize' do
@@ -73,20 +73,21 @@ describe 'GameSerializer - Lite 3 Mode - No Moves' do
                 "player_1_moves":[],
                 "player_2_moves":[]
             }
-            expect(game_serializer.serialize(game: game)).to eq JSON.dump(SERIALIZED_LITE_3_NO_MOVES_OUTPUT)
+            expect(GameSerializer.serialize(game: game)).to eq JSON.dump(SERIALIZED_LITE_3_NO_MOVES_OUTPUT)
         end
     end
 
     context 'deserialze' do
         it 'takes in JSON and outputs game data' do
-            json = game_serializer.serialize(game: game)
-            expect(game_serializer.deserialize(json: json)).to eq MockTestHelper.deserialized_output(game)
+            json = GameSerializer.serialize(game: game)
+            expect(GameSerializer.deserialize(json: json)).to eq MockTestHelper.deserialized_output(game)
         end
     end
 end
 
 describe 'GameSerializer - Regular Mode' do
-    attr_accessor :game_serializer, :game
+    include GameSerializer
+    attr_accessor :game
 
     before(:each) do
         @game = Game.new(
@@ -97,7 +98,6 @@ describe 'GameSerializer - Regular Mode' do
             game_mode: "R"
         )
         MockTestHelper.update_board(game)
-        @game_serializer = GameSerializer.new(game)
     end
 
     context 'serialize' do
@@ -113,14 +113,14 @@ describe 'GameSerializer - Regular Mode' do
                 "player_1_moves":false,
                 "player_2_moves":false
             }
-            expect(game_serializer.serialize(game: game)).to eq JSON.dump(SERIALIZED_REGULAR_OUTPUT)
+            expect(GameSerializer.serialize(game: game)).to eq JSON.dump(SERIALIZED_REGULAR_OUTPUT)
         end
     end
 
     context 'deserialize' do
         it 'takes in JSON and outputs game data' do
-            json = game_serializer.serialize(game: game)
-            expect(game_serializer.deserialize(json: json)).to eq MockTestHelper.deserialized_output(game)
+            json = GameSerializer.serialize(game: game)
+            expect(GameSerializer.deserialize(json: json)).to eq MockTestHelper.deserialized_output(game)
         end
     end
 end

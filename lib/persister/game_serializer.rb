@@ -1,10 +1,9 @@
 require_relative './game_data'
 require 'json'
 
-class GameSerializer
-    def initialize(game)
-        @game_data_types = GameData.new(game).types
-    end
+module GameSerializer
+    extend self
+    include GameData
 
     def serialize(game:)
         JSON.dump(collect_game_data(game))
@@ -16,9 +15,9 @@ class GameSerializer
     end
 
     private
-    attr_accessor :game_data_types
 
     def collect_game_data(game)
+        game_data_types = GameData.serializer_types(game)
         game_data_types.each.reduce({}) do |data_hash, type|
             data_hash[type.fetch(:name)] = type.fetch(:data)
             data_hash
@@ -26,6 +25,7 @@ class GameSerializer
     end
 
     def deserialize_data_fields(game_data)
+        game_data_types = GameData.deserializer_types
         game_data_types.each do |type|
             if type[:deserialize]
                 value = game_data[type.fetch(:name)]

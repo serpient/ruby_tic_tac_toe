@@ -4,23 +4,23 @@ require_relative './reinitializer';
 require_relative '../game';
 
 class Persister
+    include GameSerializer
     attr_accessor :repository
+
     def initialize(repository_type:)
         @repository = Repository.new(storage: repository_type)
     end
 
     def suspend(game)
-        @serializer = GameSerializer.new(game)
-        serialized_data = serializer.serialize(game: game)
+        serialized_data = GameSerializer.serialize(game: game)
         repository.save(serialized_data)
         get_recent_game_id
     end
 
     def resume(game_id:)
-        serializer = GameSerializer.new(Game.new(board_size: 3, player_2: "H"))
         json_game_data = repository.retrieve_by_id(game_id)
         game_data = json_game_data[:game_data]
-        deserialized_data = serializer.deserialize(json: game_data)
+        deserialized_data = GameSerializer.deserialize(json: game_data)
         Reinitializer.generate(game_data: deserialized_data)
     end
 
