@@ -38,14 +38,14 @@ module GameData
     def board_presenter
         {
             name: :board_presenter,
-            data: game && game.board_presenter.presenter.class.name
+            data: game&.board_presenter&.presenter.class.name
         }
     end
 
     def status
         {
             name: :status,
-            data: game && game.status,
+            data: game&.status,
             deserialize: -> (string) { status = convert_to_symbol(string); status = status == :save ? :play : status  }
         }
     end
@@ -53,14 +53,14 @@ module GameData
     def game_mode
         {
             name: :game_mode,
-            data: game && game.game_state.game_mode.type,
+            data: game&.game_state&.game_mode&.type,
         }
     end
 
     def board_positions
         {
             name: :board_positions,           
-            data: game && game.game_state.board.positions,
+            data: game&.game_state&.board&.positions,
             deserialize: -> (array) { array.map { |string| convert_to_symbol(string) } },
         }
     end
@@ -68,21 +68,21 @@ module GameData
     def board_size
         {
             name: :board_size,   
-            data: game && game.game_state.board.size,
+            data: game&.game_state&.board&.size,
         }
     end
 
     def current_player_type
         {
             name: :current_player_type,   
-            data: game && game.game_state.current_player.player.type,
+            data: game&.game_state&.current_player&.player&.type,
         }
     end
 
     def current_player_token
         {
             name: :current_player_token,   
-            data: game && game.game_state.current_player.player.token,
+            data: game&.game_state&.current_player&.player&.token,
             deserialize: -> (string) { convert_to_symbol(string) }
         }
     end
@@ -90,7 +90,7 @@ module GameData
     def player_2
         {
             name: :player_2,   
-            data: game && game.game_state.player_2.player.type,
+            data: game&.game_state&.player_2&.player&.type,
         }
     end
 
@@ -125,6 +125,6 @@ module GameData
     end
 
     def is_lite_3_mode(game)
-        game && game.game_state.game_mode.is_a?(Lite3)
+        game&.game_state&.game_mode.is_a?(Lite3)
     end
 end
