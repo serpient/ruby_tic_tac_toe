@@ -48,8 +48,8 @@ class SmartComputer
             transformed_board.find do |row|
                 row_token_count = count_tokens(row)
     
-                has_potential_win = row_token_count[token_to_find] >= target_token_count
-                has_empty_position = row_token_count[Token::EMPTY] >= 1
+                has_potential_win = row_token_count.fetch(token_to_find) >= target_token_count
+                has_empty_position = row_token_count.fetch(Token::EMPTY) >= 1
     
                 return row if (has_potential_win && has_empty_position)
             end

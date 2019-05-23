@@ -27,7 +27,7 @@ class GameCreator
         suspended_game_ids = persister.suspended_game_ids(suspended_games)
         new_or_suspended_game_settings = GameSettings.new_or_suspended_game(suspended_games, suspended_game_ids)
         setting_output = game_settings.create_settings(settings: new_or_suspended_game_settings)
-        setting_output[SettingTypes::NEW_OR_SUSPENDED_GAME]
+        setting_output.fetch(SettingTypes::NEW_OR_SUSPENDED_GAME)
     end
 
     def is_a_suspended_game_id?(input)
@@ -41,9 +41,9 @@ class GameCreator
     def new_game
         settings = game_settings.create_settings
         Game.new(
-            board_size: settings[SettingTypes::BOARD_SIZE],
-            player_2: settings[SettingTypes::OPPONENT_TYPE_SETTING],
-            game_mode: settings[SettingTypes::GAME_MODE],
+            board_size: settings.fetch(SettingTypes::BOARD_SIZE),
+            player_2: settings.fetch(SettingTypes::OPPONENT_TYPE_SETTING),
+            game_mode: settings.fetch(SettingTypes::GAME_MODE),
             game_io: game_settings.game_io,
         )
     end

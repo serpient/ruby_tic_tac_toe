@@ -19,7 +19,7 @@ class Persister
 
     def resume(game_id:)
         json_game_data = repository.retrieve_by_id(game_id)
-        game_data = json_game_data[:game_data]
+        game_data = json_game_data.fetch(:game_data)
         deserialized_data = GameSerializer.deserialize(json: game_data)
         Reinitializer.generate(game_data: deserialized_data)
     end
@@ -33,14 +33,14 @@ class Persister
     end
 
     def suspended_game_ids(list)
-        list.map do |data|
-            data[0].to_i
+        list.map do |suspended_game|
+            suspended_game.id.to_i
         end
     end
 
     private
     attr_accessor :serializer
     def get_recent_game_id
-        repository.retrieve_all[0][:id]
+        repository.retrieve_all[0].fetch(:id)
     end
 end

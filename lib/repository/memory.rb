@@ -7,17 +7,17 @@ class Memory
     end
 
     def retrieve_all
-        db[table].sort_by { |data| -data[:created_at].to_i }
+        db.fetch(table).sort_by { |data| -data.fetch(:created_at).to_i }
     end
 
     def retrieve_by_id(id)
-        db[table].find { |value| value[:id] == id }
+        db.fetch(table).find { |value| value.fetch(:id) == id }
     end
 
     def save(data)
-        db[table].push({
+        db.fetch(table).push({
             game_data: data,
-            created_at: Time.new(2010,8,10,db[table].length),
+            created_at: Time.new(2010,8,10,db.fetch(table).length),
             id: rand(1000)
         })
         nil
@@ -25,7 +25,7 @@ class Memory
 
     def retrieve_list
         retrieve_all.map do |data|
-            data[:id]
+            data.fetch(:id)
         end
     end
 

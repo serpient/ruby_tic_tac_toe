@@ -23,7 +23,7 @@ class Local
 
     def retrieve_list
         retrieve_id_and_date.to_a.map do |game_log|
-            [game_log[:id], game_log[:created_at]]
+            SuspendedGame.new(game_log.fetch(:id), game_log.fetch(:created_at))
         end
     end
 
@@ -32,6 +32,7 @@ class Local
     end
 
     private
+    SuspendedGame = Struct.new(:id, :created_at)
 
     def clean_table
         drop_table

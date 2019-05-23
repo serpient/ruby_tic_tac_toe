@@ -20,7 +20,7 @@ module Messages
     def resume_game_options(saved_games_list)
         game_string = "      Choose a New or Paused Game\n  * (N)ew Game\n"
         saved_games_list.each do |saved_game|
-            game_string << "  * (#{saved_game[0]}) #{saved_game[1]}\n"
+            game_string << "  * (#{saved_game.id}) #{saved_game.created_at}\n"
         end
         game_string
     end

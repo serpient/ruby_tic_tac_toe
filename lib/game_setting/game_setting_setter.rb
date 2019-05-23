@@ -22,10 +22,10 @@ class GameSettingSetter
     def create_settings(settings: setting_types)
         return settings.reduce({}) do |map, setting_type|
             input = nil
-            while !setting_type[:valid?].(input: input)
-                input = game_setting_IO(message: setting_type[:message])
+            while !setting_type.fetch(:valid?).(input: input)
+                input = game_setting_IO(message: setting_type.fetch(:message))
             end
-            map[setting_type[:name]] = setting_type[:parse].(input: input)
+            map[setting_type.fetch(:name)] = setting_type.fetch(:parse).(input: input)
             map
         end
     end
