@@ -3,9 +3,9 @@ require_relative './game_io/console_io'
 require_relative './messages'
 require_relative './game_rules'
 require_relative './validator'
+require_relative './input_type'
 require_relative './board_presenter/board_presenter'
 require_relative './board_presenter/string_board'
-require_relative './game_setting/setting_types'
 require_relative './game_mode/game_mode_types'
 require_relative './persister/persister'
 require_relative './repository/local'
@@ -14,8 +14,8 @@ class Game
     include Validator
     include Messages
     include GameRules
-    include SettingTypes
     include GameModeTypes
+    include InputType
 
     attr_accessor :game_state, :status,  :board_presenter
 
@@ -39,11 +39,11 @@ class Game
         while status == :play
             output_board
             output_save_option
-            position = get_valid_input(board: game_state.board, presenter: game_io)
-            if position == SettingTypes::SAVE
+            input = get_valid_input(board: game_state.board, presenter: game_io)
+            if input == InputType::SAVE
                 @status = :save
             else
-                board = update_board(input: position) 
+                board = update_board(input: input) 
                 update_game_status(board: board)
                 game_state.switch_players if status == :play
             end
