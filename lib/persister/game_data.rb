@@ -5,16 +5,24 @@ module GameData
 
     def serializer_types(game)
         @game = game
-        types.map do |type|
-            type.delete(:deserialize)
-            type
+        types.reduce([]) do |array, type|
+            array.push({ 
+                    name: type.fetch(:name), 
+                    data: type.fetch(:data) 
+                })
+            array
         end
     end
 
     def deserializer_types
-        types.map do |type|
-            type.delete(:data)
-            type
+        types.reduce([]) do |array, type|
+            if type.fetch(:deserialize, false)
+                array.push({ 
+                    name: type.fetch(:name), 
+                    deserialize: type.fetch(:deserialize) 
+                })
+            end
+            array
         end
     end
 

@@ -27,10 +27,8 @@ module GameSerializer
     def deserialize_data_fields(game_data)
         game_data_types = GameData.deserializer_types
         game_data_types.each do |type|
-            if type[:deserialize]
-                value = game_data[type.fetch(:name)]
-                game_data[type.fetch(:name)] = type[:deserialize].(value)
-            end
+            value = game_data[type.fetch(:name)]
+            game_data[type.fetch(:name)] = type[:deserialize].(value)
         end
         game_data
     end
