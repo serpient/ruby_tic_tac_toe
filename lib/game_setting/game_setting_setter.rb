@@ -35,6 +35,6 @@ class GameSettingSetter
         game_io.clear
         game_io.output_message(Messages.start_banner)
         game_io.output_message(message)
-        game_io.get_input
+        game_io.input
     end
 end

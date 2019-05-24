@@ -7,6 +7,7 @@ class Local
         @db = Sequel.connect(adapter: 'postgres', host: 'localhost', database: 'tic_tac_toe', user: 'postgres', password: 'postgres')
         @table = table_name.to_sym
         clean_table if table_name == :test
+        create_table if !table_exists?
     end
 
     def retrieve_all
@@ -70,5 +71,9 @@ class Local
             created_at TIMESTAMPTZ DEFAULT NOW()
         )"
         db.run sql
+    end
+
+    def table_exists?
+        db.table_exists?(table)
     end
 end

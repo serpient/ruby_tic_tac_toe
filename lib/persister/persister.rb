@@ -14,7 +14,7 @@ class Persister
     def suspend(game)
         serialized_data = GameSerializer.serialize(game: game)
         repository.save(serialized_data)
-        get_recent_game_id
+        recent_game_id
     end
 
     def resume(game_id:)
@@ -24,7 +24,7 @@ class Persister
         Reinitializer.generate(game_data: deserialized_data)
     end
 
-    def get_list_of_suspended_games
+    def suspended_games
         repository.retrieve_list
     end
 
@@ -40,7 +40,7 @@ class Persister
 
     private
     attr_accessor :serializer
-    def get_recent_game_id
+    def recent_game_id
         repository.retrieve_all[0].fetch(:id)
     end
 end

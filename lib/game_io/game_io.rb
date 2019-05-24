@@ -5,8 +5,8 @@ class GameIO
         @presenter = presenter
     end
 
-    def get_input(input=nil)
-        presenter.get_input(input)
+    def input(input=nil)
+        presenter.input(input)
     end
 
     def output_message(message)

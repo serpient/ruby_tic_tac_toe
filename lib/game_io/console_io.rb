@@ -1,5 +1,5 @@
 class ConsoleIO
-    def get_input(input=nil)
+    def input(input=nil)
         gets.chomp
     end
 

@@ -1,6 +1,7 @@
 require_relative '../validator'
 require_relative '../messages'
 require_relative './setting_types'
+require_relative '../input_type'
 require_relative '../repository/local'
 require_relative '../persister/persister'
 
@@ -10,6 +11,7 @@ module GameSettings
     include Messages
     include Validator
     include SettingTypes
+    include InputType
     
     def types
         [
@@ -24,7 +26,7 @@ module GameSettings
             :name => SettingTypes::NEW_OR_SUSPENDED_GAME,
             :message => Messages.resume_game_options(list_of_saved_games),
             :valid? => -> (input: nil) { Validator.resume_option_valid?(input: input, valid_game_ids: valid_game_ids) },
-            :parse => -> (input:) { input == "N" ? :new_game : input.to_i },
+            :parse => -> (input:) { input == InputType::NEW_GAME ? :new_game : input.to_i },
         }]
     end
 

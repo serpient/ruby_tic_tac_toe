@@ -17,10 +17,10 @@ class GameState
         game_mode: GameModeTypes::REGULAR_MODE
     )
         @board = Board.new(size: board_size)
-        @player_1 = Player.new(player: PlayerType.get_player(player_1), token: Token::X)
-        @player_2 = Player.new(player: PlayerType.get_player(player_2), token: Token::O)
+        @player_1 = Player.new(player: PlayerType.player(player_1), token: Token::X)
+        @player_2 = Player.new(player: PlayerType.player(player_2), token: Token::O)
         @current_player = @player_1
-        @game_mode = GameModeTypes.get_game_mode(game_mode)
+        @game_mode = GameModeTypes.game_mode(game_mode)
     end
 
     def switch_players

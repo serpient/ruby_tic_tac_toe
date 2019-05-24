@@ -7,7 +7,7 @@ class Lite3
 
     def update(board:, position:, current_player:)
         max_num_of_moves = board.size
-        current_player_moves = get_player_moves(current_player)
+        current_player_moves = player_moves(current_player)
 
         remember_move(move_collection: current_player_moves, position: position, token: current_player.token)
 
@@ -34,7 +34,7 @@ class Lite3
         @player_2_moves = []
     end
 
-    def get_player_moves(current_player)
+    def player_moves(current_player)
         current_player.token == Token::X ? player_1_moves : player_2_moves 
     end
 

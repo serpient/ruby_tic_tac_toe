@@ -23,7 +23,8 @@ class Game
         game_io: ConsoleIO.new, 
         board_size:, player_2:, 
         board_presenter: StringBoard.new,
-        game_mode: GameModeTypes::REGULAR_MODE
+        game_mode: GameModeTypes::REGULAR_MODE,
+        repository_type: Local.new
     )
         @game_io = game_io
         @game_state = GameState.new(
@@ -33,13 +34,14 @@ class Game
         )
         @status = :play
         @board_presenter = BoardPresenter.new(presenter: board_presenter)
+        @repository_type = repository_type
     end
 
     def play
         while status == :play
             output_board
             output_save_option
-            input = get_valid_input(board: game_state.board, presenter: game_io)
+            input = valid_input(board: game_state.board, presenter: game_io)
             if input == InputType::SAVE
                 @status = :save
             else
@@ -55,7 +57,7 @@ class Game
     end
 
     private
-    attr_accessor :game_io
+    attr_accessor :game_io, :repository_type
 
     def output_board
         game_io.clear
@@ -67,7 +69,7 @@ class Game
         game_io.output_message(Messages.output_save_option)
     end
 
-    def get_valid_input(board:, presenter:)
+    def valid_input(board:, presenter:)
         input = -1
         input = game_state.current_player.move(board: board, presenter: presenter) while input_not_valid(input: input, board: board) 
         input
@@ -96,7 +98,6 @@ class Game
     end
 
     def save_game
-        repository_type = game_io.is_a?(ConsoleIO) ? Memory.new : Local.new
         at_exit do
             persister = Persister.new(repository_type: repository_type)
             persister.suspend(self)

@@ -10,11 +10,11 @@ class GameCreator
     def initialize(repository_type:, game_io: GameIO.new(presenter: ConsoleIO.new))
         @persister = Persister.new(repository_type: repository_type)
         @game_settings = GameSettingSetter.new(game_io: game_io)
-        @suspended_games = persister.get_list_of_suspended_games
+        @suspended_games = persister.suspended_games
     end
 
     def create
-        game_setting_input = get_new_or_suspended_game_input if persister.has_saved_games?(suspended_games)
+        game_setting_input = new_or_suspended_game_input if persister.has_saved_games?(suspended_games)
 
         return resume_game(game_setting_input) if is_a_suspended_game_id?(game_setting_input)
         return new_game 
@@ -23,7 +23,7 @@ class GameCreator
     private 
     attr_accessor :persister, :game_settings, :game, :suspended_games
 
-    def get_new_or_suspended_game_input
+    def new_or_suspended_game_input
         suspended_game_ids = persister.suspended_game_ids(suspended_games)
         new_or_suspended_game_settings = GameSettings.new_or_suspended_game(suspended_games, suspended_game_ids)
         setting_output = game_settings.create_settings(settings: new_or_suspended_game_settings)

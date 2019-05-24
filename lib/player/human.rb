@@ -7,7 +7,7 @@ class Human
 
     def move(board:, presenter:)
         presenter.output_message(Messages.choose_position(token))
-        presenter.get_input
+        presenter.input
     end
 
     def type

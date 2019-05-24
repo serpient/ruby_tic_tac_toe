@@ -20,7 +20,6 @@ class Memory
             created_at: Time.new(2010,8,10,db.fetch(table).length),
             id: rand(1000)
         })
-        nil
     end
 
     def retrieve_list
@@ -30,11 +29,6 @@ class Memory
     end
 
     def disconnect
-        initialize_table
-    end
-
-    private
-    def initialize_table
         @db = {}
     end
 end
