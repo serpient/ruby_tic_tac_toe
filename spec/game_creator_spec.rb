@@ -8,4 +8,9 @@ describe 'GameCreator' do
             expect(new_game.is_a?(Game)).to eq true
         end
     end
+    # use a file to do the full integration test 
+    # adjust TestIO
+    # suspended game
+    # vs new game
+    # per the user input
 end

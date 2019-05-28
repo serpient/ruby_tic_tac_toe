@@ -64,7 +64,6 @@ class Local
     end
 
     def create_table
-        puts "creating table"
         sql = "CREATE TABLE #{table} (
             id SERIAL PRIMARY KEY,
             game_data JSON,

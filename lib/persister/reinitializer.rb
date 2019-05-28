@@ -12,7 +12,7 @@ module Reinitializer
         set_status(game_data)
         set_board_position(game_data)
         set_current_player(game_data)
-        set_lite_3_data(game_data) if (game.game_state.game_mode.is_a?(Lite3))
+        set_lite_3_data(game_data) if (game.game_mode.is_a?(Lite3))
         game
     end
 
@@ -24,15 +24,15 @@ module Reinitializer
     end
 
     def set_board_position(game_data)
-        game.game_state.board.positions = game_data.fetch(:board_positions)
+        game.board.positions = game_data.fetch(:board_positions)
     end
 
     def set_current_player(game_data)
-        game.game_state.current_player = game_data.fetch(:current_player_token) == :X ? game.game_state.player_1 : game.game_state.player_2
+        game.current_player = game_data.fetch(:current_player_token) == :X ? game.player_1 : game.player_2
     end
 
     def set_lite_3_data(game_data)
-        game.game_state.game_mode.player_1_moves = game_data.fetch(:player_1_moves) 
-        game.game_state.game_mode.player_2_moves = game_data.fetch(:player_2_moves) 
+        game.game_mode.player_1_moves = game_data.fetch(:player_1_moves) 
+        game.game_mode.player_2_moves = game_data.fetch(:player_2_moves) 
     end
 end 

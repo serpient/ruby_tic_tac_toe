@@ -8,6 +8,8 @@ class GameCreator
     include SettingTypes
 
     def initialize(repository_type:, game_io: GameIO.new(presenter: ConsoleIO.new))
+        # inject Persister, then it can mock what repository results
+        # dont instantiate a new class within another class
         @persister = Persister.new(repository_type: repository_type)
         @game_settings = GameSettingSetter.new(game_io: game_io)
         @suspended_games = persister.suspended_games

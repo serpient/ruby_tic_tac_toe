@@ -8,5 +8,4 @@ class Regular
     def type
         GameModeTypes::REGULAR_MODE
     end
-
 end

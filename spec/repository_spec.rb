@@ -21,43 +21,43 @@ describe 'Repository - Memory' do
 
     context 'save' do
         it 'adds a new row to db' do
-            SERIALIZED_LITE_3_OUTPUT = JSON.dump({
+            serialized_lite_3_output = JSON.dump({
                 "board_positions":["X","empty","empty","O","empty","X","empty","empty","empty"],
             })
-            repository.save(SERIALIZED_LITE_3_OUTPUT)
+            repository.save(serialized_lite_3_output)
             new_data = repository.retrieve_all
             expect(new_data.length).to eq 1
-            expect(new_data[0][:game_data]).to eq SERIALIZED_LITE_3_OUTPUT
+            expect(new_data[0][:game_data]).to eq serialized_lite_3_output
         end
     end
 
     context 'retrieve_all' do
         it 'returns result by newest to oldest' do
-            OUTPUT_1 = JSON.dump({
+            output_1 = JSON.dump({
                 "game_mode":"L",
             })
-            OUTPUT_2 = JSON.dump({
+            output_2 = JSON.dump({
                 "game_mode":"R",
             })
-            OUTPUT_3 = JSON.dump({
+            output_3 = JSON.dump({
                 "game_mode":"V",
             })
-            repository.save(OUTPUT_1)
-            repository.save(OUTPUT_2)
-            repository.save(OUTPUT_3)
+            repository.save(output_1)
+            repository.save(output_2)
+            repository.save(output_3)
             all_data = repository.retrieve_all
-            expect(all_data[0][:game_data]).to eq OUTPUT_3
-            expect(all_data[1][:game_data]).to eq OUTPUT_2
-            expect(all_data[2][:game_data]).to eq OUTPUT_1
+            expect(all_data[0][:game_data]).to eq output_3
+            expect(all_data[1][:game_data]).to eq output_2
+            expect(all_data[2][:game_data]).to eq output_1
         end
     end
 
     context 'retrieve_list' do
         it 'retrieves a list of id/created_at items' do
-            OUTPUT_1 = JSON.dump({
+            output_1 = JSON.dump({
                 "game_mode":"L",
             })
-            repository.save(OUTPUT_1)
+            repository.save(output_1)
             expect(repository.retrieve_list[0].is_a?(Integer)).to eq true
         end
     end
@@ -83,13 +83,13 @@ describe 'Repository - Local' do
 
     context 'save' do
         it 'adds a new row to db' do
-            SERIALIZED_LITE_3_OUTPUT = JSON.dump({
+            serialized_lite_3_output = JSON.dump({
                 "board_positions":["X","empty","empty","O","empty","X","empty","empty","empty"],
             })
-            repository.save(SERIALIZED_LITE_3_OUTPUT)
+            repository.save(serialized_lite_3_output)
             new_data = repository.retrieve_all
             expect(new_data.length).to eq 1
-            expect(new_data[0][:game_data]).to eq SERIALIZED_LITE_3_OUTPUT
+            expect(new_data[0][:game_data]).to eq serialized_lite_3_output
         end
     end
 
@@ -99,41 +99,41 @@ describe 'Repository - Local' do
         end
 
         it 'returns result by newest to oldest' do
-            OUTPUT_1 = JSON.dump({
+            output_1 = JSON.dump({
                 "game_mode":"L",
             })
-            OUTPUT_2 = JSON.dump({
+            output_2 = JSON.dump({
                 "game_mode":"R",
             })
-            OUTPUT_3 = JSON.dump({
+            output_3 = JSON.dump({
                 "game_mode":"V",
             })
-            repository.save(OUTPUT_1)
-            repository.save(OUTPUT_2)
-            repository.save(OUTPUT_3)
+            repository.save(output_1)
+            repository.save(output_2)
+            repository.save(output_3)
             all_data = repository.retrieve_all
-            expect(all_data[0][:game_data]).to eq OUTPUT_3
-            expect(all_data[1][:game_data]).to eq OUTPUT_2
-            expect(all_data[2][:game_data]).to eq OUTPUT_1
+            expect(all_data[0][:game_data]).to eq output_3
+            expect(all_data[1][:game_data]).to eq output_2
+            expect(all_data[2][:game_data]).to eq output_1
         end
     end
 
     context 'retrieve_by_id' do
         it 'returns a result by id' do
-            OUTPUT_1 = JSON.dump({
+            output_1 = JSON.dump({
                 "game_mode":"L",
             })
-            repository.save(OUTPUT_1)
-            expect(repository.retrieve_by_id(1)[:game_data]).to eq OUTPUT_1
+            repository.save(output_1)
+            expect(repository.retrieve_by_id(1)[:game_data]).to eq output_1
         end
     end
 
     context 'retrieve_list' do
         it 'retrieves a list of id/created_at items' do
-            OUTPUT_1 = JSON.dump({
+            output_1 = JSON.dump({
                 "game_mode":"L",
             })
-            repository.save(OUTPUT_1)
+            repository.save(output_1)
             expect(repository.retrieve_list[0][0].is_a?(Integer)).to eq true
         end
     end

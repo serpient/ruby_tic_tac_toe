@@ -18,10 +18,13 @@ describe 'GameSerializer - Lite 3 Mode - With Moves' do
         MockTestHelper.update_board(game)
     end
 
+    # postgres , saving individual data to columns for predictable data
+    # vs, a large json data
+    # validation of input types
+    # SQL vs Not Relational databases
     context 'serialize' do
         it 'takes in game instance and outputs JSON version of data' do
             SERIALIZED_LITE_3_OUTPUT = {
-                "board_presenter":"StringBoard",
                 "status":"play",
                 "game_mode":"L",
                 "board_positions":["X","empty","empty","O","empty","X","empty","empty","empty"],
@@ -63,7 +66,6 @@ describe 'GameSerializer - Lite 3 Mode - No Moves' do
     context 'serialize' do
         it 'takes in game instance and outputs JSON version of data' do
             SERIALIZED_LITE_3_NO_MOVES_OUTPUT = {
-                "board_presenter":"StringBoard",
                 "status":"play",
                 "game_mode":"L",
                 "board_positions":["empty","empty","empty","empty","empty","empty","empty","empty","empty"],
@@ -103,7 +105,6 @@ describe 'GameSerializer - Regular Mode' do
     context 'serialize' do
         it 'takes in game instance and outputs JSON version of data' do
             SERIALIZED_REGULAR_OUTPUT = {
-                "board_presenter":"StringBoard",
                 "status":"play",
                 "game_mode":"R",
                 "board_positions":["X","empty","empty","O","empty","X","empty","empty","empty"],

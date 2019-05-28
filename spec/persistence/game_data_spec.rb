@@ -22,8 +22,8 @@ describe 'GameData' do
             )
             MockTestHelper.update_board(game)
             serializer_types = GameData.serializer_types(game)
-            expect(serializer_types[0][:name]).to eq(:board_presenter)
-            expect(serializer_types[0][:data]).to eq("StringBoard")
+            expect(serializer_types[0][:name]).to eq(:status)
+            expect(serializer_types[0][:data]).to eq(:play)
         end
     end
 end

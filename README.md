@@ -22,15 +22,15 @@ Enter the following into psql
 `CREATE DATABASE postgres`
 
 Option 2 - pgAdmin
-![create](https://www.guru99.com/images/1/092818_0513_PostgreSQLC6.png)
-![settings](https://www.guru99.com/images/1/092818_0513_PostgreSQLC7.png)
+- ![create](https://www.guru99.com/images/1/092818_0513_PostgreSQLC6.png)
+- ![settings](https://www.guru99.com/images/1/092818_0513_PostgreSQLC7.png)
 
 6. Verify that the database was added 
 Option 1 - PSQL
-In PSQL, type `\l` to see a list of databases
+- In PSQL, type `\l` to see a list of databases
 
 Option 2 - pgAdmin
-![result](https://www.guru99.com/images/1/092818_0513_PostgreSQLC8.png)
+- ![result](https://www.guru99.com/images/1/092818_0513_PostgreSQLC8.png)
 
 To connect to the database in psql, use `\c postgres`
 
