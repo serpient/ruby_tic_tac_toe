@@ -1,16 +1,12 @@
 require_relative './game'
 require_relative './game_setting/game_setting_setter'
 require_relative './game_setting/setting_types'
-require_relative './persister/persister'
-require_relative './repository/local'
 
 class GameCreator
     include SettingTypes
 
-    def initialize(repository_type:, game_io: GameIO.new(presenter: ConsoleIO.new))
-        # inject Persister, then it can mock what repository results
-        # dont instantiate a new class within another class
-        @persister = Persister.new(repository_type: repository_type)
+    def initialize(persister:, game_io: GameIO.new(presenter: ConsoleIO.new))
+        @persister = persister
         @game_settings = GameSettingSetter.new(game_io: game_io)
         @suspended_games = persister.suspended_games
     end
