@@ -4,8 +4,6 @@ require_relative '../lib/player/player_types'
 require_relative '../lib/board'
 
 describe 'Board Presenter' do
-    # include PlayerTypes
-
     context 'Initialization' do
         board_presenter = BoardPresenter.new(
             presenter: StringBoard.new
