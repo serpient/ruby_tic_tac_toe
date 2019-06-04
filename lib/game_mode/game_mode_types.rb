@@ -8,7 +8,7 @@ module GameModeTypes
     LITE_3_MODE = "L"
     GAME_MODES = [REGULAR_MODE, LITE_3_MODE]
 
-    def get_game_mode(type)
+    def game_mode(type)
         case type
         when REGULAR_MODE
             Regular.new

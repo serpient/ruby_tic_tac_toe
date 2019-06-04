@@ -1,17 +1,21 @@
 require_relative './player/player_types'
-require_relative './game_setting/setting_types'
 require_relative './game_mode/game_mode_types'
+require_relative './input_type'
 
 module Validator
     extend self
     
     include PlayerType
-    include SettingTypes
     include GameModeTypes
+    include InputType
 
     def position_valid?(input:, board:) 
         int = input.to_i
         board_range_valid?(int,board) && board.position_empty?(int)
+    end
+
+    def save_game?(input:) 
+        input == InputType::SAVE
     end
 
     def board_range_valid?(int, board)
@@ -29,5 +33,9 @@ module Validator
 
     def game_mode_valid?(input:)
         GameModeTypes::GAME_MODES.include?(input)
+    end
+
+    def resume_option_valid?(input:, valid_game_ids:)
+        input == "N" || valid_game_ids.include?(input.to_i)
     end
 end

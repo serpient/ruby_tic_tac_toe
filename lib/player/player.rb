@@ -7,6 +7,10 @@ class Player
         player.token = token
     end
 
+    def type
+        player.type
+    end
+
     def move(board:, presenter:)
         player.move(board: board, presenter: presenter)
     end

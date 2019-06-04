@@ -1,5 +1,5 @@
 class TestIO
-    def get_input(input=nil)
+    def input(input=nil)
         return input if input != nil
 
         value = case count 

@@ -1,11 +1,13 @@
 require_relative '../token'
+require_relative './game_mode_types'
 
 class Lite3
     include Token
+    attr_accessor :player_1_moves, :player_2_moves
 
     def update(board:, position:, current_player:)
         max_num_of_moves = board.size
-        current_player_moves = get_player_moves(current_player)
+        current_player_moves = player_moves(current_player)
 
         remember_move(move_collection: current_player_moves, position: position, token: current_player.token)
 
@@ -16,8 +18,15 @@ class Lite3
         board.update(position: position, token: current_player.token)
     end
 
+    def new_position(token:, position:)
+        PositionWithIndex.new(token, position)
+    end
+
+    def type
+        GameModeTypes::LITE_3_MODE
+    end
+
     private
-    attr_accessor :player_1_moves, :player_2_moves
     PositionWithIndex = Struct.new(:token, :position)
 
     def initialize
@@ -25,12 +34,12 @@ class Lite3
         @player_2_moves = []
     end
 
-    def get_player_moves(current_player)
+    def player_moves(current_player)
         current_player.token == Token::X ? player_1_moves : player_2_moves 
     end
 
     def remember_move(move_collection:, position:, token:)
-        move_collection.push(PositionWithIndex.new(token, position))
+        move_collection.push(new_position(token: token, position: position))
     end
 
     def remove_oldest_move(move_collection:, board:)

@@ -17,12 +17,28 @@ module Messages
         "         Choose the Game Mode:\n         * (R)egular\n         * (L)ite 3\n" 
     end
 
+    def resume_game_options(saved_games_list)
+        game_string = "      Choose a New or Paused Game\n  * (N)ew Game\n"
+        saved_games_list.each do |saved_game|
+            game_string << "  * (#{saved_game.id}) #{saved_game.created_at}\n"
+        end
+        game_string
+    end
+
     def choose_position(token)
         "Player #{token}: Choose a valid position: "
     end
     
     def computer_chooses(position, token)
         "Player #{token} chooses position #{position}"
+    end
+
+    def output_save_option
+        "Enter ! to save and close the game.\n\n"
+    end
+
+    def game_save
+        "Saving game... \nYou can resume this game when you\nstart a new Tic Tac Toe game.\n\n\nGoodbye!\n\n\n"
     end
 
     def win(token)

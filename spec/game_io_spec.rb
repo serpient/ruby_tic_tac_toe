@@ -12,12 +12,12 @@ describe 'Game IO' do
         end
     end
 
-    context 'get_input with GameIO' do
+    context 'input with GameIO' do
         game_io = GameIO.new(
             presenter: TestIO.new
         )
         it 'gets input through presenter' do
-            expect(game_io.get_input("1")).to eq "1"
+            expect(game_io.input("1")).to eq "1"
         end
     end
 

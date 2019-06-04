@@ -8,7 +8,7 @@ module PlayerType
     COMPUTER = "D"
     SMART_COMPUTER = "S"
 
-    def get_player(type)
+    def player(type)
         case type
         when HUMAN
             Human.new
